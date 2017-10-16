@@ -1,4 +1,4 @@
-void init(char* filePath);
+void initInputSystem(char *filePath);
 char nextChar();
 void sendBack();
-void destroy();
+void destroyInputSystem();

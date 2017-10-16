@@ -10,7 +10,9 @@ CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../lexical/LexicalAnalyze
 
 CMakeFiles/GoCompiler.dir/main.c.o: ../input/InputSystem.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../main.c
+CMakeFiles/GoCompiler.dir/main.c.o: ../symbols/SymbolsTable.h
 
+CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../symbols/SymbolsTable.c
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../symbols/SymbolsTable.h
 

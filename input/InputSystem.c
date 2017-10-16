@@ -13,7 +13,7 @@ int currentIndex = 0;
 
 void loadBlock(int block);
 
-void init(char* filePath) {
+void initInputSystem(char *filePath) {
     file = fopen(filePath, "rb");
 
     blockA[BLOCK_SIZE_BYTES] = blockB[BLOCK_SIZE_BYTES] = EOF;
@@ -49,7 +49,7 @@ void sendBack() {
 
 }
 
-void destroy() {
+void destroyInputSystem() {
     fclose(file);
 }
 

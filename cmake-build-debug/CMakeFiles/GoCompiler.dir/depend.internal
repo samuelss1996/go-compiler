@@ -11,7 +11,9 @@ CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o
 CMakeFiles/GoCompiler.dir/main.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/main.c
+ /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o
+ /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c
  /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o

@@ -27,14 +27,22 @@ LexicalAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/main.c
-stdio.h
--
 input/InputSystem.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
+symbols/SymbolsTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
+stdio.h
+-
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c
 SymbolsTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
+../Definitions.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
+stdio.h
+-
+string.h
+-
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 

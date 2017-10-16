@@ -1,13 +1,18 @@
-#include <stdio.h>
 #include "input/InputSystem.h"
+#include "symbols/SymbolsTable.h"
 
+#include <stdio.h>
+
+// TODO ask the user the file to be compiled
+// TODO handle compilation errors using other module
 int main() {
-    int i = 0;
-    init("../concurrentSum.go");
+    initInputSystem("../concurrentSum.go");
+    initSymbolsTable();
 
-    for(i = 0; i < 100; i++) {
-        printf("%c", nextChar());
-    }
+    printf("%d\n", findSymbol("break"));
 
-    printf("\n");
+    destroySymbolsTable();
+    destroyInputSystem();
+
+    return 0;
 }
