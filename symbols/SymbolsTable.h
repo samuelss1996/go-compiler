@@ -1,0 +1,8 @@
+//
+// Created by samuel on 3/10/17.
+//
+
+#ifndef GOCOMPILER_SYMBOLTABLE_H
+#define GOCOMPILER_SYMBOLTABLE_H
+
+#endif //GOCOMPILER_SYMBOLTABLE_H
