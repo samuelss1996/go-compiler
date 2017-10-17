@@ -1,4 +1,5 @@
 void initInputSystem(char *filePath);
 char nextChar();
-void sendBack();
+char* getReadToken(char *outBuffer);
+void moveBack(int positions);
 void destroyInputSystem();

@@ -21,8 +21,14 @@ stdio.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.c
+ctype.h
+-
 LexicalAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
+../input/InputSystem.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
+../symbols/SymbolsTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 
@@ -31,6 +37,8 @@ input/InputSystem.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 symbols/SymbolsTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
+lexical/LexicalAnalyzer.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 stdio.h
 -
 

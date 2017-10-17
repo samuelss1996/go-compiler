@@ -8,8 +8,11 @@ FILE *file;
 
 char blockA[BLOCK_SIZE_BYTES + 1];
 char blockB[BLOCK_SIZE_BYTES + 1];
-int currentBlock = 0;
-int currentIndex = 0;
+
+int startBlock = 0;
+int startIndex = 0;
+int frontBlock = 0;
+int frontIndex = 0;
 
 void loadBlock(int block);
 
@@ -24,29 +27,48 @@ void initInputSystem(char *filePath) {
 char nextChar() {
     char result;
 
-    if(currentBlock == 0) {
-        result = blockA[currentIndex];
+    if(frontBlock == 0) {
+        result = blockA[frontIndex];
     } else {
-        result = blockB[currentIndex];
+        result = blockB[frontIndex];
     }
 
     if(result == EOF) {
-        if(currentIndex == BLOCK_SIZE_BYTES) {
-            currentBlock = (currentBlock == 0)? 1 : 0;
-            currentIndex = 0;
+        if(frontIndex == BLOCK_SIZE_BYTES) {
+            frontBlock = (frontBlock == 0)? 1 : 0;
+            frontIndex = 0;
 
-            loadBlock(currentBlock);
+            loadBlock(frontBlock);
             result = nextChar();
         }
     } else {
-        currentIndex++;
+        frontIndex++;
     }
 
     return result;
 }
 
-void sendBack() {
+char* getReadToken(char *outBuffer) {
+    int backupBlock = frontBlock;
+    int backupIndex = frontIndex;
 
+    frontBlock = startBlock;
+    frontIndex = startIndex;
+
+    for (int i = 0; (frontBlock != backupBlock || frontIndex != backupIndex); ++i) {
+        outBuffer[i] = nextChar();
+    }
+
+    return outBuffer;
+}
+
+void moveBack(int positions) {
+    frontIndex -= positions;
+
+    if(frontIndex < 0) {
+        frontBlock = (frontBlock == 0)? 1 : 0;
+        frontIndex = BLOCK_SIZE_BYTES - frontIndex;
+    }
 }
 
 void destroyInputSystem() {

@@ -1,8 +1,1 @@
-//
-// Created by samuel on 3/10/17.
-//
-
-#ifndef GOCOMPILER_LEXICALANALYZER_H
-#define GOCOMPILER_LEXICALANALYZER_H
-
-#endif //GOCOMPILER_LEXICALANALYZER_H
+int nextToken();
