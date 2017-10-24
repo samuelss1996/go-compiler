@@ -86,3 +86,10 @@
 #define TOKEN_RUNE_LITERAL 506
 #define TOKEN_STRING_LITERAL 507
 #define TOKEN_COMMENT 508
+
+// Other constants
+#define ARR_RUNE_VALID_ESCAPED_CHARS {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '\''}
+#define SIZE_RUNE_VALID_ESCAPED_CHARS 9
+
+#define ARR_STRING_VALID_ESCAPED_CHARS {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '"'}
+#define SIZE_STRING_VALID_ESCAPED_CHARS 9

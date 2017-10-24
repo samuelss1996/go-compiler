@@ -16,6 +16,7 @@ int frontIndex = 0;
 
 void loadBlock(int block);
 
+// TODO proper handling of goBack between blocks when going forward again
 void initInputSystem(char *filePath) {
     file = fopen(filePath, "rb");
 
