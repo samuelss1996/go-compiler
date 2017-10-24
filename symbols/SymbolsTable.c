@@ -8,6 +8,7 @@ char symbols[300][50];
 int ids[300];
 int symbolsCount = 0;
 
+// TODO fix this crap
 void initSymbolsTable() {
     addSymbol("break", KEYWORD_BREAK);
     addSymbol("default", KEYWORD_DEFAULT);

@@ -1,5 +1,3 @@
-#define BLOCK_SIZE_BYTES 4096
-
 // Go language keywords
 #define KEYWORD_BREAK 300
 #define KEYWORD_DEFAULT 301
@@ -88,6 +86,9 @@
 #define TOKEN_COMMENT 508
 
 // Other constants
+#define BLOCK_SIZE_BYTES 4096
+#define ERROR_CODE -100
+
 #define ARR_RUNE_VALID_ESCAPED_CHARS {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '\''}
 #define SIZE_RUNE_VALID_ESCAPED_CHARS 9
 

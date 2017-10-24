@@ -4,6 +4,8 @@
 #include "../symbols/SymbolsTable.h"
 #include "../Definitions.h"
 
+// TODO ignore comments, do not return to syntactic (call nextToken)
+// TODO call getReadToken on every return
 int nextToken() {
     int status = 0;
     char readChar;
@@ -17,108 +19,210 @@ int nextToken() {
                 if(isalpha(readChar) || readChar == '_') {
                     status = 1;
                 } else if(readChar == '/') {
-                    status = 3;
+                    status = 2;
                 } else if(readChar == '\'') {
-                    status = 7;
+                    status = 6;
                 } else if(readChar == '"') {
-                    status = 10;
+                    status = 9;
+                } else if(readChar == '0') {
+                    status = 11;
+                } else if(isdigit(readChar)) {
+                    status = 20;
                 } else if(readChar == ';') {
+                    getReadToken(token);
                     return PUNCTUATION_SEMICOLON;
-                }
-                else {
-                    return -1;
+                } else {
+                    return ERROR_CODE;
                 }
                 break;
             case 1: // Alpha char recognized
-                if(isalnum(readChar) || readChar == '_') {
-                    status = 1;
-                } else {
-                    status = 2;
+                if(!isalnum(readChar) && readChar != '_') {
                     moveBack(1);
-                }
-                break;
-            case 2: // Identifier recognized
-                moveBack(1);
-                getReadToken(token);
+                    getReadToken(token);
 
-                return findSymbol(token);
-            case 3: // '/' char recognized
-                if(isalpha(readChar) || readChar == '_') {
-                    // TODO other things, '/' can be an operator
-                } else if(readChar == '/') {
-                    status = 4;
-                } else if(readChar == '*') {
-                    status = 5;
+                    return findSymbol(token);
                 }
                 break;
-            case 4: // '//' sequence recognized. Single-line comment. Ends on \n
+            case 2: // '/' char recognized
+                if(readChar == '/') {
+                    status = 3;
+                } else if(readChar == '*') {
+                    status = 4;
+                } else {
+                    // TODO handle other situations, '/' can be an operator
+                }
+                break;
+            case 3: // '//' sequence recognized. Single-line comment. Ends on \n
                 if(readChar == '\n') {
                     getReadToken(token);
 
                     return TOKEN_COMMENT;
                 }
                 break;
-            case 5: // '/*' sequence recognized. Multi-line comment. Ends on '*/'
+            case 4: // '/*' sequence recognized. Multi-line comment. Ends on '*/'
                 if(readChar == '*') {
-                    status = 6;
+                    status = 5;
                 }
                 break;
-            case 6: // Recognized '*' on multi-line comment. Possible comment end. Confirmed if '/' found.
+            case 5: // Recognized '*' on multi-line comment. Possible comment end. Confirmed if '/' found.
                 if(readChar == '/') {
                     getReadToken(token);
                     return TOKEN_COMMENT;
                 } else {
-                    status = 5;
+                    status = 4;
                 }
                 break;
-            case 7: // Recognized "'". Expecting valid rune char or "'" for rune to end
+            case 6: // Recognized "'". Expecting valid rune char or "'" for rune to end
                 if(readChar != '\'' && readChar != '\n' && readChar != '\\') {
-                    status = 8;
+                    status = 7;
                 } else if (readChar == '\\') {
-                    status = 9;
+                    status = 8;
                 } else if(readChar == '\'') {
+                    getReadToken(token);
                     return TOKEN_RUNE_LITERAL;
                 } else {
-                    return -1;
+                    return ERROR_CODE;
                 }
                 break;
-            case 8: // Recognized char inside rune literal. Expecting "'" for rune to end
+            case 7: // Recognized char inside rune literal. Expecting "'" for rune to end
                 if(readChar == '\'') {
+                    getReadToken(token);
                     return TOKEN_RUNE_LITERAL;
                 } else {
-                    return -1;
+                    return ERROR_CODE;
                 }
-            case 9: // Recognized escape char inside rune ('\'). Expecting valid escaped char
+            case 8: // Recognized escape char inside rune ('\'). Expecting valid escaped char
                 for (int i = 0; i < SIZE_RUNE_VALID_ESCAPED_CHARS; ++i) {
                     if(readChar == ARR_RUNE_VALID_ESCAPED_CHARS[i]) {
-                        status = 8;
+                        status = 7;
                         break;
                     }
                 }
 
-                if(status == 9) { // Not valid escaped char
-                    return -1;
+                if(status == 8) { // Not valid escaped char
+                    return ERROR_CODE;
                 }
                 break;
-            case 10: // Recognized '"'. Expecting any valid string char or " for string to end
+            case 9: // Recognized '"'. Expecting any valid string char or " for string to end
                 if(readChar == '"') {
+                    getReadToken(token);
                     return TOKEN_STRING_LITERAL;
                 } else if(readChar == '\\') {
-                    status = 11;
+                    status = 10;
                 } else if(readChar == '\n') {
-                    return -1;
+                    return ERROR_CODE;
                 }
                 break;
-            case 11: // Recognized escape char inside string ('\'). Expecting valid escaped char
+            case 10: // Recognized escape char inside string ('\'). Expecting valid escaped char
                 for (int i = 0; i < SIZE_STRING_VALID_ESCAPED_CHARS; ++i) {
                     if(readChar == ARR_STRING_VALID_ESCAPED_CHARS[i]) {
-                        status = 10;
+                        status = 9;
                         break;
                     }
                 }
 
-                if(status == 11) { // Not valid escaped char
-                    return -1;
+                if(status == 10) { // Not valid escaped char
+                    return ERROR_CODE;
+                }
+
+                break;
+            case 11: // Recognized '0'. Expecting octal or hexadecimal integer, floating-point decimal, or imaginary
+                if(readChar == 'x' || readChar == 'X') { // hexadecimal
+                    status = 12;
+                } else if(readChar >= '0' && readChar <= '7') { // octal
+                    status = 14;
+                } else if(isdigit(readChar)) { // float or imaginary
+                    status = 15;
+                } else if(readChar == 'i'){
+                    return TOKEN_IMAGINARY_LITERAL;
+                } else if(readChar == '.') {
+                    status = 16;
+                } else if(readChar == 'e' || readChar == 'E') {
+                    status = 17;
+                } else {
+                    moveBack(1);
+                    return TOKEN_INTEGER_LITERAL;
+                }
+                break;
+            case 12: // Recognized '0x'. Expecting at least one hexadecimal digit.
+                if(isxdigit(_toupper(readChar))) {
+                    status = 13;
+                } else {
+                    return ERROR_CODE;
+                }
+                break;
+            case 13: // Recognized '0xF', where F is an hexadecimal digit. Expecting 0 or more hexadecimal digits
+                if(!isxdigit(_toupper(readChar))) {
+                    moveBack(1);
+                    return TOKEN_INTEGER_LITERAL; // TODO maybe change to hexadecimal
+                }
+                break;
+            case 14: // Recognized '07', where 7 is an octal digit. Expecting 0 or more octal digits, float or imaginary number
+                if(readChar == 'i') {
+                    return TOKEN_IMAGINARY_LITERAL; // TODO can also be a decimal int to make an imaginary or float
+                } else if(readChar == '8' || readChar == '9') {
+                    status = 15;
+                } else if(!isdigit(readChar)) {
+                    moveBack(1);
+                    return TOKEN_INTEGER_LITERAL; // TODO maybe change to octal
+                }
+                break;
+            case 15: // Recognized a number starting with '0', with no 'X' and at least one non-octal digit. Expecting imaginary or float
+                if(readChar == 'i') {
+                    return TOKEN_IMAGINARY_LITERAL;
+                } else if(readChar == '.') {
+                    status = 16;
+                } else if(readChar == 'e' || readChar == 'E') {
+                    status = 17;
+                } else if(!isdigit(readChar)) {
+                    return ERROR_CODE;
+                }
+
+                break;
+            case 16: // Recognized numbers and a point ('.'). Expecting decimal part of float or imaginary
+                if(readChar == 'i') {
+                    return TOKEN_IMAGINARY_LITERAL; // TODO maybe change to float imaginary
+                } else if(readChar == 'e' || readChar == 'E') {
+                    status = 17;
+                } else if(!isdigit(readChar)) {
+                    moveBack(1);
+                    return TOKEN_FLOATING_POINT_LITERAL;
+                }
+                break;
+            case 17: // Recognized number and 'e'. Expecting exponent
+                if(readChar == '+' || readChar == '-') {
+                    status = 18;
+                } else if(isdigit(readChar)) {
+                    status = 19;
+                } else {
+                    return ERROR_CODE;
+                }
+                break;
+            case 18: // Recognized number and 'e' and '+' or '-'. Expecting exponent continuation
+                if(isdigit(readChar)) {
+                    status = 19;
+                } else {
+                    return ERROR_CODE;
+                }
+                break;
+            case 19: // Recognized valid number exponent. Expecting more numbers or 'i' for imaginary
+                if(readChar == 'i') {
+                    return TOKEN_IMAGINARY_LITERAL; // TODO maybe change to float exponential imaginary
+                } else if(!isdigit(readChar)) {
+                    moveBack(1);
+                    return TOKEN_FLOATING_POINT_LITERAL; // TODO maybe change to float with exponent
+                }
+                break;
+            case 20: // Recognized non-zero digit. Expecting decimal integer, float or imaginary
+                if(readChar == 'i') {
+                    return TOKEN_IMAGINARY_LITERAL;
+                } else if(readChar == '.') {
+                    status = 16;
+                } else if(readChar == 'e' || readChar == 'E') {
+                    status = 17;
+                } else if(!isdigit(readChar)) {
+                    moveBack(1);
+                    return TOKEN_INTEGER_LITERAL;
                 }
 
                 break;
