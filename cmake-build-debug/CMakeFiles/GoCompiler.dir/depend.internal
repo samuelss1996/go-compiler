@@ -16,6 +16,7 @@ CMakeFiles/GoCompiler.dir/main.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/main.c
  /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c
@@ -23,3 +24,7 @@ CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.c
  /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
+CMakeFiles/GoCompiler.dir/util/HashTable.c.o
+ /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c
+CMakeFiles/GoCompiler.dir/util/LinkedList.c.o
+ /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c

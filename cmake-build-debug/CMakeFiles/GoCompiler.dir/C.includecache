@@ -39,6 +39,8 @@ symbols/SymbolsTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 lexical/LexicalAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
+util/LinkedList.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h
 stdio.h
 -
 
@@ -57,4 +59,14 @@ SyntacticAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c
+stdlib.h
+-
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c
+stdlib.h
+-
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h
 

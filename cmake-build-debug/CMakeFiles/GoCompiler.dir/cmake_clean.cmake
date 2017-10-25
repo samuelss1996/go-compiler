@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o"
   "CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o"
   "CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o"
+  "CMakeFiles/GoCompiler.dir/util/HashTable.c.o"
+  "CMakeFiles/GoCompiler.dir/util/LinkedList.c.o"
   "GoCompiler.pdb"
   "GoCompiler"
 )

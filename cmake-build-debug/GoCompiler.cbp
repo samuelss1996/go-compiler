@@ -114,6 +114,18 @@
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h">
 			<Option target="GoCompiler"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c">
+			<Option target="GoCompiler"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h">
+			<Option target="GoCompiler"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c">
+			<Option target="GoCompiler"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h">
+			<Option target="GoCompiler"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

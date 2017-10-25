@@ -258,6 +258,60 @@ syntactic/SyntacticAnalyzer.c.s:
 	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.s
 .PHONY : syntactic/SyntacticAnalyzer.c.s
 
+util/HashTable.o: util/HashTable.c.o
+
+.PHONY : util/HashTable.o
+
+# target to build an object file
+util/HashTable.c.o:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/util/HashTable.c.o
+.PHONY : util/HashTable.c.o
+
+util/HashTable.i: util/HashTable.c.i
+
+.PHONY : util/HashTable.i
+
+# target to preprocess a source file
+util/HashTable.c.i:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/util/HashTable.c.i
+.PHONY : util/HashTable.c.i
+
+util/HashTable.s: util/HashTable.c.s
+
+.PHONY : util/HashTable.s
+
+# target to generate assembly for a file
+util/HashTable.c.s:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/util/HashTable.c.s
+.PHONY : util/HashTable.c.s
+
+util/LinkedList.o: util/LinkedList.c.o
+
+.PHONY : util/LinkedList.o
+
+# target to build an object file
+util/LinkedList.c.o:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/util/LinkedList.c.o
+.PHONY : util/LinkedList.c.o
+
+util/LinkedList.i: util/LinkedList.c.i
+
+.PHONY : util/LinkedList.i
+
+# target to preprocess a source file
+util/LinkedList.c.i:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/util/LinkedList.c.i
+.PHONY : util/LinkedList.c.i
+
+util/LinkedList.s: util/LinkedList.c.s
+
+.PHONY : util/LinkedList.s
+
+# target to generate assembly for a file
+util/LinkedList.c.s:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/util/LinkedList.c.s
+.PHONY : util/LinkedList.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,6 +336,12 @@ help:
 	@echo "... syntactic/SyntacticAnalyzer.o"
 	@echo "... syntactic/SyntacticAnalyzer.i"
 	@echo "... syntactic/SyntacticAnalyzer.s"
+	@echo "... util/HashTable.o"
+	@echo "... util/HashTable.i"
+	@echo "... util/HashTable.s"
+	@echo "... util/LinkedList.o"
+	@echo "... util/LinkedList.i"
+	@echo "... util/LinkedList.s"
 .PHONY : help
 
 

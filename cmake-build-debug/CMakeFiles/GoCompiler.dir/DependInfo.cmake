@@ -9,6 +9,8 @@ set(CMAKE_DEPENDS_CHECK_C
   "/mnt/c/Users/Ada/GitHub/GoCompiler/main.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/main.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o"
+  "/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/util/HashTable.c.o"
+  "/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/util/LinkedList.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

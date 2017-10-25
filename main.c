@@ -1,6 +1,7 @@
 #include "input/InputSystem.h"
 #include "symbols/SymbolsTable.h"
 #include "lexical/LexicalAnalyzer.h"
+#include "util/LinkedList.h"
 
 #include <stdio.h>
 
@@ -10,17 +11,49 @@
 // TODO handle documentation comments
 // TODO put keywords in a separated file
 int main() {
-    initInputSystem("../concurrentSum.go");
-    initSymbolsTable();
+//    initInputSystem("../concurrentSum.go");
+//    initSymbolsTable();
+//
+//    int token;
+//    do {
+//        token = nextToken();
+//        printf("%d\n", token);
+//    } while(token != EOF);
+//
+//    destroySymbolsTable();
+//    destroyInputSystem();
 
-    int token;
-    do {
-        token = nextToken();
-        printf("%d\n", token);
-    } while(token != EOF);
+    LinkedList list = NULL;
+    createList(&list);
 
-    destroySymbolsTable();
-    destroyInputSystem();
+    append(&list, 2);
+    append(&list, 3);
+    append(&list, 5);
+    append(&list, -1);
+
+    ListNode currentNode = firstNode(&list);
+
+    while(currentNode != NULL) {
+        printf("%d\n", nodeValue(&list, currentNode));
+        currentNode = nextNode(&list, currentNode);
+    }
+
+    destroyList(&list);
+
+    createList(&list);
+    
+    append(&list, -1);
+    append(&list, 3);
+    append(&list, 5);
+    append(&list, 2);
+
+    currentNode = firstNode(&list);
+
+    while(currentNode != NULL) {
+        printf("%d\n", nodeValue(&list, currentNode));
+        currentNode = nextNode(&list, currentNode);
+    }
+
 
     return 0;
 }

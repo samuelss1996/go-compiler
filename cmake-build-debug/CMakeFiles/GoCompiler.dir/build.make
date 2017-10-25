@@ -177,13 +177,63 @@ CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o.provides: CMakeFiles/G
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o.provides.build: CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o
 
 
+CMakeFiles/GoCompiler.dir/util/HashTable.c.o: CMakeFiles/GoCompiler.dir/flags.make
+CMakeFiles/GoCompiler.dir/util/HashTable.c.o: ../util/HashTable.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/GoCompiler.dir/util/HashTable.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/GoCompiler.dir/util/HashTable.c.o   -c /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c
+
+CMakeFiles/GoCompiler.dir/util/HashTable.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/GoCompiler.dir/util/HashTable.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c > CMakeFiles/GoCompiler.dir/util/HashTable.c.i
+
+CMakeFiles/GoCompiler.dir/util/HashTable.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/GoCompiler.dir/util/HashTable.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c -o CMakeFiles/GoCompiler.dir/util/HashTable.c.s
+
+CMakeFiles/GoCompiler.dir/util/HashTable.c.o.requires:
+
+.PHONY : CMakeFiles/GoCompiler.dir/util/HashTable.c.o.requires
+
+CMakeFiles/GoCompiler.dir/util/HashTable.c.o.provides: CMakeFiles/GoCompiler.dir/util/HashTable.c.o.requires
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/util/HashTable.c.o.provides.build
+.PHONY : CMakeFiles/GoCompiler.dir/util/HashTable.c.o.provides
+
+CMakeFiles/GoCompiler.dir/util/HashTable.c.o.provides.build: CMakeFiles/GoCompiler.dir/util/HashTable.c.o
+
+
+CMakeFiles/GoCompiler.dir/util/LinkedList.c.o: CMakeFiles/GoCompiler.dir/flags.make
+CMakeFiles/GoCompiler.dir/util/LinkedList.c.o: ../util/LinkedList.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/GoCompiler.dir/util/LinkedList.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/GoCompiler.dir/util/LinkedList.c.o   -c /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c
+
+CMakeFiles/GoCompiler.dir/util/LinkedList.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/GoCompiler.dir/util/LinkedList.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c > CMakeFiles/GoCompiler.dir/util/LinkedList.c.i
+
+CMakeFiles/GoCompiler.dir/util/LinkedList.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/GoCompiler.dir/util/LinkedList.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c -o CMakeFiles/GoCompiler.dir/util/LinkedList.c.s
+
+CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.requires:
+
+.PHONY : CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.requires
+
+CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.provides: CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.requires
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.provides.build
+.PHONY : CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.provides
+
+CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.provides.build: CMakeFiles/GoCompiler.dir/util/LinkedList.c.o
+
+
 # Object files for target GoCompiler
 GoCompiler_OBJECTS = \
 "CMakeFiles/GoCompiler.dir/main.c.o" \
 "CMakeFiles/GoCompiler.dir/input/InputSystem.c.o" \
 "CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o" \
 "CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o" \
-"CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o"
+"CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o" \
+"CMakeFiles/GoCompiler.dir/util/HashTable.c.o" \
+"CMakeFiles/GoCompiler.dir/util/LinkedList.c.o"
 
 # External object files for target GoCompiler
 GoCompiler_EXTERNAL_OBJECTS =
@@ -193,9 +243,11 @@ GoCompiler: CMakeFiles/GoCompiler.dir/input/InputSystem.c.o
 GoCompiler: CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o
 GoCompiler: CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o
 GoCompiler: CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o
+GoCompiler: CMakeFiles/GoCompiler.dir/util/HashTable.c.o
+GoCompiler: CMakeFiles/GoCompiler.dir/util/LinkedList.c.o
 GoCompiler: CMakeFiles/GoCompiler.dir/build.make
 GoCompiler: CMakeFiles/GoCompiler.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable GoCompiler"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable GoCompiler"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/GoCompiler.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -208,6 +260,8 @@ CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/input/InputSystem.
 CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o.requires
 CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o.requires
 CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o.requires
+CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/util/HashTable.c.o.requires
+CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.requires
 
 .PHONY : CMakeFiles/GoCompiler.dir/requires
 
