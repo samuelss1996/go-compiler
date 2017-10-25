@@ -41,6 +41,8 @@ lexical/LexicalAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 util/LinkedList.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h
+util/HashTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
 stdio.h
 -
 
@@ -63,10 +65,22 @@ SyntacticAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c
 stdlib.h
 -
+string.h
+-
+LinkedList.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
+../Definitions.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c
 stdlib.h
 -
+../Definitions.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h
+../Definitions.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
 

@@ -1,10 +1,16 @@
+#include "../Definitions.h"
+
 typedef void* LinkedList;
 typedef void* ListNode;
-typedef int ListItem;
+typedef void* ListItem;
 
 void createList(LinkedList* list);
 ListNode firstNode(LinkedList* list);
-ListNode nextNode(LinkedList* list, ListNode baseNode);
-ListItem nodeValue(LinkedList* list, ListNode node);
+ListNode nextNode(ListNode baseNode);
+ListItem nodeItem(ListNode node);
+void createItem(ListItem* item, char* key, SymbolsTableValue value);
+void destroyItem(ListItem* item);
+char* itemKey(ListItem item);
+SymbolsTableValue itemValue(ListItem item);
 void append(LinkedList* list, ListItem item);
 void destroyList(LinkedList* list);

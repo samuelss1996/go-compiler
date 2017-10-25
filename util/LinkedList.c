@@ -1,6 +1,12 @@
 #include <stdlib.h>
+#include "../Definitions.h"
 
-typedef int ListItem;
+typedef struct {
+    char* key;
+    SymbolsTableValue value;
+} ListItemStruct;
+
+typedef ListItemStruct* ListItem;
 
 typedef struct listNode {
     ListItem item;
@@ -28,12 +34,31 @@ ListNode firstNode(LinkedList* list){
     return (*list)->first;
 }
 
-ListNode nextNode(LinkedList* list, ListNode baseNode) {
+ListNode nextNode(ListNode baseNode) {
     return baseNode->next;
 }
 
-ListItem nodeValue(LinkedList* list, ListNode node) {
+ListItem nodeItem(ListNode node) {
     return node->item;
+}
+
+void createItem(ListItem* item, char* key, SymbolsTableValue value) {
+    *item = (ListItem) malloc(sizeof(ListItemStruct));
+
+    (*item)->key = key;
+    (*item)->value = value;
+}
+
+void destroyItem(ListItem* item) {
+    free(*item);
+}
+
+char* itemKey(ListItem item){
+    return item->key;
+}
+
+SymbolsTableValue itemValue(ListItem item){
+    return item->value;
 }
 
 void append(LinkedList* list, ListItem item){
@@ -58,6 +83,7 @@ void destroyList(LinkedList* list){
         currentNode = (*list)->first;
         (*list)->first = (*list)->first->next;
 
+        destroyItem(&currentNode->item);
         free(currentNode);
     }
 

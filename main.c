@@ -2,6 +2,7 @@
 #include "symbols/SymbolsTable.h"
 #include "lexical/LexicalAnalyzer.h"
 #include "util/LinkedList.h"
+#include "util/HashTable.h"
 
 #include <stdio.h>
 
@@ -23,37 +24,22 @@ int main() {
 //    destroySymbolsTable();
 //    destroyInputSystem();
 
-    LinkedList list = NULL;
-    createList(&list);
+    HashTable test;
 
-    append(&list, 2);
-    append(&list, 3);
-    append(&list, 5);
-    append(&list, -1);
+    createHashTable(&test);
+    insertHash(&test, "a", 1);
+    insertHash(&test, "b", 2);
+    insertHash(&test, "c", 3);
+    insertHash(&test, "d", 4);
+    insertHash(&test, "e", 5);
+    insertHash(&test, "f", 6);
 
-    ListNode currentNode = firstNode(&list);
-
-    while(currentNode != NULL) {
-        printf("%d\n", nodeValue(&list, currentNode));
-        currentNode = nextNode(&list, currentNode);
-    }
-
-    destroyList(&list);
-
-    createList(&list);
-    
-    append(&list, -1);
-    append(&list, 3);
-    append(&list, 5);
-    append(&list, 2);
-
-    currentNode = firstNode(&list);
-
-    while(currentNode != NULL) {
-        printf("%d\n", nodeValue(&list, currentNode));
-        currentNode = nextNode(&list, currentNode);
-    }
-
+    printf("%d", findHash(&test, "a"));
+    printf("%d", findHash(&test, "b"));
+    printf("%d", findHash(&test, "c"));
+    printf("%d", findHash(&test, "d"));
+    printf("%d", findHash(&test, "e"));
+    printf("%d", findHash(&test, "f"));
 
     return 0;
 }

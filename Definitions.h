@@ -89,4 +89,8 @@
 
 // Other constants
 #define BLOCK_SIZE_BYTES 4096
-#define ERROR_CODE -100
+#define ERROR_CODE (-100)
+#define TOKEN_NOT_FOUND (-101)
+
+// Custom types
+typedef int SymbolsTableValue;
