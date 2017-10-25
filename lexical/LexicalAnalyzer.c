@@ -4,12 +4,33 @@
 #include "../symbols/SymbolsTable.h"
 #include "../Definitions.h"
 
+char ARR_RUNE_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '\''};
+#define SIZE_RUNE_VALID_ESCAPED_CHARS 9
+
+char ARR_STRING_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '"'};
+#define SIZE_STRING_VALID_ESCAPED_CHARS 9
+
+char ARR_SINGLE_CHAR_TOKENS[] = {'(', ')', '[', ']', '{', '}', ',', ';', '\n', EOF};
+#define SIZE_SINGLE_CHAR_TOKENS 10
+
+int operatorsAutomaton(char readChar);
+int mainAutomaton();
+
 // TODO ignore comments, do not return to syntactic (call nextToken)
-// TODO call getReadToken on every return
+// TODO maybe operators hash table
 int nextToken() {
+    char buffer[200];
+    int token = mainAutomaton();
+
+    getReadToken(buffer);
+
+    return token;
+}
+
+int mainAutomaton() {
     int status = 0;
     char readChar;
-    char token[200];
+    char buffer[200];
 
     while(1) {
         readChar = nextChar();
@@ -28,19 +49,17 @@ int nextToken() {
                     status = 11;
                 } else if(isdigit(readChar)) {
                     status = 20;
-                } else if(readChar == ';') {
-                    getReadToken(token);
-                    return PUNCTUATION_SEMICOLON;
+                } else if(readChar == ' ' || readChar == '\t' || readChar == '\r') {
+                    getReadToken(buffer); // TODO fix this crap
+                    return nextToken();
                 } else {
-                    return ERROR_CODE;
+                    return operatorsAutomaton(readChar);
                 }
                 break;
             case 1: // Alpha char recognized
                 if(!isalnum(readChar) && readChar != '_') {
                     moveBack(1);
-                    getReadToken(token);
-
-                    return findSymbol(token);
+                    return TOKEN_IDENTIFIER;
                 }
                 break;
             case 2: // '/' char recognized
@@ -54,8 +73,6 @@ int nextToken() {
                 break;
             case 3: // '//' sequence recognized. Single-line comment. Ends on \n
                 if(readChar == '\n') {
-                    getReadToken(token);
-
                     return TOKEN_COMMENT;
                 }
                 break;
@@ -66,7 +83,6 @@ int nextToken() {
                 break;
             case 5: // Recognized '*' on multi-line comment. Possible comment end. Confirmed if '/' found.
                 if(readChar == '/') {
-                    getReadToken(token);
                     return TOKEN_COMMENT;
                 } else {
                     status = 4;
@@ -78,7 +94,6 @@ int nextToken() {
                 } else if (readChar == '\\') {
                     status = 8;
                 } else if(readChar == '\'') {
-                    getReadToken(token);
                     return TOKEN_RUNE_LITERAL;
                 } else {
                     return ERROR_CODE;
@@ -86,7 +101,6 @@ int nextToken() {
                 break;
             case 7: // Recognized char inside rune literal. Expecting "'" for rune to end
                 if(readChar == '\'') {
-                    getReadToken(token);
                     return TOKEN_RUNE_LITERAL;
                 } else {
                     return ERROR_CODE;
@@ -105,7 +119,6 @@ int nextToken() {
                 break;
             case 9: // Recognized '"'. Expecting any valid string char or " for string to end
                 if(readChar == '"') {
-                    getReadToken(token);
                     return TOKEN_STRING_LITERAL;
                 } else if(readChar == '\\') {
                     status = 10;
@@ -228,4 +241,14 @@ int nextToken() {
                 break;
         }
     }
+}
+
+int operatorsAutomaton(char readChar) {
+    for (int i = 0; i < SIZE_SINGLE_CHAR_TOKENS; ++i) {
+        if(readChar == ARR_SINGLE_CHAR_TOKENS[i]) {
+            return readChar;
+        }
+    }
+
+    return ERROR_CODE;
 }

@@ -1,7 +1,6 @@
 #include "SymbolsTable.h"
 #include "../Definitions.h"
 
-#include <stdio.h>
 #include <string.h>
 
 char symbols[300][50];
@@ -51,7 +50,7 @@ int findSymbol(char *token) {
         }
     }
 
-    return -1;
+    return ERROR_CODE;
 }
 
 void destroySymbolsTable() {

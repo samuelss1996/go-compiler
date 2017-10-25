@@ -1,9 +1,6 @@
 #include "InputSystem.h"
 #include "../Definitions.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-
 FILE *file;
 
 char blockA[BLOCK_SIZE_BYTES + 1];
@@ -60,6 +57,9 @@ char* getReadToken(char *outBuffer) {
         outBuffer[i] = nextChar();
     }
 
+    startBlock = frontBlock;
+    startIndex = frontIndex;
+
     return outBuffer;
 }
 
@@ -77,12 +77,18 @@ void destroyInputSystem() {
 }
 
 void loadBlock(int block) {
+    size_t readChars;
+
     switch(block) {
         case 0:
-            fread(blockA, 1, BLOCK_SIZE_BYTES, file);
+            readChars = fread(blockA, sizeof(char), BLOCK_SIZE_BYTES, file);
+            blockA[readChars] = EOF;
             break;
         default:
-            fread(blockB, 1, BLOCK_SIZE_BYTES, file);
+            readChars = fread(blockB, sizeof(char), BLOCK_SIZE_BYTES, file);
+            blockA[readChars] = EOF;
             break;
     }
+
+
 }

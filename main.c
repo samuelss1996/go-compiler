@@ -13,9 +13,11 @@ int main() {
     initInputSystem("../concurrentSum.go");
     initSymbolsTable();
 
-    for (int i = 0; i < 2; ++i) {
-        printf("%d", nextToken());
-    }
+    int token;
+    do {
+        token = nextToken();
+        printf("%d\n", token);
+    } while(token != EOF);
 
     destroySymbolsTable();
     destroyInputSystem();
