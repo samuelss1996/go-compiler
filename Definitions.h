@@ -91,6 +91,9 @@
 #define BLOCK_SIZE_BYTES 4096
 #define ERROR_CODE (-100)
 #define TOKEN_NOT_FOUND (-101)
+#define MAXIMUM_OPERATOR_LENGTH 3
+
+#define OPERATORS_DB_PATH ../db/operators.db
 
 // Custom types
 typedef int SymbolsTableValue;

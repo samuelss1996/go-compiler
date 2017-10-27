@@ -13,17 +13,19 @@
 // TODO handle documentation comments
 // TODO put keywords in a separated file
 int main() {
-//    initInputSystem("../concurrentSum.go");
-//    initSymbolsTable();
-//
-//    int token;
-//    do {
-//        token = nextToken();
-//        printf("%d\n", token);
-//    } while(token != EOF);
-//
-//    destroySymbolsTable();
-//    destroyInputSystem();
-    
+    initInputSystem("../concurrentSum.go");
+    initSymbolsTable();
+    initLexicalAnalyzer();
+
+    int token;
+    do {
+        token = nextToken();
+        printf("%d\n", token);
+    } while(token != EOF);
+
+    destroyLexicalAnalyzer();
+    destroySymbolsTable();
+    destroyInputSystem();
+
     return 0;
 }

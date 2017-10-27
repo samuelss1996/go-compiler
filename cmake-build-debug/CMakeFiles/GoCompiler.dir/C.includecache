@@ -29,6 +29,8 @@ LexicalAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 ../Definitions.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
+../util/HashTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 
@@ -100,6 +102,8 @@ LinkedList.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c
 stdlib.h
+-
+string.h
 -
 ../Definitions.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h

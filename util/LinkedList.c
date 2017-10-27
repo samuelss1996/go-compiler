@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "../Definitions.h"
 
 typedef struct {
@@ -45,7 +46,9 @@ ListItem nodeItem(ListNode node) {
 void createItem(ListItem* item, char* key, SymbolsTableValue value) {
     *item = (ListItem) malloc(sizeof(ListItemStruct));
 
-    (*item)->key = key;
+    (*item)->key = (char *) malloc((strlen(key) + 1) * sizeof(char));
+
+    strcpy((*item)->key, key);
     (*item)->value = value;
 }
 

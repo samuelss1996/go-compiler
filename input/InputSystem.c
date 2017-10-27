@@ -49,16 +49,16 @@ char nextChar() {
 char* getReadToken(char *outBuffer) {
     int backupBlock = frontBlock;
     int backupIndex = frontIndex;
+    int i;
 
     frontBlock = startBlock;
     frontIndex = startIndex;
 
-    for (int i = 0; (frontBlock != backupBlock || frontIndex != backupIndex); ++i) {
+    for (i = 0; (frontBlock != backupBlock || frontIndex != backupIndex); ++i) {
         outBuffer[i] = nextChar();
     }
 
-    startBlock = frontBlock;
-    startIndex = frontIndex;
+    outBuffer[i] = '\0';
 
     return outBuffer;
 }
@@ -71,6 +71,11 @@ void moveBack(int positions) {
         frontBlock = (frontBlock == 0)? 1 : 0;
         frontIndex = BLOCK_SIZE_BYTES - frontIndex;
     }
+}
+
+void moveForward() {
+    startBlock = frontBlock;
+    startIndex = frontIndex;
 }
 
 void destroyInputSystem() {

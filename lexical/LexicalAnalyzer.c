@@ -3,26 +3,42 @@
 #include "../input/InputSystem.h"
 #include "../symbols/SymbolsTable.h"
 #include "../Definitions.h"
+#include "../util/HashTable.h"
 
-char ARR_RUNE_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '\''};
 #define SIZE_RUNE_VALID_ESCAPED_CHARS 9
-
-char ARR_STRING_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '"'};
 #define SIZE_STRING_VALID_ESCAPED_CHARS 9
 
-char ARR_SINGLE_CHAR_TOKENS[] = {'(', ')', '[', ']', '{', '}', ',', ';', '\n', EOF};
-#define SIZE_SINGLE_CHAR_TOKENS 10
+char ARR_RUNE_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '\''};
+char ARR_STRING_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '"'};
 
-int operatorsAutomaton(char readChar);
+HashTable operatorsTable;
+
 int mainAutomaton();
+int recognizeOperator();
 
 // TODO ignore comments, do not return to syntactic (call nextToken)
 // TODO maybe operators hash table
+// TODO newlines and EOF as tokens
+void initLexicalAnalyzer() {
+    FILE *operatorsDb = fopen("../db/operators.db", "r");
+    char operator[MAXIMUM_OPERATOR_LENGTH + 1];
+    int operatorId;
+
+    createHashTable(&operatorsTable);
+
+    while(fscanf(operatorsDb, "%s %d", operator, &operatorId) > 0) {
+        insertHash(&operatorsTable, operator, operatorId);
+    }
+
+    fclose(operatorsDb);
+}
+
 int nextToken() {
     char buffer[200];
     int token = mainAutomaton();
 
     getReadToken(buffer);
+    moveForward();
 
     return token;
 }
@@ -30,7 +46,6 @@ int nextToken() {
 int mainAutomaton() {
     int status = 0;
     char readChar;
-    char buffer[200];
 
     while(1) {
         readChar = nextChar();
@@ -50,10 +65,12 @@ int mainAutomaton() {
                 } else if(isdigit(readChar)) {
                     status = 20;
                 } else if(readChar == ' ' || readChar == '\t' || readChar == '\r') {
-                    getReadToken(buffer); // TODO fix this crap
+                    moveForward();
                     return nextToken();
+                } else if(readChar == '\n' || readChar == EOF){
+                    return readChar;
                 } else {
-                    return operatorsAutomaton(readChar);
+                    return recognizeOperator();
                 }
                 break;
             case 1: // Alpha char recognized
@@ -243,12 +260,29 @@ int mainAutomaton() {
     }
 }
 
-int operatorsAutomaton(char readChar) {
-    for (int i = 0; i < SIZE_SINGLE_CHAR_TOKENS; ++i) {
-        if(readChar == ARR_SINGLE_CHAR_TOKENS[i]) {
-            return readChar;
+int recognizeOperator() {
+    char readOperator[MAXIMUM_OPERATOR_LENGTH + 1];
+    int operatorId = ERROR_CODE;
+    int newOperatorId;
+
+    while(1) {
+        getReadToken(readOperator);
+        newOperatorId = findHash(&operatorsTable, readOperator);
+        if(newOperatorId == TOKEN_NOT_FOUND) {
+            break;
         }
+
+        operatorId = newOperatorId;
+        nextChar();
     }
 
-    return ERROR_CODE;
+    if (operatorId != ERROR_CODE) {
+        moveBack(1);
+    }
+
+    return operatorId;
+}
+
+void destroyLexicalAnalyzer() {
+    destroyHashTable(&operatorsTable);
 }
