@@ -18,7 +18,7 @@ int recognizeOperator();
 
 // TODO ignore comments, do not return to syntactic (call nextToken)
 // TODO maybe operators hash table
-// TODO newlines and EOF as tokens
+// TODO operators recognizement failing before EOF
 void initLexicalAnalyzer() {
     FILE *operatorsDb = fopen("../db/operators.db", "r");
     char operator[MAXIMUM_OPERATOR_LENGTH + 1];
@@ -268,12 +268,15 @@ int recognizeOperator() {
     while(1) {
         getReadToken(readOperator);
         newOperatorId = findHash(&operatorsTable, readOperator);
+
         if(newOperatorId == TOKEN_NOT_FOUND) {
             break;
         }
 
         operatorId = newOperatorId;
-        nextChar();
+        if(nextChar() == EOF) {
+            return operatorId;
+        }
     }
 
     if (operatorId != ERROR_CODE) {
