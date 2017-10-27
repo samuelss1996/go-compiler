@@ -16,6 +16,7 @@ CMakeFiles/GoCompiler.dir/main.c.o: ../input/InputSystem.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../lexical/LexicalAnalyzer.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../main.c
 CMakeFiles/GoCompiler.dir/main.c.o: ../symbols/SymbolsTable.h
+CMakeFiles/GoCompiler.dir/main.c.o: ../test/TestRunner.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../util/HashTable.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../util/LinkedList.h
 
@@ -25,6 +26,16 @@ CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../symbols/SymbolsTable.h
 
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../syntactic/SyntacticAnalyzer.c
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../syntactic/SyntacticAnalyzer.h
+
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../Definitions.h
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../test/TestHashTable.c
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../test/TestUtils.h
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../util/HashTable.h
+
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestHashTable.h
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestRunner.c
+
+CMakeFiles/GoCompiler.dir/test/TestUtils.c.o: ../test/TestUtils.c
 
 CMakeFiles/GoCompiler.dir/util/HashTable.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/util/HashTable.c.o: ../util/HashTable.c

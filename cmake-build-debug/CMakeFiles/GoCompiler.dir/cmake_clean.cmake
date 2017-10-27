@@ -6,6 +6,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o"
   "CMakeFiles/GoCompiler.dir/util/HashTable.c.o"
   "CMakeFiles/GoCompiler.dir/util/LinkedList.c.o"
+  "CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o"
+  "CMakeFiles/GoCompiler.dir/test/TestUtils.c.o"
+  "CMakeFiles/GoCompiler.dir/test/TestRunner.c.o"
   "GoCompiler.pdb"
   "GoCompiler"
 )

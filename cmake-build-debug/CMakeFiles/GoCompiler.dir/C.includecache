@@ -43,6 +43,8 @@ util/LinkedList.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h
 util/HashTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
+test/TestRunner.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.h
 stdio.h
 -
 
@@ -61,6 +63,28 @@ SyntacticAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.c
+../util/HashTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
+TestUtils.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.h
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.h
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c
+TestHashTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.h
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.h
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.c
+stdio.h
+-
+stdlib.h
+-
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c
 stdlib.h

@@ -258,6 +258,87 @@ syntactic/SyntacticAnalyzer.c.s:
 	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.s
 .PHONY : syntactic/SyntacticAnalyzer.c.s
 
+test/TestHashTable.o: test/TestHashTable.c.o
+
+.PHONY : test/TestHashTable.o
+
+# target to build an object file
+test/TestHashTable.c.o:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o
+.PHONY : test/TestHashTable.c.o
+
+test/TestHashTable.i: test/TestHashTable.c.i
+
+.PHONY : test/TestHashTable.i
+
+# target to preprocess a source file
+test/TestHashTable.c.i:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestHashTable.c.i
+.PHONY : test/TestHashTable.c.i
+
+test/TestHashTable.s: test/TestHashTable.c.s
+
+.PHONY : test/TestHashTable.s
+
+# target to generate assembly for a file
+test/TestHashTable.c.s:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestHashTable.c.s
+.PHONY : test/TestHashTable.c.s
+
+test/TestRunner.o: test/TestRunner.c.o
+
+.PHONY : test/TestRunner.o
+
+# target to build an object file
+test/TestRunner.c.o:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestRunner.c.o
+.PHONY : test/TestRunner.c.o
+
+test/TestRunner.i: test/TestRunner.c.i
+
+.PHONY : test/TestRunner.i
+
+# target to preprocess a source file
+test/TestRunner.c.i:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestRunner.c.i
+.PHONY : test/TestRunner.c.i
+
+test/TestRunner.s: test/TestRunner.c.s
+
+.PHONY : test/TestRunner.s
+
+# target to generate assembly for a file
+test/TestRunner.c.s:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestRunner.c.s
+.PHONY : test/TestRunner.c.s
+
+test/TestUtils.o: test/TestUtils.c.o
+
+.PHONY : test/TestUtils.o
+
+# target to build an object file
+test/TestUtils.c.o:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestUtils.c.o
+.PHONY : test/TestUtils.c.o
+
+test/TestUtils.i: test/TestUtils.c.i
+
+.PHONY : test/TestUtils.i
+
+# target to preprocess a source file
+test/TestUtils.c.i:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestUtils.c.i
+.PHONY : test/TestUtils.c.i
+
+test/TestUtils.s: test/TestUtils.c.s
+
+.PHONY : test/TestUtils.s
+
+# target to generate assembly for a file
+test/TestUtils.c.s:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestUtils.c.s
+.PHONY : test/TestUtils.c.s
+
 util/HashTable.o: util/HashTable.c.o
 
 .PHONY : util/HashTable.o
@@ -336,6 +417,15 @@ help:
 	@echo "... syntactic/SyntacticAnalyzer.o"
 	@echo "... syntactic/SyntacticAnalyzer.i"
 	@echo "... syntactic/SyntacticAnalyzer.s"
+	@echo "... test/TestHashTable.o"
+	@echo "... test/TestHashTable.i"
+	@echo "... test/TestHashTable.s"
+	@echo "... test/TestRunner.o"
+	@echo "... test/TestRunner.i"
+	@echo "... test/TestRunner.s"
+	@echo "... test/TestUtils.o"
+	@echo "... test/TestUtils.i"
+	@echo "... test/TestUtils.s"
 	@echo "... util/HashTable.o"
 	@echo "... util/HashTable.i"
 	@echo "... util/HashTable.s"

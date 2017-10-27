@@ -9,6 +9,9 @@ set(CMAKE_DEPENDS_CHECK_C
   "/mnt/c/Users/Ada/GitHub/GoCompiler/main.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/main.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o"
+  "/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o"
+  "/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/test/TestRunner.c.o"
+  "/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/test/TestUtils.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/util/HashTable.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/util/LinkedList.c.o"
   )

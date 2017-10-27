@@ -55,6 +55,8 @@ void insertHash(HashTable* hashTable, char* key, SymbolsTableValue value) {
     if(targetList == NULL) {
         createList(&targetList);
         (*hashTable)->elements[hash] = targetList;
+    } else {
+        printf("Colisión\n");
     }
 
     createItem(&newItem, key, value);

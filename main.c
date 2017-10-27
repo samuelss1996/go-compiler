@@ -3,6 +3,7 @@
 #include "lexical/LexicalAnalyzer.h"
 #include "util/LinkedList.h"
 #include "util/HashTable.h"
+#include "test/TestRunner.h"
 
 #include <stdio.h>
 
@@ -23,23 +24,6 @@ int main() {
 //
 //    destroySymbolsTable();
 //    destroyInputSystem();
-
-    HashTable test;
-
-    createHashTable(&test);
-    insertHash(&test, "a", 1);
-    insertHash(&test, "b", 2);
-    insertHash(&test, "c", 3);
-    insertHash(&test, "d", 4);
-    insertHash(&test, "e", 5);
-    insertHash(&test, "f", 6);
-
-    printf("%d", findHash(&test, "a"));
-    printf("%d", findHash(&test, "b"));
-    printf("%d", findHash(&test, "c"));
-    printf("%d", findHash(&test, "d"));
-    printf("%d", findHash(&test, "e"));
-    printf("%d", findHash(&test, "f"));
-
+    
     return 0;
 }

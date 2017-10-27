@@ -225,6 +225,78 @@ CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.provides: CMakeFiles/GoCompiler.di
 CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.provides.build: CMakeFiles/GoCompiler.dir/util/LinkedList.c.o
 
 
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: CMakeFiles/GoCompiler.dir/flags.make
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../test/TestHashTable.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o   -c /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.c
+
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/GoCompiler.dir/test/TestHashTable.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.c > CMakeFiles/GoCompiler.dir/test/TestHashTable.c.i
+
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/GoCompiler.dir/test/TestHashTable.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.c -o CMakeFiles/GoCompiler.dir/test/TestHashTable.c.s
+
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o.requires:
+
+.PHONY : CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o.requires
+
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o.provides: CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o.requires
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o.provides.build
+.PHONY : CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o.provides
+
+CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o.provides.build: CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o
+
+
+CMakeFiles/GoCompiler.dir/test/TestUtils.c.o: CMakeFiles/GoCompiler.dir/flags.make
+CMakeFiles/GoCompiler.dir/test/TestUtils.c.o: ../test/TestUtils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/GoCompiler.dir/test/TestUtils.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/GoCompiler.dir/test/TestUtils.c.o   -c /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.c
+
+CMakeFiles/GoCompiler.dir/test/TestUtils.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/GoCompiler.dir/test/TestUtils.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.c > CMakeFiles/GoCompiler.dir/test/TestUtils.c.i
+
+CMakeFiles/GoCompiler.dir/test/TestUtils.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/GoCompiler.dir/test/TestUtils.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.c -o CMakeFiles/GoCompiler.dir/test/TestUtils.c.s
+
+CMakeFiles/GoCompiler.dir/test/TestUtils.c.o.requires:
+
+.PHONY : CMakeFiles/GoCompiler.dir/test/TestUtils.c.o.requires
+
+CMakeFiles/GoCompiler.dir/test/TestUtils.c.o.provides: CMakeFiles/GoCompiler.dir/test/TestUtils.c.o.requires
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestUtils.c.o.provides.build
+.PHONY : CMakeFiles/GoCompiler.dir/test/TestUtils.c.o.provides
+
+CMakeFiles/GoCompiler.dir/test/TestUtils.c.o.provides.build: CMakeFiles/GoCompiler.dir/test/TestUtils.c.o
+
+
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: CMakeFiles/GoCompiler.dir/flags.make
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestRunner.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/GoCompiler.dir/test/TestRunner.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/GoCompiler.dir/test/TestRunner.c.o   -c /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c
+
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/GoCompiler.dir/test/TestRunner.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c > CMakeFiles/GoCompiler.dir/test/TestRunner.c.i
+
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/GoCompiler.dir/test/TestRunner.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c -o CMakeFiles/GoCompiler.dir/test/TestRunner.c.s
+
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.o.requires:
+
+.PHONY : CMakeFiles/GoCompiler.dir/test/TestRunner.c.o.requires
+
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.o.provides: CMakeFiles/GoCompiler.dir/test/TestRunner.c.o.requires
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestRunner.c.o.provides.build
+.PHONY : CMakeFiles/GoCompiler.dir/test/TestRunner.c.o.provides
+
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.o.provides.build: CMakeFiles/GoCompiler.dir/test/TestRunner.c.o
+
+
 # Object files for target GoCompiler
 GoCompiler_OBJECTS = \
 "CMakeFiles/GoCompiler.dir/main.c.o" \
@@ -233,7 +305,10 @@ GoCompiler_OBJECTS = \
 "CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o" \
 "CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o" \
 "CMakeFiles/GoCompiler.dir/util/HashTable.c.o" \
-"CMakeFiles/GoCompiler.dir/util/LinkedList.c.o"
+"CMakeFiles/GoCompiler.dir/util/LinkedList.c.o" \
+"CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o" \
+"CMakeFiles/GoCompiler.dir/test/TestUtils.c.o" \
+"CMakeFiles/GoCompiler.dir/test/TestRunner.c.o"
 
 # External object files for target GoCompiler
 GoCompiler_EXTERNAL_OBJECTS =
@@ -245,9 +320,12 @@ GoCompiler: CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o
 GoCompiler: CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o
 GoCompiler: CMakeFiles/GoCompiler.dir/util/HashTable.c.o
 GoCompiler: CMakeFiles/GoCompiler.dir/util/LinkedList.c.o
+GoCompiler: CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o
+GoCompiler: CMakeFiles/GoCompiler.dir/test/TestUtils.c.o
+GoCompiler: CMakeFiles/GoCompiler.dir/test/TestRunner.c.o
 GoCompiler: CMakeFiles/GoCompiler.dir/build.make
 GoCompiler: CMakeFiles/GoCompiler.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable GoCompiler"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking C executable GoCompiler"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/GoCompiler.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -262,6 +340,9 @@ CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/lexical/LexicalAna
 CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o.requires
 CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/util/HashTable.c.o.requires
 CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/util/LinkedList.c.o.requires
+CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o.requires
+CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/test/TestUtils.c.o.requires
+CMakeFiles/GoCompiler.dir/requires: CMakeFiles/GoCompiler.dir/test/TestRunner.c.o.requires
 
 .PHONY : CMakeFiles/GoCompiler.dir/requires
 

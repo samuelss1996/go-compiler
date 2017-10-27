@@ -63,6 +63,7 @@ char* getReadToken(char *outBuffer) {
     return outBuffer;
 }
 
+// TODO consider out of range move
 void moveBack(int positions) {
     frontIndex -= positions;
 
