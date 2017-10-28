@@ -18,6 +18,8 @@ int mainAutomaton();
 int recognizeOperator();
 int alphanumericAutomaton();
 int commentsAutomaton();
+int runesAutomaton();
+int stringsAutomaton();
 
 // TODO booleans
 // TODO a float can begin with '.'
@@ -67,72 +69,20 @@ int mainAutomaton() {
                 } else if(readChar == '/') {
                     return commentsAutomaton();
                 } else if(readChar == '\'') {
-                    status = 6;
+                    return runesAutomaton();
                 } else if(readChar == '"') {
-                    status = 9;
+                    return stringsAutomaton();
                 } else if(readChar == '0') {
                     status = 11;
                 } else if(isdigit(readChar)) {
                     status = 20;
                 } else if(readChar == ' ' || readChar == '\t' || readChar == '\r') {
-                    //confirmToken(inputSystem);
                     return TOKEN_COMMENT; // TODO
                 } else if(readChar == '\n' || readChar == EOF){
                     return readChar;
                 } else {
                     return recognizeOperator();
                 }
-                break;
-            case 6: // Recognized "'". Expecting valid rune char or "'" for rune to end
-                if(readChar != '\'' && readChar != '\n' && readChar != '\\') {
-                    status = 7;
-                } else if (readChar == '\\') {
-                    status = 8;
-                } else if(readChar == '\'') {
-                    return TOKEN_RUNE_LITERAL;
-                } else {
-                    return ERROR_CODE;
-                }
-                break;
-            case 7: // Recognized char inside rune literal. Expecting "'" for rune to end
-                if(readChar == '\'') {
-                    return TOKEN_RUNE_LITERAL;
-                } else {
-                    return ERROR_CODE;
-                }
-            case 8: // Recognized escape char inside rune ('\'). Expecting valid escaped char
-                for (int i = 0; i < SIZE_RUNE_VALID_ESCAPED_CHARS; ++i) {
-                    if(readChar == ARR_RUNE_VALID_ESCAPED_CHARS[i]) {
-                        status = 7;
-                        break;
-                    }
-                }
-
-                if(status == 8) { // Not valid escaped char
-                    return ERROR_CODE;
-                }
-                break;
-            case 9: // Recognized '"'. Expecting any valid string char or " for string to end
-                if(readChar == '"') {
-                    return TOKEN_STRING_LITERAL;
-                } else if(readChar == '\\') {
-                    status = 10;
-                } else if(readChar == '\n') {
-                    return ERROR_CODE;
-                }
-                break;
-            case 10: // Recognized escape char inside string ('\'). Expecting valid escaped char
-                for (int i = 0; i < SIZE_STRING_VALID_ESCAPED_CHARS; ++i) {
-                    if(readChar == ARR_STRING_VALID_ESCAPED_CHARS[i]) {
-                        status = 9;
-                        break;
-                    }
-                }
-
-                if(status == 10) { // Not valid escaped char
-                    return ERROR_CODE;
-                }
-
                 break;
             case 11: // Recognized '0'. Expecting octal or hexadecimal integer, floating-point decimal, or imaginary
                 if(readChar == 'x' || readChar == 'X') { // hexadecimal
@@ -293,6 +243,70 @@ int commentsAutomaton() {
                     case EOF: return ERROR_CODE;
                     default: status = 2; break;
                 }
+                break;
+        }
+    }
+}
+
+int runesAutomaton() {
+    int status = 0;
+    char readChar;
+
+    while(1) {
+        readChar = nextChar(inputSystem);
+
+        switch(status) {
+            case 0:
+                switch(readChar) {
+                    case '\\': status = 1; break;
+                    case '\n': case '\'': return ERROR_CODE;
+                    default: status = 2; break;
+                }
+                break;
+            case 1:
+                for (int i = 0; i < SIZE_RUNE_VALID_ESCAPED_CHARS; ++i) {
+                    if(readChar == ARR_RUNE_VALID_ESCAPED_CHARS[i]) {
+                        status = 2;
+                        break;
+                    }
+                }
+
+                if(status == 1) return ERROR_CODE;
+                break;
+            case 2:
+                switch(readChar) {
+                    case '\'': return TOKEN_RUNE_LITERAL;
+                    default: return ERROR_CODE;
+                }
+        }
+    }
+}
+
+// TODO maybe add raw strings
+int stringsAutomaton() {
+    int status = 0;
+    char readChar;
+
+    while(1) {
+        readChar = nextChar(inputSystem);
+
+        switch(status) {
+            case 0:
+                switch(readChar) {
+                    case '"': return TOKEN_STRING_LITERAL;
+                    case '\\': status = 1; break;
+                    case '\n': return ERROR_CODE;
+                }
+                break;
+            case 1:
+                for (int i = 0; i < SIZE_STRING_VALID_ESCAPED_CHARS; ++i) {
+                    if(readChar == ARR_STRING_VALID_ESCAPED_CHARS[i]) {
+                        status = 0;
+                        break;
+                    }
+                }
+
+                if(status == 1) return ERROR_CODE;
                 break;
         }
     }

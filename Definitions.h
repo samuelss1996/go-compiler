@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 // Go language keywords
+// TODO include types
 #define KEYWORD_BREAK 300
 #define KEYWORD_DEFAULT 301
 #define KEYWORD_FUNC 302
@@ -88,7 +89,7 @@
 #define TOKEN_COMMENT 508
 
 // Other constants
-#define BLOCK_SIZE_BYTES 32
+#define BLOCK_SIZE_BYTES 48
 #define ERROR_CODE (-100)
 #define TOKEN_NOT_FOUND (-101)
 #define MAXIMUM_OPERATOR_LENGTH 3
