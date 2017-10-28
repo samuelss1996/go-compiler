@@ -3,13 +3,10 @@
 
 CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../input/InputSystem.c
-CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../input/InputSystem.h
 
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../input/InputSystem.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../lexical/LexicalAnalyzer.c
-CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../lexical/LexicalAnalyzer.h
-CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../symbols/SymbolsTable.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../util/HashTable.h
 
 CMakeFiles/GoCompiler.dir/main.c.o: ../Definitions.h
@@ -33,7 +30,11 @@ CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../test/TestHashTable.c
 CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../test/TestUtils.h
 CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../util/HashTable.h
 
+CMakeFiles/GoCompiler.dir/test/TestInputSystem.c.o: ../input/InputSystem.h
+CMakeFiles/GoCompiler.dir/test/TestInputSystem.c.o: ../test/TestInputSystem.c
+
 CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestHashTable.h
+CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestInputSystem.h
 CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestRunner.c
 
 CMakeFiles/GoCompiler.dir/test/TestUtils.c.o: ../test/TestUtils.c

@@ -1,6 +1,8 @@
-void initInputSystem(char *filePath);
-char nextChar();
-char* getReadToken(char *outBuffer);
-void moveBack(int positions);
-void moveForward();
-void destroyInputSystem();
+typedef void* InputSystem;
+
+void createInputSystem(InputSystem* inputSystem, char *filePath);
+char nextChar(InputSystem* inputSystem);
+void getReadToken(InputSystem* inputSystem, char *outBuffer);
+void moveBack(InputSystem* inputSystem, int positions);
+void confirmToken(InputSystem* inputSystem);
+void destroyInputSystem(InputSystem* inputSystem);

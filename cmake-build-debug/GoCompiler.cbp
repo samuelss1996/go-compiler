@@ -120,6 +120,12 @@
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.h">
 			<Option target="GoCompiler"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.c">
+			<Option target="GoCompiler"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.h">
+			<Option target="GoCompiler"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c">
 			<Option target="GoCompiler"/>
 		</Unit>

@@ -1,100 +1,111 @@
-#include "InputSystem.h"
+#include <stdlib.h>
 #include "../Definitions.h"
 
-FILE *file;
+typedef struct {
+    FILE *file;
+    char *blockA;
+    char *blockB;
+    char *frontPointer;
+    char *backPointer;
+    int currentBlock;
+    short validBlocks[2];
+} InputSystemStruct;
 
-char blockA[BLOCK_SIZE_BYTES + 1];
-char blockB[BLOCK_SIZE_BYTES + 1];
+typedef InputSystemStruct* InputSystem;
 
-int startBlock = 0;
-int startIndex = 0;
-int frontBlock = 0;
-int frontIndex = 0;
+void loadBlock(InputSystem* inputSystem, int block);
+long frontAsLong(InputSystem* inputSystem);
+void moveToOtherBlock(InputSystem* inputSystem);
+void moveBack(InputSystem* inputSystem, int positions);
 
-void loadBlock(int block);
+void createInputSystem(InputSystem* inputSystem, char *filePath) {
+    *inputSystem = (InputSystem) malloc(sizeof(InputSystemStruct));
 
-// TODO proper handling of goBack between blocks when going forward again
-void initInputSystem(char *filePath) {
-    file = fopen(filePath, "rb");
+    (*inputSystem)->file = fopen(filePath, "rb");
+    (*inputSystem)->blockA = (char *) malloc(BLOCK_SIZE_BYTES + 1);
+    (*inputSystem)->blockB = (char *) malloc(BLOCK_SIZE_BYTES + 1);
+    (*inputSystem)->frontPointer = (*inputSystem)->backPointer = (*inputSystem)->blockA;
+    (*inputSystem)->currentBlock = 0;
+    (*inputSystem)->validBlocks[0] = (*inputSystem)->validBlocks[1] = 0;
 
-    blockA[BLOCK_SIZE_BYTES] = blockB[BLOCK_SIZE_BYTES] = EOF;
-
-    loadBlock(0);
+    loadBlock(inputSystem, 0);
+    loadBlock(inputSystem, 1);
 }
 
-char nextChar() {
-    char result;
+char nextChar(InputSystem* inputSystem) {
+    char result = *(*inputSystem)->frontPointer;
 
-    if(frontBlock == 0) {
-        result = blockA[frontIndex];
-    } else {
-        result = blockB[frontIndex];
-    }
+    (*inputSystem)->frontPointer++;
 
-    if(result == EOF) {
-        if(frontIndex == BLOCK_SIZE_BYTES) {
-            frontBlock = (frontBlock == 0)? 1 : 0;
-            frontIndex = 0;
+    if(*(*inputSystem)->frontPointer == EOF && frontAsLong(inputSystem) == BLOCK_SIZE_BYTES) {
+        (*inputSystem)->validBlocks[(*inputSystem)->currentBlock] = 0;
 
-            loadBlock(frontBlock);
-            result = nextChar();
-        }
-    } else {
-        frontIndex++;
+        moveToOtherBlock(inputSystem);
+        loadBlock(inputSystem, (*inputSystem)->currentBlock);
     }
 
     return result;
 }
 
-char* getReadToken(char *outBuffer) {
-    int backupBlock = frontBlock;
-    int backupIndex = frontIndex;
-    int i;
+void getReadToken(InputSystem* inputSystem, char *outBuffer) {
+    int size, i;
 
-    frontBlock = startBlock;
-    frontIndex = startIndex;
+    for (size = 0; (*inputSystem)->frontPointer != (*inputSystem)->backPointer; size++) {
+        moveBack(inputSystem, 1);
+    }
 
-    for (i = 0; (frontBlock != backupBlock || frontIndex != backupIndex); ++i) {
-        outBuffer[i] = nextChar();
+    for(i = 0; i < size; i++) {
+        outBuffer[i] = nextChar(inputSystem);
     }
 
     outBuffer[i] = '\0';
-
-    return outBuffer;
 }
 
-// TODO consider out of range move
-void moveBack(int positions) {
-    frontIndex -= positions;
+void moveBack(InputSystem* inputSystem, int positions) {
+    long newIndex = frontAsLong(inputSystem) - positions;
 
-    if(frontIndex < 0) {
-        frontBlock = (frontBlock == 0)? 1 : 0;
-        frontIndex = BLOCK_SIZE_BYTES - frontIndex;
+    if(newIndex >= 0) {
+        (*inputSystem)->frontPointer -= positions;
+    } else {
+        moveToOtherBlock(inputSystem);
+        (*inputSystem)->frontPointer += BLOCK_SIZE_BYTES + newIndex;
     }
 }
 
-void moveForward() {
-    startBlock = frontBlock;
-    startIndex = frontIndex;
+void confirmToken(InputSystem* inputSystem) {
+    (*inputSystem)->backPointer = (*inputSystem)->frontPointer;
 }
 
-void destroyInputSystem() {
-    fclose(file);
+void destroyInputSystem(InputSystem* inputSystem) {
+    free((*inputSystem)->blockA);
+    free((*inputSystem)->blockB);
+
+    fclose((*inputSystem)->file);
+
+    free(*inputSystem);
 }
 
-void loadBlock(int block) {
+void loadBlock(InputSystem* inputSystem, int block) {
+    char* blockToBeLoaded = (block == 0)? (*inputSystem)->blockA : (*inputSystem)->blockB;
     size_t readChars;
 
-    switch(block) {
-        case 0:
-            readChars = fread(blockA, sizeof(char), BLOCK_SIZE_BYTES, file);
-            blockA[readChars] = EOF;
-            break;
-        default:
-            readChars = fread(blockB, sizeof(char), BLOCK_SIZE_BYTES, file);
-            blockA[readChars] = EOF;
-            break;
+    if(!(*inputSystem)->validBlocks[block]) {
+        readChars = fread(blockToBeLoaded, sizeof(char), BLOCK_SIZE_BYTES, (*inputSystem)->file);
+
+        (*inputSystem)->validBlocks[block] = 1;
+        blockToBeLoaded[readChars] = EOF;
     }
+}
 
+long frontAsLong(InputSystem* inputSystem) {
+    char* currentBlockPointer = ((*inputSystem)->currentBlock == 0)? (*inputSystem)->blockA : (*inputSystem)->blockB;
 
+    return (*inputSystem)->frontPointer - currentBlockPointer;
+}
+
+void moveToOtherBlock(InputSystem* inputSystem) {
+    int currentBlockIndex = (*inputSystem)->currentBlock;
+
+    (*inputSystem)->currentBlock = (currentBlockIndex == 0) ? 1 : 0;
+    (*inputSystem)->frontPointer = (currentBlockIndex == 0) ? (*inputSystem)->blockB : (*inputSystem)->blockA;
 }

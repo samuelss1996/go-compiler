@@ -13,9 +13,11 @@
 // TODO handle documentation comments
 // TODO put keywords in a separated file
 int main() {
-    initInputSystem("../concurrentSum.go");
+    InputSystem inputSystem;
+
+    createInputSystem(&inputSystem, "../concurrentSum.go");
     initSymbolsTable();
-    initLexicalAnalyzer();
+    initLexicalAnalyzer(&inputSystem);
 
     int token;
     do {
@@ -25,7 +27,8 @@ int main() {
 
     destroyLexicalAnalyzer();
     destroySymbolsTable();
-    destroyInputSystem();
+    destroyInputSystem(&inputSystem);
+
 
     return 0;
 }

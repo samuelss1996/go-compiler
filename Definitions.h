@@ -88,7 +88,7 @@
 #define TOKEN_COMMENT 508
 
 // Other constants
-#define BLOCK_SIZE_BYTES 4096
+#define BLOCK_SIZE_BYTES 32
 #define ERROR_CODE (-100)
 #define TOKEN_NOT_FOUND (-101)
 #define MAXIMUM_OPERATOR_LENGTH 3

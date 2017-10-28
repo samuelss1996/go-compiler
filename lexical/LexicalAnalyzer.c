@@ -1,9 +1,7 @@
 #include <ctype.h>
-#include "LexicalAnalyzer.h"
-#include "../input/InputSystem.h"
-#include "../symbols/SymbolsTable.h"
 #include "../Definitions.h"
 #include "../util/HashTable.h"
+#include "../input/InputSystem.h"
 
 #define SIZE_RUNE_VALID_ESCAPED_CHARS 9
 #define SIZE_STRING_VALID_ESCAPED_CHARS 9
@@ -12,17 +10,18 @@ char ARR_RUNE_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', 
 char ARR_STRING_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '"'};
 
 HashTable operatorsTable;
+InputSystem* inputSystem;
 
 int mainAutomaton();
 int recognizeOperator();
 
 // TODO ignore comments, do not return to syntactic (call nextToken)
-// TODO maybe operators hash table
-// TODO operators recognizement failing before EOF
-void initLexicalAnalyzer() {
+// TODO do not ignore \n after single-line comments
+void initLexicalAnalyzer(InputSystem* is) {
     FILE *operatorsDb = fopen("../db/operators.db", "r");
     char operator[MAXIMUM_OPERATOR_LENGTH + 1];
     int operatorId;
+    inputSystem = is;
 
     createHashTable(&operatorsTable);
 
@@ -37,8 +36,8 @@ int nextToken() {
     char buffer[200];
     int token = mainAutomaton();
 
-    getReadToken(buffer);
-    moveForward();
+    getReadToken(inputSystem, buffer);
+    confirmToken(inputSystem);
 
     return token;
 }
@@ -48,7 +47,7 @@ int mainAutomaton() {
     char readChar;
 
     while(1) {
-        readChar = nextChar();
+        readChar = nextChar(inputSystem);
 
         switch(status) {
             case 0: // Initial status
@@ -65,7 +64,7 @@ int mainAutomaton() {
                 } else if(isdigit(readChar)) {
                     status = 20;
                 } else if(readChar == ' ' || readChar == '\t' || readChar == '\r') {
-                    moveForward();
+                    confirmToken(inputSystem);
                     return nextToken();
                 } else if(readChar == '\n' || readChar == EOF){
                     return readChar;
@@ -75,7 +74,7 @@ int mainAutomaton() {
                 break;
             case 1: // Alpha char recognized
                 if(!isalnum(readChar) && readChar != '_') {
-                    moveBack(1);
+                    moveBack(inputSystem, 1);
                     return TOKEN_IDENTIFIER;
                 }
                 break;
@@ -170,7 +169,7 @@ int mainAutomaton() {
                 } else if(readChar == 'e' || readChar == 'E') {
                     status = 17;
                 } else {
-                    moveBack(1);
+                    moveBack(inputSystem, 1);
                     return TOKEN_INTEGER_LITERAL;
                 }
                 break;
@@ -183,7 +182,7 @@ int mainAutomaton() {
                 break;
             case 13: // Recognized '0xF', where F is an hexadecimal digit. Expecting 0 or more hexadecimal digits
                 if(!isxdigit(_toupper(readChar))) {
-                    moveBack(1);
+                    moveBack(inputSystem, 1);
                     return TOKEN_INTEGER_LITERAL; // TODO maybe change to hexadecimal
                 }
                 break;
@@ -193,7 +192,7 @@ int mainAutomaton() {
                 } else if(readChar == '8' || readChar == '9') {
                     status = 15;
                 } else if(!isdigit(readChar)) {
-                    moveBack(1);
+                    moveBack(inputSystem, 1);
                     return TOKEN_INTEGER_LITERAL; // TODO maybe change to octal
                 }
                 break;
@@ -215,7 +214,7 @@ int mainAutomaton() {
                 } else if(readChar == 'e' || readChar == 'E') {
                     status = 17;
                 } else if(!isdigit(readChar)) {
-                    moveBack(1);
+                    moveBack(inputSystem, 1);
                     return TOKEN_FLOATING_POINT_LITERAL;
                 }
                 break;
@@ -239,7 +238,7 @@ int mainAutomaton() {
                 if(readChar == 'i') {
                     return TOKEN_IMAGINARY_LITERAL; // TODO maybe change to float exponential imaginary
                 } else if(!isdigit(readChar)) {
-                    moveBack(1);
+                    moveBack(inputSystem, 1);
                     return TOKEN_FLOATING_POINT_LITERAL; // TODO maybe change to float with exponent
                 }
                 break;
@@ -251,7 +250,7 @@ int mainAutomaton() {
                 } else if(readChar == 'e' || readChar == 'E') {
                     status = 17;
                 } else if(!isdigit(readChar)) {
-                    moveBack(1);
+                    moveBack(inputSystem, 1);
                     return TOKEN_INTEGER_LITERAL;
                 }
 
@@ -266,7 +265,7 @@ int recognizeOperator() {
     int newOperatorId;
 
     while(1) {
-        getReadToken(readOperator);
+        getReadToken(inputSystem, readOperator);
         newOperatorId = findHash(&operatorsTable, readOperator);
 
         if(newOperatorId == TOKEN_NOT_FOUND) {
@@ -274,13 +273,11 @@ int recognizeOperator() {
         }
 
         operatorId = newOperatorId;
-        if(nextChar() == EOF) {
-            return operatorId;
-        }
+        nextChar(inputSystem);
     }
 
     if (operatorId != ERROR_CODE) {
-        moveBack(1);
+        moveBack(inputSystem, 1);
     }
 
     return operatorId;
