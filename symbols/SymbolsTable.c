@@ -50,7 +50,7 @@ int findSymbol(char *token) {
         }
     }
 
-    return ERROR_CODE;
+    return TOKEN_NOT_FOUND;
 }
 
 void destroySymbolsTable() {

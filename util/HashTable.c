@@ -12,6 +12,7 @@ typedef struct {
 
 typedef HashTableStruct* HashTable;
 // TODO implement hash table expansion
+// TODO improve for operators, maybe allow variable initial capacity
 
 unsigned long calculateHash(char* key);
 

@@ -7,6 +7,7 @@ CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../input/InputSystem.c
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../input/InputSystem.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../lexical/LexicalAnalyzer.c
+CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../symbols/SymbolsTable.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../util/HashTable.h
 
 CMakeFiles/GoCompiler.dir/main.c.o: ../Definitions.h

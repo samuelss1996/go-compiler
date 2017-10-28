@@ -53,6 +53,7 @@ void createItem(ListItem* item, char* key, SymbolsTableValue value) {
 }
 
 void destroyItem(ListItem* item) {
+    free((*item)->key);
     free(*item);
 }
 

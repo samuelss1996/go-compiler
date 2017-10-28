@@ -2,6 +2,7 @@
 #include "../Definitions.h"
 #include "../util/HashTable.h"
 #include "../input/InputSystem.h"
+#include "../symbols/SymbolsTable.h"
 
 #define SIZE_RUNE_VALID_ESCAPED_CHARS 9
 #define SIZE_STRING_VALID_ESCAPED_CHARS 9
@@ -14,9 +15,10 @@ InputSystem* inputSystem;
 
 int mainAutomaton();
 int recognizeOperator();
+int alphanumericAutomaton();
+int commentsAutomaton();
 
-// TODO ignore comments, do not return to syntactic (call nextToken)
-// TODO do not ignore \n after single-line comments
+// TODO booleans
 void initLexicalAnalyzer(InputSystem* is) {
     FILE *operatorsDb = fopen("../db/operators.db", "r");
     char operator[MAXIMUM_OPERATOR_LENGTH + 1];
@@ -33,11 +35,12 @@ void initLexicalAnalyzer(InputSystem* is) {
 }
 
 int nextToken() {
-    char buffer[200];
     int token = mainAutomaton();
-
-    getReadToken(inputSystem, buffer);
     confirmToken(inputSystem);
+
+    if(token == TOKEN_COMMENT) {
+        return nextToken();
+    }
 
     return token;
 }
@@ -52,9 +55,9 @@ int mainAutomaton() {
         switch(status) {
             case 0: // Initial status
                 if(isalpha(readChar) || readChar == '_') {
-                    status = 1;
+                    return alphanumericAutomaton();
                 } else if(readChar == '/') {
-                    status = 2;
+                    return commentsAutomaton();
                 } else if(readChar == '\'') {
                     status = 6;
                 } else if(readChar == '"') {
@@ -70,38 +73,6 @@ int mainAutomaton() {
                     return readChar;
                 } else {
                     return recognizeOperator();
-                }
-                break;
-            case 1: // Alpha char recognized
-                if(!isalnum(readChar) && readChar != '_') {
-                    moveBack(inputSystem, 1);
-                    return TOKEN_IDENTIFIER;
-                }
-                break;
-            case 2: // '/' char recognized
-                if(readChar == '/') {
-                    status = 3;
-                } else if(readChar == '*') {
-                    status = 4;
-                } else {
-                    // TODO handle other situations, '/' can be an operator
-                }
-                break;
-            case 3: // '//' sequence recognized. Single-line comment. Ends on \n
-                if(readChar == '\n') {
-                    return TOKEN_COMMENT;
-                }
-                break;
-            case 4: // '/*' sequence recognized. Multi-line comment. Ends on '*/'
-                if(readChar == '*') {
-                    status = 5;
-                }
-                break;
-            case 5: // Recognized '*' on multi-line comment. Possible comment end. Confirmed if '/' found.
-                if(readChar == '/') {
-                    return TOKEN_COMMENT;
-                } else {
-                    status = 4;
                 }
                 break;
             case 6: // Recognized "'". Expecting valid rune char or "'" for rune to end
@@ -254,6 +225,66 @@ int mainAutomaton() {
                     return TOKEN_INTEGER_LITERAL;
                 }
 
+                break;
+        }
+    }
+}
+
+int alphanumericAutomaton() {
+    char readChar = nextChar(inputSystem);
+    char token[200]; // TODO
+    int tokenId;
+
+    while(isalnum(readChar) || readChar == '_') {
+        readChar = nextChar(inputSystem);
+    }
+
+    moveBack(inputSystem, 1);
+    getReadToken(inputSystem, token);
+
+    tokenId = findSymbol(token);
+
+    if(tokenId == TOKEN_NOT_FOUND) {
+        addSymbol(token, TOKEN_IDENTIFIER);
+        return TOKEN_IDENTIFIER;
+    }
+}
+
+int commentsAutomaton() {
+    int status = 0;
+    char readChar;
+
+    while(1) {
+        readChar = nextChar(inputSystem);
+
+        switch(status) {
+            case 0:
+                switch(readChar) {
+                    case '/': status = 1; break;
+                    case '*': status = 2; break;
+                    default:
+                        moveBack(inputSystem, 1);
+                        return recognizeOperator();
+                }
+                break;
+            case 1:
+                if(readChar == '\n') {
+                    moveBack(inputSystem, 1);
+                    return TOKEN_COMMENT;
+                }
+                break;
+            case 2:
+                switch(readChar) {
+                    case '*': status = 3; break;
+                    case EOF: return ERROR_CODE;
+                }
+                break;
+            case 3:
+                switch(readChar) {
+                    case '/': return TOKEN_COMMENT;
+                    case EOF: return ERROR_CODE;
+                    default: status = 2; break;
+                }
                 break;
         }
     }
