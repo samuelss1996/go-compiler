@@ -99,6 +99,12 @@
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h">
 			<Option target="GoCompiler"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.c">
+			<Option target="GoCompiler"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h">
+			<Option target="GoCompiler"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/main.c">
 			<Option target="GoCompiler"/>
 		</Unit>

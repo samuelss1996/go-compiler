@@ -3,6 +3,7 @@
 #include "../util/HashTable.h"
 #include "../input/InputSystem.h"
 #include "../symbols/SymbolsTable.h"
+#include "LexicalComponent.h"
 
 #define SIZE_RUNE_VALID_ESCAPED_CHARS 9
 #define SIZE_STRING_VALID_ESCAPED_CHARS 9
@@ -19,6 +20,7 @@ int alphanumericAutomaton();
 int commentsAutomaton();
 
 // TODO booleans
+// TODO a float can begin with '.'
 void initLexicalAnalyzer(InputSystem* is) {
     FILE *operatorsDb = fopen("../db/operators.db", "r");
     char operator[MAXIMUM_OPERATOR_LENGTH + 1];
@@ -34,15 +36,21 @@ void initLexicalAnalyzer(InputSystem* is) {
     fclose(operatorsDb);
 }
 
-int nextToken() {
-    int token = mainAutomaton();
+LexicalComponent nextLexicalComponent() {
+    int componentId = mainAutomaton();
+    char componentToken[200]; // TODO
+    LexicalComponent result;
+
+    getReadToken(inputSystem, componentToken);
     confirmToken(inputSystem);
 
-    if(token == TOKEN_COMMENT) {
-        return nextToken();
+    if(componentId == TOKEN_COMMENT) {
+        return nextLexicalComponent();
     }
 
-    return token;
+    createLexicalComponent(&result, componentId, componentToken);
+
+    return result;
 }
 
 int mainAutomaton() {
@@ -54,7 +62,7 @@ int mainAutomaton() {
 
         switch(status) {
             case 0: // Initial status
-                if(isalpha(readChar) || readChar == '_') {
+                if(isalpha(readChar) || readChar == '_') { // TODO find if '_' has a special meaning itself
                     return alphanumericAutomaton();
                 } else if(readChar == '/') {
                     return commentsAutomaton();
@@ -67,8 +75,8 @@ int mainAutomaton() {
                 } else if(isdigit(readChar)) {
                     status = 20;
                 } else if(readChar == ' ' || readChar == '\t' || readChar == '\r') {
-                    confirmToken(inputSystem);
-                    return nextToken();
+                    //confirmToken(inputSystem);
+                    return TOKEN_COMMENT; // TODO
                 } else if(readChar == '\n' || readChar == EOF){
                     return readChar;
                 } else {

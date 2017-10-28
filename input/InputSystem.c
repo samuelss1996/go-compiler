@@ -50,7 +50,7 @@ char nextChar(InputSystem* inputSystem) {
 void getReadToken(InputSystem* inputSystem, char *outBuffer) {
     int size, i;
 
-    for (size = 0; (*inputSystem)->frontPointer != (*inputSystem)->backPointer; size++) {
+    for (size = 0; (*inputSystem)->frontPointer != (*inputSystem)->backPointer && size < BLOCK_SIZE_BYTES; size++) {
         moveBack(inputSystem, 1);
     }
 

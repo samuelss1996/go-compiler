@@ -10,6 +10,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/GoCompiler.dir/test/TestUtils.c.o"
   "CMakeFiles/GoCompiler.dir/test/TestRunner.c.o"
   "CMakeFiles/GoCompiler.dir/test/TestInputSystem.c.o"
+  "CMakeFiles/GoCompiler.dir/lexical/LexicalComponent.c.o"
   "GoCompiler.pdb"
   "GoCompiler"
 )

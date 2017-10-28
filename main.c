@@ -19,11 +19,11 @@ int main() {
     initSymbolsTable();
     initLexicalAnalyzer(&inputSystem);
 
-    int token;
+    LexicalComponent component;
     do {
-        token = nextToken();
-        printf("%d\n", token);
-    } while(token != EOF);
+        component = nextLexicalComponent();
+        printf("%s -> %d\n", getLexicalComponentToken(&component), getLexicalComponentId(&component));
+    } while(getLexicalComponentId(&component) != EOF);
 
     destroyLexicalAnalyzer();
     destroySymbolsTable();

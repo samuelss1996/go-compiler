@@ -29,10 +29,22 @@ ctype.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 ../symbols/SymbolsTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
+LexicalComponent.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 ../input/InputSystem.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
+LexicalComponent.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.c
+stdlib.h
+-
+string.h
+-
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/main.c
 input/InputSystem.h

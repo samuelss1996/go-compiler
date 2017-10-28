@@ -177,6 +177,33 @@ lexical/LexicalAnalyzer.c.s:
 	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.s
 .PHONY : lexical/LexicalAnalyzer.c.s
 
+lexical/LexicalComponent.o: lexical/LexicalComponent.c.o
+
+.PHONY : lexical/LexicalComponent.o
+
+# target to build an object file
+lexical/LexicalComponent.c.o:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/lexical/LexicalComponent.c.o
+.PHONY : lexical/LexicalComponent.c.o
+
+lexical/LexicalComponent.i: lexical/LexicalComponent.c.i
+
+.PHONY : lexical/LexicalComponent.i
+
+# target to preprocess a source file
+lexical/LexicalComponent.c.i:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/lexical/LexicalComponent.c.i
+.PHONY : lexical/LexicalComponent.c.i
+
+lexical/LexicalComponent.s: lexical/LexicalComponent.c.s
+
+.PHONY : lexical/LexicalComponent.s
+
+# target to generate assembly for a file
+lexical/LexicalComponent.c.s:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/lexical/LexicalComponent.c.s
+.PHONY : lexical/LexicalComponent.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -435,6 +462,9 @@ help:
 	@echo "... lexical/LexicalAnalyzer.o"
 	@echo "... lexical/LexicalAnalyzer.i"
 	@echo "... lexical/LexicalAnalyzer.s"
+	@echo "... lexical/LexicalComponent.o"
+	@echo "... lexical/LexicalComponent.i"
+	@echo "... lexical/LexicalComponent.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

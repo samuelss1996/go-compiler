@@ -1,5 +1,6 @@
 #include "../input/InputSystem.h"
+#include "LexicalComponent.h"
 
 void initLexicalAnalyzer(InputSystem* inputSystem);
-int nextToken();
+LexicalComponent nextLexicalComponent();
 void destroyLexicalAnalyzer();

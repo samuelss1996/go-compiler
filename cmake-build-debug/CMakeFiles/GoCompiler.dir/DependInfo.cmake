@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/input/InputSystem.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o"
+  "/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/lexical/LexicalComponent.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/main.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/main.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o"
   "/mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.c" "/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o"
