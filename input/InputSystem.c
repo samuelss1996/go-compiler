@@ -17,6 +17,7 @@ void loadBlock(InputSystem* inputSystem, int block);
 long frontAsLong(InputSystem* inputSystem);
 void moveToOtherBlock(InputSystem* inputSystem);
 void moveBack(InputSystem* inputSystem, int positions);
+int resetFrontPosition(InputSystem* inputSystem);
 
 void createInputSystem(InputSystem* inputSystem, char *filePath) {
     *inputSystem = (InputSystem) malloc(sizeof(InputSystemStruct));
@@ -49,10 +50,7 @@ char nextChar(InputSystem* inputSystem) {
 
 void getReadToken(InputSystem* inputSystem, char *outBuffer) {
     int size, i;
-
-    for (size = 0; (*inputSystem)->frontPointer != (*inputSystem)->backPointer && size < BLOCK_SIZE_BYTES; size++) {
-        moveBack(inputSystem, 1);
-    }
+    size = resetFrontPosition(inputSystem);
 
     for(i = 0; i < size; i++) {
         outBuffer[i] = nextChar(inputSystem);
@@ -70,6 +68,15 @@ void moveBack(InputSystem* inputSystem, int positions) {
         moveToOtherBlock(inputSystem);
         (*inputSystem)->frontPointer += BLOCK_SIZE_BYTES + newIndex;
     }
+}
+
+int resetFrontPosition(InputSystem* inputSystem) {
+    int i;
+    for (i = 0; (*inputSystem)->frontPointer != (*inputSystem)->backPointer && i < BLOCK_SIZE_BYTES; i++) {
+        moveBack(inputSystem, 1);
+    }
+
+    return i;
 }
 
 void confirmToken(InputSystem* inputSystem) {

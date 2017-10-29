@@ -4,5 +4,6 @@ void createInputSystem(InputSystem* inputSystem, char *filePath);
 char nextChar(InputSystem* inputSystem);
 void getReadToken(InputSystem* inputSystem, char *outBuffer);
 void moveBack(InputSystem* inputSystem, int positions);
+int resetFrontPosition(InputSystem* inputSystem);
 void confirmToken(InputSystem* inputSystem);
 void destroyInputSystem(InputSystem* inputSystem);

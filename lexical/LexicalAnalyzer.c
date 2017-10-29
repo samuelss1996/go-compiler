@@ -20,9 +20,13 @@ int alphanumericAutomaton();
 int commentsAutomaton();
 int runesAutomaton();
 int stringsAutomaton();
+int numbersAutomaton();
+short isInteger();
+short isFloat();
+short isImaginary();
+short isOctal(char digit);
 
 // TODO booleans
-// TODO a float can begin with '.'
 void initLexicalAnalyzer(InputSystem* is) {
     FILE *operatorsDb = fopen("../db/operators.db", "r");
     char operator[MAXIMUM_OPERATOR_LENGTH + 1];
@@ -56,136 +60,17 @@ LexicalComponent nextLexicalComponent() {
 }
 
 int mainAutomaton() {
-    int status = 0;
-    char readChar;
+    char readChar = nextChar(inputSystem);
 
-    while(1) {
-        readChar = nextChar(inputSystem);
+    if(isalpha(readChar) || readChar == '_') return alphanumericAutomaton(); // TODO find out if '_' is different
+    if(readChar == '/') return commentsAutomaton();
+    if(readChar == '\'') return runesAutomaton();
+    if(readChar == '"') return stringsAutomaton();
+    if(isdigit(readChar) || readChar == '.') return numbersAutomaton();
+    if(readChar == ' ' || readChar == '\t' || readChar == '\r') return TOKEN_COMMENT; // TODO
+    if(readChar == '\n' || readChar == EOF) return readChar;
 
-        switch(status) {
-            case 0: // Initial status
-                if(isalpha(readChar) || readChar == '_') { // TODO find if '_' has a special meaning itself
-                    return alphanumericAutomaton();
-                } else if(readChar == '/') {
-                    return commentsAutomaton();
-                } else if(readChar == '\'') {
-                    return runesAutomaton();
-                } else if(readChar == '"') {
-                    return stringsAutomaton();
-                } else if(readChar == '0') {
-                    status = 11;
-                } else if(isdigit(readChar)) {
-                    status = 20;
-                } else if(readChar == ' ' || readChar == '\t' || readChar == '\r') {
-                    return TOKEN_COMMENT; // TODO
-                } else if(readChar == '\n' || readChar == EOF){
-                    return readChar;
-                } else {
-                    return recognizeOperator();
-                }
-                break;
-            case 11: // Recognized '0'. Expecting octal or hexadecimal integer, floating-point decimal, or imaginary
-                if(readChar == 'x' || readChar == 'X') { // hexadecimal
-                    status = 12;
-                } else if(readChar >= '0' && readChar <= '7') { // octal
-                    status = 14;
-                } else if(isdigit(readChar)) { // float or imaginary
-                    status = 15;
-                } else if(readChar == 'i'){
-                    return TOKEN_IMAGINARY_LITERAL;
-                } else if(readChar == '.') {
-                    status = 16;
-                } else if(readChar == 'e' || readChar == 'E') {
-                    status = 17;
-                } else {
-                    moveBack(inputSystem, 1);
-                    return TOKEN_INTEGER_LITERAL;
-                }
-                break;
-            case 12: // Recognized '0x'. Expecting at least one hexadecimal digit.
-                if(isxdigit(_toupper(readChar))) {
-                    status = 13;
-                } else {
-                    return ERROR_CODE;
-                }
-                break;
-            case 13: // Recognized '0xF', where F is an hexadecimal digit. Expecting 0 or more hexadecimal digits
-                if(!isxdigit(_toupper(readChar))) {
-                    moveBack(inputSystem, 1);
-                    return TOKEN_INTEGER_LITERAL; // TODO maybe change to hexadecimal
-                }
-                break;
-            case 14: // Recognized '07', where 7 is an octal digit. Expecting 0 or more octal digits, float or imaginary number
-                if(readChar == 'i') {
-                    return TOKEN_IMAGINARY_LITERAL; // TODO can also be a decimal int to make an imaginary or float
-                } else if(readChar == '8' || readChar == '9') {
-                    status = 15;
-                } else if(!isdigit(readChar)) {
-                    moveBack(inputSystem, 1);
-                    return TOKEN_INTEGER_LITERAL; // TODO maybe change to octal
-                }
-                break;
-            case 15: // Recognized a number starting with '0', with no 'X' and at least one non-octal digit. Expecting imaginary or float
-                if(readChar == 'i') {
-                    return TOKEN_IMAGINARY_LITERAL;
-                } else if(readChar == '.') {
-                    status = 16;
-                } else if(readChar == 'e' || readChar == 'E') {
-                    status = 17;
-                } else if(!isdigit(readChar)) {
-                    return ERROR_CODE;
-                }
-
-                break;
-            case 16: // Recognized numbers and a point ('.'). Expecting decimal part of float or imaginary
-                if(readChar == 'i') {
-                    return TOKEN_IMAGINARY_LITERAL; // TODO maybe change to float imaginary
-                } else if(readChar == 'e' || readChar == 'E') {
-                    status = 17;
-                } else if(!isdigit(readChar)) {
-                    moveBack(inputSystem, 1);
-                    return TOKEN_FLOATING_POINT_LITERAL;
-                }
-                break;
-            case 17: // Recognized number and 'e'. Expecting exponent
-                if(readChar == '+' || readChar == '-') {
-                    status = 18;
-                } else if(isdigit(readChar)) {
-                    status = 19;
-                } else {
-                    return ERROR_CODE;
-                }
-                break;
-            case 18: // Recognized number and 'e' and '+' or '-'. Expecting exponent continuation
-                if(isdigit(readChar)) {
-                    status = 19;
-                } else {
-                    return ERROR_CODE;
-                }
-                break;
-            case 19: // Recognized valid number exponent. Expecting more numbers or 'i' for imaginary
-                if(readChar == 'i') {
-                    return TOKEN_IMAGINARY_LITERAL; // TODO maybe change to float exponential imaginary
-                } else if(!isdigit(readChar)) {
-                    moveBack(inputSystem, 1);
-                    return TOKEN_FLOATING_POINT_LITERAL; // TODO maybe change to float with exponent
-                }
-                break;
-            case 20: // Recognized non-zero digit. Expecting decimal integer, float or imaginary
-                if(readChar == 'i') {
-                    return TOKEN_IMAGINARY_LITERAL;
-                } else if(readChar == '.') {
-                    status = 16;
-                } else if(readChar == 'e' || readChar == 'E') {
-                    status = 17;
-                } else if(!isdigit(readChar)) {
-                    moveBack(inputSystem, 1);
-                    return TOKEN_INTEGER_LITERAL;
-                }
-
-                break;
-        }
-    }
+    return recognizeOperator();
 }
 
 int alphanumericAutomaton() {
@@ -312,6 +197,150 @@ int stringsAutomaton() {
     }
 }
 
+int numbersAutomaton() {
+    resetFrontPosition(inputSystem);
+    if(isImaginary()) {
+        return TOKEN_IMAGINARY_LITERAL;
+    }
+
+    resetFrontPosition(inputSystem);
+    if(isFloat()) { // TODO already called in isImaginary, maybe make more efficient
+        moveBack(inputSystem, 1);
+        return TOKEN_FLOATING_POINT_LITERAL;
+    }
+
+    resetFrontPosition(inputSystem);
+    if(isInteger()) {
+        moveBack(inputSystem, 1);
+        return TOKEN_INTEGER_LITERAL;
+    }
+
+    resetFrontPosition(inputSystem);
+    nextChar(inputSystem);
+
+    return recognizeOperator();
+}
+
+short isInteger() {
+    int status = 0;
+    char readChar;
+
+    while(1) {
+        readChar = nextChar(inputSystem);
+
+        switch(status) {
+            case 0:
+                if(readChar == '0') status = 2;
+                else if(isdigit(readChar)) status = 1;
+                else return 0;
+                break;
+            case 1:
+                if(!isdigit(readChar)) return 1;
+                break;
+            case 2:
+                if(isOctal(readChar)) status = 3;
+                else if(readChar == 'x' || readChar == 'X') status = 4;
+                else return 1;
+                break;
+            case 3:
+                if(!isOctal(readChar)) return 1;
+                break;
+            case 4:
+                if(isxdigit(readChar)) status = 5;
+                else {
+                    moveBack(inputSystem, 1);
+                    return 1;
+                }
+                break;
+            case 5:
+                if(!isxdigit(readChar)) return 1;
+                break;
+        }
+    }
+}
+
+short isFloat() {
+    int status = 0;
+    char readChar;
+
+    while(1) {
+        readChar = nextChar(inputSystem);
+
+        switch(status) {
+            case 0:
+                if(isdigit(readChar)) status = 1;
+                else if(readChar == '.') status = 6;
+                else return 0;
+                break;
+            case 1:
+                if(readChar == '.') status = 2;
+                else if(readChar == 'e' || readChar == 'E') status = 3;
+                else if(!isdigit(readChar)) return 0;
+                break;
+            case 2:
+                if(readChar == 'e' || readChar == 'E') status = 3;
+                else if(!isdigit(readChar)) return 1;
+                break;
+            case 3:
+                if(readChar == '+' || readChar == '-') status = 4;
+                else if(isdigit(readChar)) status = 5;
+                else {
+                    moveBack(inputSystem, 1); // TODO test this please
+                    return 1;
+                }
+                break;
+            case 4:
+                if(isdigit(readChar)) status = 5;
+                else {
+                    moveBack(inputSystem, 2);
+                    return 1;
+                }
+                break;
+            case 5:
+                if(!isdigit(readChar)) return 1;
+                break;
+            case 6:
+                if(isdigit(readChar)) status = 7;
+                else return 0;
+                break;
+            case 7:
+                if(readChar == 'e' || readChar == 'E') status = 3;
+                else if(!isdigit(readChar)) return 1;
+                break;
+        }
+    }
+}
+
+short isImaginary() {
+    int status = 0;
+    char readChar;
+    short hasFloatFormat = isFloat();
+
+    if (!hasFloatFormat) {
+        resetFrontPosition(inputSystem);
+    } else {
+        moveBack(inputSystem, 2);
+    }
+
+    while(1) {
+        readChar = nextChar(inputSystem);
+
+        switch(status) {
+            case 0:
+                if(hasFloatFormat) status = 1;
+                else if(isdigit(readChar)) status = 2;
+                else return 0;
+                break;
+            case 1:
+                if(readChar == 'i') return 1;
+                else return 0;
+            case 2:
+                if(readChar == 'i') return 1;
+                else if(!isdigit(readChar)) return 0;
+        }
+    }
+}
+
 int recognizeOperator() {
     char readOperator[MAXIMUM_OPERATOR_LENGTH + 1];
     int operatorId = ERROR_CODE;
@@ -334,6 +363,10 @@ int recognizeOperator() {
     }
 
     return operatorId;
+}
+
+short isOctal(char digit) {
+    return digit >= '0' && digit <= '7';
 }
 
 void destroyLexicalAnalyzer() {
