@@ -1,4 +1,5 @@
 #include <ctype.h>
+#include <stdlib.h>
 #include "../Definitions.h"
 #include "../util/HashTable.h"
 #include "../input/InputSystem.h"
@@ -11,47 +12,39 @@
 char ARR_RUNE_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '\''};
 char ARR_STRING_VALID_ESCAPED_CHARS[] = {'a', 'b', 'f', 'n', 'r', 't', 'v', '\\', '"'};
 
-HashTable operatorsTable;
-InputSystem* inputSystem;
+typedef struct {
+    InputSystem inputSystem;
+    SymbolsTable symbolsTable;
+    HashTable operatorsTable;
+} LexicalAnalyzerStruct;
 
-int mainAutomaton();
-int recognizeOperator();
-int alphanumericAutomaton();
-int commentsAutomaton();
-int runesAutomaton();
-int stringsAutomaton();
-int numbersAutomaton();
-short isInteger();
-short isFloat();
-short isImaginary();
+typedef LexicalAnalyzerStruct* LexicalAnalyzer;
+
+int mainAutomaton(LexicalAnalyzer* lexicalAnalyzer);
+int recognizeOperator(LexicalAnalyzer* lexicalAnalyzer);
+short isInteger(LexicalAnalyzer* lexicalAnalyzer);
+short isFloat(LexicalAnalyzer* lexicalAnalyzer);
+short isImaginary(LexicalAnalyzer* lexicalAnalyzer);
 short isOctal(char digit);
 
-// TODO booleans
-void initLexicalAnalyzer(InputSystem* is) {
-    FILE *operatorsDb = fopen("../db/operators.db", "r");
-    char operator[MAXIMUM_OPERATOR_LENGTH + 1];
-    int operatorId;
-    inputSystem = is;
+void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, InputSystem inputSystem, SymbolsTable symbolsTable, HashTable operatorsTable) {
+    *lexicalAnalyzer = (LexicalAnalyzer) malloc(sizeof(LexicalAnalyzerStruct));
 
-    createHashTable(&operatorsTable);
-
-    while(fscanf(operatorsDb, "%s %d", operator, &operatorId) > 0) {
-        insertHash(&operatorsTable, operator, operatorId);
-    }
-
-    fclose(operatorsDb);
+    (*lexicalAnalyzer)->inputSystem = inputSystem;
+    (*lexicalAnalyzer)->symbolsTable = symbolsTable;
+    (*lexicalAnalyzer)->operatorsTable = operatorsTable;
 }
 
-LexicalComponent nextLexicalComponent() {
-    int componentId = mainAutomaton();
+LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
+    int componentId = mainAutomaton(lexicalAnalyzer);
     char componentToken[200]; // TODO
     LexicalComponent result;
 
-    getReadToken(inputSystem, componentToken);
-    confirmToken(inputSystem);
+    getReadToken(&(*lexicalAnalyzer)->inputSystem, componentToken);
+    confirmToken(&(*lexicalAnalyzer)->inputSystem);
 
     if(componentId == TOKEN_COMMENT) {
-        return nextLexicalComponent();
+        return nextLexicalComponent(lexicalAnalyzer);
     }
 
     createLexicalComponent(&result, componentId, componentToken);
@@ -59,46 +52,36 @@ LexicalComponent nextLexicalComponent() {
     return result;
 }
 
-int mainAutomaton() {
-    char readChar = nextChar(inputSystem);
-
-    if(isalpha(readChar) || readChar == '_') return alphanumericAutomaton(); // TODO find out if '_' is different
-    if(readChar == '/') return commentsAutomaton();
-    if(readChar == '\'') return runesAutomaton();
-    if(readChar == '"') return stringsAutomaton();
-    if(isdigit(readChar) || readChar == '.') return numbersAutomaton();
-    if(readChar == ' ' || readChar == '\t' || readChar == '\r') return TOKEN_COMMENT; // TODO
-    if(readChar == '\n' || readChar == EOF) return readChar;
-
-    return recognizeOperator();
+void destroyLexicalAnalyzer(LexicalAnalyzer* lexicalAnalyzer) {
+    free(*lexicalAnalyzer);
 }
 
-int alphanumericAutomaton() {
-    char readChar = nextChar(inputSystem);
+int alphanumericAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
+    char readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
     char token[200]; // TODO
     int tokenId;
 
     while(isalnum(readChar) || readChar == '_') {
-        readChar = nextChar(inputSystem);
+        readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
     }
 
-    moveBack(inputSystem, 1);
-    getReadToken(inputSystem, token);
+    moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+    getReadToken(&(*lexicalAnalyzer)->inputSystem, token);
 
-    tokenId = findSymbol(token);
+    tokenId = findSymbol(&(*lexicalAnalyzer)->symbolsTable, token);
 
     if(tokenId == TOKEN_NOT_FOUND) {
-        addSymbol(token, TOKEN_IDENTIFIER);
+        addSymbol(&(*lexicalAnalyzer)->symbolsTable, token, TOKEN_IDENTIFIER);
         return TOKEN_IDENTIFIER;
     }
 }
 
-int commentsAutomaton() {
+int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
 
     while(1) {
-        readChar = nextChar(inputSystem);
+        readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
             case 0:
@@ -106,13 +89,13 @@ int commentsAutomaton() {
                     case '/': status = 1; break;
                     case '*': status = 2; break;
                     default:
-                        moveBack(inputSystem, 1);
-                        return recognizeOperator();
+                        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+                        return recognizeOperator(lexicalAnalyzer);
                 }
                 break;
             case 1:
                 if(readChar == '\n') {
-                    moveBack(inputSystem, 1);
+                    moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
                     return TOKEN_COMMENT;
                 }
                 break;
@@ -133,12 +116,12 @@ int commentsAutomaton() {
     }
 }
 
-int runesAutomaton() {
+int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
 
     while(1) {
-        readChar = nextChar(inputSystem);
+        readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
             case 0:
@@ -168,12 +151,12 @@ int runesAutomaton() {
 }
 
 // TODO maybe add raw strings
-int stringsAutomaton() {
+int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
 
     while(1) {
-        readChar = nextChar(inputSystem);
+        readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
             case 0:
@@ -197,36 +180,51 @@ int stringsAutomaton() {
     }
 }
 
-int numbersAutomaton() {
-    resetFrontPosition(inputSystem);
-    if(isImaginary()) {
+int numbersAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
+    resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
+    if(isImaginary(lexicalAnalyzer)) {
         return TOKEN_IMAGINARY_LITERAL;
     }
 
-    resetFrontPosition(inputSystem);
-    if(isFloat()) { // TODO already called in isImaginary, maybe make more efficient
-        moveBack(inputSystem, 1);
+    resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
+    if(isFloat(lexicalAnalyzer)) { // TODO already called in isImaginary, maybe make more efficient
+        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
         return TOKEN_FLOATING_POINT_LITERAL;
     }
 
-    resetFrontPosition(inputSystem);
-    if(isInteger()) {
-        moveBack(inputSystem, 1);
+    resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
+    if(isInteger(lexicalAnalyzer)) {
+        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
         return TOKEN_INTEGER_LITERAL;
     }
 
-    resetFrontPosition(inputSystem);
-    nextChar(inputSystem);
+    resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
+    nextChar(&(*lexicalAnalyzer)->inputSystem);
 
-    return recognizeOperator();
+    return recognizeOperator(lexicalAnalyzer);
 }
 
-short isInteger() {
+
+int mainAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
+    char readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
+
+    if(isalpha(readChar) || readChar == '_') return alphanumericAutomaton(lexicalAnalyzer); // TODO find out if '_' is different
+    if(readChar == '/') return commentsAutomaton(lexicalAnalyzer);
+    if(readChar == '\'') return runesAutomaton(lexicalAnalyzer);
+    if(readChar == '"') return stringsAutomaton(lexicalAnalyzer);
+    if(isdigit(readChar) || readChar == '.') return numbersAutomaton(lexicalAnalyzer);
+    if(readChar == ' ' || readChar == '\t' || readChar == '\r') return TOKEN_COMMENT; // TODO
+    if(readChar == '\n' || readChar == EOF) return readChar;
+
+    return recognizeOperator(lexicalAnalyzer);
+}
+
+short isInteger(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
 
     while(1) {
-        readChar = nextChar(inputSystem);
+        readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
             case 0:
@@ -248,7 +246,7 @@ short isInteger() {
             case 4:
                 if(isxdigit(readChar)) status = 5;
                 else {
-                    moveBack(inputSystem, 1);
+                    moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
                     return 1;
                 }
                 break;
@@ -259,12 +257,12 @@ short isInteger() {
     }
 }
 
-short isFloat() {
+short isFloat(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
 
     while(1) {
-        readChar = nextChar(inputSystem);
+        readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
             case 0:
@@ -285,14 +283,14 @@ short isFloat() {
                 if(readChar == '+' || readChar == '-') status = 4;
                 else if(isdigit(readChar)) status = 5;
                 else {
-                    moveBack(inputSystem, 1); // TODO test this please
+                    moveBack(&(*lexicalAnalyzer)->inputSystem, 1); // TODO test this please
                     return 1;
                 }
                 break;
             case 4:
                 if(isdigit(readChar)) status = 5;
                 else {
-                    moveBack(inputSystem, 2);
+                    moveBack(&(*lexicalAnalyzer)->inputSystem, 2);
                     return 1;
                 }
                 break;
@@ -311,19 +309,19 @@ short isFloat() {
     }
 }
 
-short isImaginary() {
+short isImaginary(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
-    short hasFloatFormat = isFloat();
+    short hasFloatFormat = isFloat(lexicalAnalyzer);
 
     if (!hasFloatFormat) {
-        resetFrontPosition(inputSystem);
+        resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
     } else {
-        moveBack(inputSystem, 2);
+        moveBack(&(*lexicalAnalyzer)->inputSystem, 2);
     }
 
     while(1) {
-        readChar = nextChar(inputSystem);
+        readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
             case 0:
@@ -341,25 +339,25 @@ short isImaginary() {
     }
 }
 
-int recognizeOperator() {
+int recognizeOperator(LexicalAnalyzer* lexicalAnalyzer) {
     char readOperator[MAXIMUM_OPERATOR_LENGTH + 1];
     int operatorId = ERROR_CODE;
     int newOperatorId;
 
     while(1) {
-        getReadToken(inputSystem, readOperator);
-        newOperatorId = findHash(&operatorsTable, readOperator);
+        getReadToken(&(*lexicalAnalyzer)->inputSystem, readOperator);
+        newOperatorId = findHash(&(*lexicalAnalyzer)->operatorsTable, readOperator);
 
         if(newOperatorId == TOKEN_NOT_FOUND) {
             break;
         }
 
         operatorId = newOperatorId;
-        nextChar(inputSystem);
+        nextChar(&(*lexicalAnalyzer)->inputSystem);
     }
 
     if (operatorId != ERROR_CODE) {
-        moveBack(inputSystem, 1);
+        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
     }
 
     return operatorId;
@@ -367,8 +365,4 @@ int recognizeOperator() {
 
 short isOctal(char digit) {
     return digit >= '0' && digit <= '7';
-}
-
-void destroyLexicalAnalyzer() {
-    destroyHashTable(&operatorsTable);
 }

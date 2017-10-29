@@ -1,6 +1,9 @@
 #include "../input/InputSystem.h"
 #include "LexicalComponent.h"
+#include "../util/HashTable.h"
 
-void initLexicalAnalyzer(InputSystem* inputSystem);
-LexicalComponent nextLexicalComponent();
-void destroyLexicalAnalyzer();
+typedef void* LexicalAnalyzer;
+
+void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, InputSystem inputSystem, SymbolsTable symbolsTable, HashTable operatorsTable);
+LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer);
+void destroyLexicalAnalyzer(LexicalAnalyzer* lexicalAnalyzer);

@@ -7,28 +7,53 @@
 
 #include <stdio.h>
 
+void fillOperatorsTable(HashTable *operatorsTable) ;
+
 // TODO ask the user the file to be compiled
 // TODO handle compilation errors using other module
 // TODO handle \nnn and \xnn inside runes and strings
 // TODO handle documentation comments
 // TODO put keywords in a separated file
+// TODO booleans
 int main() {
     InputSystem inputSystem;
+    SymbolsTable symbolsTable;
+    HashTable operatorsTable;
+    LexicalAnalyzer lexicalAnalyzer;
+    LexicalComponent component;
+    int componentId;
 
     createInputSystem(&inputSystem, "../concurrentSum.go");
-    initSymbolsTable();
-    initLexicalAnalyzer(&inputSystem);
+    createSymbolsTable(&symbolsTable);
+    createHashTable(&operatorsTable);
+    createLexicalAnalyzer(&lexicalAnalyzer, inputSystem, symbolsTable, operatorsTable);
 
-    LexicalComponent component;
+    fillOperatorsTable(&operatorsTable);
+
     do {
-        component = nextLexicalComponent();
+        component = nextLexicalComponent(&lexicalAnalyzer);
         printf("%s -> %d\n", getLexicalComponentToken(&component), getLexicalComponentId(&component));
-    } while(getLexicalComponentId(&component) != EOF);
 
-    destroyLexicalAnalyzer();
-    destroySymbolsTable();
+        componentId = getLexicalComponentId(&component);
+        destroyLexicalComponent(&component);
+    } while(componentId != EOF);
+
     destroyInputSystem(&inputSystem);
-
+    destroySymbolsTable(&symbolsTable);
+    destroyHashTable(&operatorsTable);
+    destroyLexicalAnalyzer(&lexicalAnalyzer);
 
     return 0;
+}
+
+void fillOperatorsTable(HashTable *operatorsTable) {
+    FILE *operatorsDb = fopen("../db/operators.db", "r");
+    char operator[MAXIMUM_OPERATOR_LENGTH + 1];
+    int operatorId;
+
+    while(fscanf(operatorsDb, "%s %d", operator, &operatorId) > 0) {
+        insertHash(operatorsTable, operator, operatorId);
+    }
+
+    fclose(operatorsDb);
 }

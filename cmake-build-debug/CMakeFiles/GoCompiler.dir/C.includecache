@@ -21,6 +21,8 @@ stdlib.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.c
 ctype.h
 -
+stdlib.h
+-
 ../Definitions.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
 ../util/HashTable.h
@@ -37,6 +39,8 @@ LexicalComponent.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 LexicalComponent.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
+../util/HashTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.c
 stdlib.h
@@ -63,11 +67,11 @@ stdio.h
 -
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c
-SymbolsTable.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 ../Definitions.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
-string.h
+../util/HashTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
+stdlib.h
 -
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h

@@ -25,7 +25,7 @@ CMakeFiles/GoCompiler.dir/main.c.o: ../util/LinkedList.h
 
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../symbols/SymbolsTable.c
-CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../symbols/SymbolsTable.h
+CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../util/HashTable.h
 
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../syntactic/SyntacticAnalyzer.c
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../syntactic/SyntacticAnalyzer.h

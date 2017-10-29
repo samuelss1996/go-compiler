@@ -26,7 +26,7 @@ CMakeFiles/GoCompiler.dir/main.c.o
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c
- /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.c
  /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
