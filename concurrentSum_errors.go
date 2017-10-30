@@ -1,7 +1,7 @@
-@package main /*
+@@package main /*
 */
 
-@import "fmt
+@import "fmt\o\'"
 
 func sum(s []float32, c chan float32) {
         var sum float32 = 0

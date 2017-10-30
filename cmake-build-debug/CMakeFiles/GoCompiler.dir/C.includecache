@@ -11,8 +11,8 @@ stdio.h
 -
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.c
-Errors.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
+stdio.h
+-
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
 
@@ -39,6 +39,8 @@ stdlib.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 LexicalComponent.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
+../errors/Errors.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 ../input/InputSystem.h

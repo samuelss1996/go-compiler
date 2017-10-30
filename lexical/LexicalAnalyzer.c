@@ -5,6 +5,7 @@
 #include "../input/InputSystem.h"
 #include "../symbols/SymbolsTable.h"
 #include "LexicalComponent.h"
+#include "../errors/Errors.h"
 
 #define SIZE_RUNE_VALID_ESCAPED_CHARS 9
 #define SIZE_STRING_VALID_ESCAPED_CHARS 9
@@ -40,16 +41,11 @@ LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     char componentToken[200]; // TODO
     LexicalComponent result;
 
-    if(componentId != TOKEN_COMMENT) {
-        getReadToken(&(*lexicalAnalyzer)->inputSystem, componentToken);
-    }
-
+    getReadToken(&(*lexicalAnalyzer)->inputSystem, componentToken);
     confirmToken(&(*lexicalAnalyzer)->inputSystem);
 
     if(componentId == TOKEN_COMMENT || componentId == TOKEN_BLANK) {
         return nextLexicalComponent(lexicalAnalyzer);
-    } else if(componentId == ERROR_CODE) {
-        printf("[%d, %d]", getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem));
     }
 
     createLexicalComponent(&result, componentId, componentToken);
@@ -99,7 +95,7 @@ int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                 }
                 break;
             case 1:
-                if(readChar == '\n') {
+                if(readChar == '\n' || readChar == EOF) {
                     moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
                     return TOKEN_COMMENT;
                 }
@@ -107,13 +103,17 @@ int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
             case 2:
                 switch(readChar) {
                     case '*': status = 3; break;
-                    case EOF: return ERROR_CODE;
+                    case EOF:
+                        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+                        return TOKEN_COMMENT;
                 }
                 break;
             case 3:
                 switch(readChar) {
                     case '/': return TOKEN_COMMENT;
-                    case EOF: return ERROR_CODE;
+                    case EOF:
+                        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+                        return TOKEN_COMMENT;
                     default: status = 2; break;
                 }
                 break;
@@ -155,10 +155,10 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     }
 }
 
-// TODO maybe add raw strings
 int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
+    int result = TOKEN_STRING_LITERAL;
 
     while(1) {
         readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
@@ -166,9 +166,12 @@ int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
         switch(status) {
             case 0:
                 switch(readChar) {
-                    case '"': return TOKEN_STRING_LITERAL;
+                    case '"': return result;
                     case '\\': status = 1; break;
-                    case '\n': return ERROR_CODE;
+                    case '\n':
+                        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+                        expectingEndOfString(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem));
+                        return ERROR_CODE;
                 }
                 break;
             case 1:
@@ -179,7 +182,12 @@ int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                     }
                 }
 
-                if(status == 1) return ERROR_CODE;
+                if(status == 1) {
+                    invalidEscapedCharInsideString(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem), readChar);
+
+                    status = 0;
+                    result = ERROR_CODE;
+                }
                 break;
         }
     }
@@ -363,6 +371,8 @@ int recognizeOperator(LexicalAnalyzer* lexicalAnalyzer) {
 
     if (operatorId != ERROR_CODE) {
         moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+    } else {
+        invalidSymbol(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem), *readOperator);
     }
 
     return operatorId;

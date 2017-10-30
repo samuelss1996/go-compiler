@@ -50,14 +50,14 @@ char nextChar(InputSystem* inputSystem) {
         loadBlock(inputSystem, (*inputSystem)->currentBlock);
     }
 
-    if((*inputSystem)->newLineFlag) {
+    if((*inputSystem)->newLineFlag > 0) {
         (*inputSystem)->currentLine++;
         (*inputSystem)->currentColumn = 0;
         (*inputSystem)->newLineFlag = 0;
     }
 
     if(result == '\n') {
-        (*inputSystem)->newLineFlag = 1;
+        (*inputSystem)->newLineFlag++;
     }
 
     (*inputSystem)->currentColumn++;
@@ -80,13 +80,16 @@ void moveBack(InputSystem* inputSystem, int positions) {
     long newIndex = frontAsLong(inputSystem) - positions;
 
     (*inputSystem)->currentColumn -= positions;
-    (*inputSystem)->newLineFlag = 0;
 
     if(newIndex >= 0) {
         (*inputSystem)->frontPointer -= positions;
     } else {
         moveToOtherBlock(inputSystem);
         (*inputSystem)->frontPointer += BLOCK_SIZE_BYTES + newIndex;
+    }
+
+    if (*(*inputSystem)->frontPointer == '\n') {
+        (*inputSystem)->newLineFlag--;
     }
 }
 
