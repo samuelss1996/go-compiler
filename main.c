@@ -24,7 +24,7 @@ int main() {
     LexicalAnalyzer lexicalAnalyzer;
     SyntacticAnalyzer syntacticAnalyzer;
 
-    createInputSystem(&inputSystem, "../concurrentSum.go");
+    createInputSystem(&inputSystem, "../concurrentSum_errors.go");
     createSymbolsTable(&symbolsTable);
     createHashTable(&operatorsTable);
     createLexicalAnalyzer(&lexicalAnalyzer, inputSystem, symbolsTable, operatorsTable);

@@ -1,13 +1,14 @@
-package main
+@package main /*
+*/
 
-import "fmt"
+@import "fmt
 
 func sum(s []float32, c chan float32) {
         var sum float32 = 0
         for _, v := range s {
                 sum += v
         }
-        c <- sum // send sum to c
+        c <- @sum // send sum to c
 }
 
 func main() {
@@ -20,8 +21,8 @@ func main() {
         c := make(chan float32)
         go sum(s[:len(s)/2], c)
         go sum(s[len(s)/2:], c)
-        i, j := <-c, <-c // receive from c
+        i, j@ := <-c, <-c // receive from c
 
-        fmt.Println("Partial results and \"Total\" sum:");
-        fmt.Println(i, j, i+j)
+        fmt@Println("Partial results and \"Total\" sum:);
+        fmt@Println(i, j, i+j)
 }

@@ -9,15 +9,18 @@ typedef struct {
     char *backPointer;
     int currentBlock;
     short validBlocks[2];
+    int currentLine;
+    int currentColumn;
+    short newLineFlag;
 } InputSystemStruct;
 
 typedef InputSystemStruct* InputSystem;
 
+void moveBack(InputSystem* inputSystem, int positions);
+int resetFrontPosition(InputSystem* inputSystem);
 void loadBlock(InputSystem* inputSystem, int block);
 long frontAsLong(InputSystem* inputSystem);
 void moveToOtherBlock(InputSystem* inputSystem);
-void moveBack(InputSystem* inputSystem, int positions);
-int resetFrontPosition(InputSystem* inputSystem);
 
 void createInputSystem(InputSystem* inputSystem, char *filePath) {
     *inputSystem = (InputSystem) malloc(sizeof(InputSystemStruct));
@@ -28,6 +31,9 @@ void createInputSystem(InputSystem* inputSystem, char *filePath) {
     (*inputSystem)->frontPointer = (*inputSystem)->backPointer = (*inputSystem)->blockA;
     (*inputSystem)->currentBlock = 0;
     (*inputSystem)->validBlocks[0] = (*inputSystem)->validBlocks[1] = 0;
+    (*inputSystem)->currentLine = 1;
+    (*inputSystem)->currentColumn = 0;
+    (*inputSystem)->newLineFlag = 0;
 
     loadBlock(inputSystem, 0);
     loadBlock(inputSystem, 1);
@@ -35,7 +41,6 @@ void createInputSystem(InputSystem* inputSystem, char *filePath) {
 
 char nextChar(InputSystem* inputSystem) {
     char result = *(*inputSystem)->frontPointer;
-
     (*inputSystem)->frontPointer++;
 
     if(*(*inputSystem)->frontPointer == EOF && frontAsLong(inputSystem) == BLOCK_SIZE_BYTES) {
@@ -44,6 +49,18 @@ char nextChar(InputSystem* inputSystem) {
         moveToOtherBlock(inputSystem);
         loadBlock(inputSystem, (*inputSystem)->currentBlock);
     }
+
+    if((*inputSystem)->newLineFlag) {
+        (*inputSystem)->currentLine++;
+        (*inputSystem)->currentColumn = 0;
+        (*inputSystem)->newLineFlag = 0;
+    }
+
+    if(result == '\n') {
+        (*inputSystem)->newLineFlag = 1;
+    }
+
+    (*inputSystem)->currentColumn++;
 
     return result;
 }
@@ -61,6 +78,9 @@ void getReadToken(InputSystem* inputSystem, char *outBuffer) {
 
 void moveBack(InputSystem* inputSystem, int positions) {
     long newIndex = frontAsLong(inputSystem) - positions;
+
+    (*inputSystem)->currentColumn -= positions;
+    (*inputSystem)->newLineFlag = 0;
 
     if(newIndex >= 0) {
         (*inputSystem)->frontPointer -= positions;
@@ -81,6 +101,14 @@ int resetFrontPosition(InputSystem* inputSystem) {
 
 void confirmToken(InputSystem* inputSystem) {
     (*inputSystem)->backPointer = (*inputSystem)->frontPointer;
+}
+
+int getCurrentLine(InputSystem* inputSystem) {
+    return (*inputSystem)->currentLine;
+}
+
+int getCurrentColumn(InputSystem* inputSystem) {
+    return (*inputSystem)->currentColumn;
 }
 
 void destroyInputSystem(InputSystem* inputSystem) {

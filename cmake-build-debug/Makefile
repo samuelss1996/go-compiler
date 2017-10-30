@@ -123,6 +123,33 @@ GoCompiler/fast:
 	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/build
 .PHONY : GoCompiler/fast
 
+errors/Errors.o: errors/Errors.c.o
+
+.PHONY : errors/Errors.o
+
+# target to build an object file
+errors/Errors.c.o:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/errors/Errors.c.o
+.PHONY : errors/Errors.c.o
+
+errors/Errors.i: errors/Errors.c.i
+
+.PHONY : errors/Errors.i
+
+# target to preprocess a source file
+errors/Errors.c.i:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/errors/Errors.c.i
+.PHONY : errors/Errors.c.i
+
+errors/Errors.s: errors/Errors.c.s
+
+.PHONY : errors/Errors.s
+
+# target to generate assembly for a file
+errors/Errors.c.s:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/errors/Errors.c.s
+.PHONY : errors/Errors.c.s
+
 input/InputSystem.o: input/InputSystem.c.o
 
 .PHONY : input/InputSystem.o
@@ -456,6 +483,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... GoCompiler"
+	@echo "... errors/Errors.o"
+	@echo "... errors/Errors.i"
+	@echo "... errors/Errors.s"
 	@echo "... input/InputSystem.o"
 	@echo "... input/InputSystem.i"
 	@echo "... input/InputSystem.s"

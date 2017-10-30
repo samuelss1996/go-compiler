@@ -40,11 +40,16 @@ LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     char componentToken[200]; // TODO
     LexicalComponent result;
 
-    getReadToken(&(*lexicalAnalyzer)->inputSystem, componentToken);
+    if(componentId != TOKEN_COMMENT) {
+        getReadToken(&(*lexicalAnalyzer)->inputSystem, componentToken);
+    }
+
     confirmToken(&(*lexicalAnalyzer)->inputSystem);
 
     if(componentId == TOKEN_COMMENT || componentId == TOKEN_BLANK) {
         return nextLexicalComponent(lexicalAnalyzer);
+    } else if(componentId == ERROR_CODE) {
+        printf("[%d, %d]", getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem));
     }
 
     createLexicalComponent(&result, componentId, componentToken);
