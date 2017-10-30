@@ -87,6 +87,7 @@
 #define TOKEN_RUNE_LITERAL 506
 #define TOKEN_STRING_LITERAL 507
 #define TOKEN_COMMENT 508
+#define TOKEN_BLANK 509
 
 // Other constants
 #define BLOCK_SIZE_BYTES 48

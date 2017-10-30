@@ -1,6 +1,7 @@
 #include "../input/InputSystem.h"
 #include "LexicalComponent.h"
 #include "../util/HashTable.h"
+#include "../symbols/SymbolsTable.h"
 
 typedef void* LexicalAnalyzer;
 

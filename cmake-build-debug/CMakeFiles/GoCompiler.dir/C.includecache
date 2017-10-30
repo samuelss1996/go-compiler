@@ -41,6 +41,8 @@ LexicalComponent.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
 ../util/HashTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
+../symbols/SymbolsTable.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.c
 stdlib.h
@@ -63,6 +65,8 @@ util/HashTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
 test/TestRunner.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.h
+syntactic/SyntacticAnalyzer.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
 stdio.h
 -
 
@@ -77,10 +81,16 @@ stdlib.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.c
-SyntacticAnalyzer.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
+stdlib.h
+-
+string.h
+-
+../lexical/LexicalAnalyzer.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
+../lexical/LexicalAnalyzer.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.c
 ../util/HashTable.h

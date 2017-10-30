@@ -43,7 +43,7 @@ LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     getReadToken(&(*lexicalAnalyzer)->inputSystem, componentToken);
     confirmToken(&(*lexicalAnalyzer)->inputSystem);
 
-    if(componentId == TOKEN_COMMENT) {
+    if(componentId == TOKEN_COMMENT || componentId == TOKEN_BLANK) {
         return nextLexicalComponent(lexicalAnalyzer);
     }
 
@@ -213,7 +213,7 @@ int mainAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     if(readChar == '\'') return runesAutomaton(lexicalAnalyzer);
     if(readChar == '"') return stringsAutomaton(lexicalAnalyzer);
     if(isdigit(readChar) || readChar == '.') return numbersAutomaton(lexicalAnalyzer);
-    if(readChar == ' ' || readChar == '\t' || readChar == '\r') return TOKEN_COMMENT; // TODO
+    if(readChar == ' ' || readChar == '\t' || readChar == '\r') return TOKEN_BLANK;
     if(readChar == '\n' || readChar == EOF) return readChar;
 
     return recognizeOperator(lexicalAnalyzer);
@@ -283,7 +283,7 @@ short isFloat(LexicalAnalyzer* lexicalAnalyzer) {
                 if(readChar == '+' || readChar == '-') status = 4;
                 else if(isdigit(readChar)) status = 5;
                 else {
-                    moveBack(&(*lexicalAnalyzer)->inputSystem, 1); // TODO test this please
+                    moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
                     return 1;
                 }
                 break;
@@ -314,10 +314,10 @@ short isImaginary(LexicalAnalyzer* lexicalAnalyzer) {
     char readChar;
     short hasFloatFormat = isFloat(lexicalAnalyzer);
 
-    if (!hasFloatFormat) {
-        resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
-    } else {
+    if (hasFloatFormat) {
         moveBack(&(*lexicalAnalyzer)->inputSystem, 2);
+    } else {
+        resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
     }
 
     while(1) {

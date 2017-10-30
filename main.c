@@ -4,6 +4,7 @@
 #include "util/LinkedList.h"
 #include "util/HashTable.h"
 #include "test/TestRunner.h"
+#include "syntactic/SyntacticAnalyzer.h"
 
 #include <stdio.h>
 
@@ -11,37 +12,33 @@ void fillOperatorsTable(HashTable *operatorsTable) ;
 
 // TODO ask the user the file to be compiled
 // TODO handle compilation errors using other module
-// TODO handle \nnn and \xnn inside runes and strings
+// TODO maybe handle \nnn and \xnn inside runes and strings
 // TODO handle documentation comments
 // TODO put keywords in a separated file
 // TODO booleans
+// TODO check if comments should act as newline
 int main() {
     InputSystem inputSystem;
     SymbolsTable symbolsTable;
     HashTable operatorsTable;
     LexicalAnalyzer lexicalAnalyzer;
-    LexicalComponent component;
-    int componentId;
+    SyntacticAnalyzer syntacticAnalyzer;
 
     createInputSystem(&inputSystem, "../concurrentSum.go");
     createSymbolsTable(&symbolsTable);
     createHashTable(&operatorsTable);
     createLexicalAnalyzer(&lexicalAnalyzer, inputSystem, symbolsTable, operatorsTable);
+    createSyntacticAnalyzer(&syntacticAnalyzer, lexicalAnalyzer);
 
     fillOperatorsTable(&operatorsTable);
 
-    do {
-        component = nextLexicalComponent(&lexicalAnalyzer);
-        printf("%s -> %d\n", getLexicalComponentToken(&component), getLexicalComponentId(&component));
-
-        componentId = getLexicalComponentId(&component);
-        destroyLexicalComponent(&component);
-    } while(componentId != EOF);
+    startSyntacticAnalyzer(&syntacticAnalyzer);
 
     destroyInputSystem(&inputSystem);
     destroySymbolsTable(&symbolsTable);
     destroyHashTable(&operatorsTable);
     destroyLexicalAnalyzer(&lexicalAnalyzer);
+    destroySyntacticAnalyzer(&syntacticAnalyzer);
 
     return 0;
 }

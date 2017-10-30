@@ -20,6 +20,7 @@ CMakeFiles/GoCompiler.dir/main.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/main.c
  /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h
@@ -28,8 +29,13 @@ CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c
  /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o
+ /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.c
- /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
 CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.c
