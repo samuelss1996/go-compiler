@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 // Go language keywords
-// TODO include types
 #define KEYWORD_BREAK 300
 #define KEYWORD_DEFAULT 301
 #define KEYWORD_FUNC 302
@@ -88,6 +87,33 @@
 #define TOKEN_STRING_LITERAL 507
 #define TOKEN_COMMENT 508
 #define TOKEN_BLANK 509
+
+// Go language data types
+#define DATA_TYPE_UINT8 600
+#define DATA_TYPE_UINT16 601
+#define DATA_TYPE_UINT32 602
+#define DATA_TYPE_UINT64 603
+#define DATA_TYPE_INT8 604
+#define DATA_TYPE_INT16 605
+#define DATA_TYPE_INT32 606
+#define DATA_TYPE_INT64 607
+#define DATA_TYPE_FLOAT32 608
+#define DATA_TYPE_FLOAT64 609
+#define DATA_TYPE_COMPLEX64 610
+#define DATA_TYPE_COMPLEX128 611
+#define DATA_TYPE_BYTE 612
+#define DATA_TYPE_RUNE 613
+
+#define DATA_TYPE_UINT 602
+#define DATA_TYPE_INT 606
+#define DATA_TYPE_UINTPTR 603
+
+#define DATA_TYPE_STRING 614
+#define DATA_TYPE_STRUCT 615
+
+// Go language constants
+#define CONSTANT_BOOLEAN_TRUE 700
+#define CONSTANT_BOOLEAN_FALSE 701
 
 // Other constants
 #define BLOCK_SIZE_BYTES 48

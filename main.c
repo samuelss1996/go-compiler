@@ -11,9 +11,10 @@
 void fillOperatorsTable(HashTable *operatorsTable) ;
 
 // TODO ask the user the file to be compiled
-// TODO put keywords in a separated file
-// TODO booleans
+// TODO handle documentation comments
 // TODO check if comments should act as newline
+// TODO maybe handle rune errors
+// TODO check memory leaks
 int main() {
     InputSystem inputSystem;
     SymbolsTable symbolsTable;
