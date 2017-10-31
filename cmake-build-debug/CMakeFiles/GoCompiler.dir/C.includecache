@@ -23,6 +23,8 @@ stdlib.h
 -
 ../Definitions.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
+../errors/Errors.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 

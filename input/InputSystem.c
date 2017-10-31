@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "../Definitions.h"
+#include "../errors/Errors.h"
 
 typedef struct {
     FILE *file;
@@ -18,6 +19,7 @@ typedef InputSystemStruct* InputSystem;
 
 void moveBack(InputSystem* inputSystem, int positions);
 int resetFrontPosition(InputSystem* inputSystem);
+void destroyInputSystem(InputSystem* inputSystem);
 void loadBlock(InputSystem* inputSystem, int block);
 long frontAsLong(InputSystem* inputSystem);
 void moveToOtherBlock(InputSystem* inputSystem);
@@ -34,6 +36,13 @@ void createInputSystem(InputSystem* inputSystem, char *filePath) {
     (*inputSystem)->currentLine = 1;
     (*inputSystem)->currentColumn = 0;
     (*inputSystem)->newLineFlag = 0;
+
+    if((*inputSystem)->file == NULL) {
+        unableToOpenFile(filePath);
+        destroyInputSystem(inputSystem);
+
+        exit(EXIT_CODE_UNABLE_TO_OPEN_FILE);
+    }
 
     loadBlock(inputSystem, 0);
     loadBlock(inputSystem, 1);
@@ -118,7 +127,9 @@ void destroyInputSystem(InputSystem* inputSystem) {
     free((*inputSystem)->blockA);
     free((*inputSystem)->blockB);
 
-    fclose((*inputSystem)->file);
+    if ((*inputSystem)->file != NULL) {
+        fclose((*inputSystem)->file);
+    }
 
     free(*inputSystem);
 }
@@ -128,7 +139,7 @@ void loadBlock(InputSystem* inputSystem, int block) {
     size_t readChars;
 
     if(!(*inputSystem)->validBlocks[block]) {
-        readChars = fread(blockToBeLoaded, sizeof(char), BLOCK_SIZE_BYTES, (*inputSystem)->file);
+        readChars = fread(blockToBeLoaded, 1, BLOCK_SIZE_BYTES, (*inputSystem)->file);
 
         (*inputSystem)->validBlocks[block] = 1;
         blockToBeLoaded[readChars] = EOF;

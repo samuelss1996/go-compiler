@@ -9,10 +9,9 @@
 void fillOperatorsTable(HashTable *operatorsTable);
 
 // TODO ask the user the file to be compiled
-// TODO check if comments should act as newline
 // TODO maybe handle rune errors
 // TODO check memory leaks
-// TODO handle I/O errors
+// TODO handle db reading errors
 int main() {
     InputSystem inputSystem;
     SymbolsTable symbolsTable;
@@ -20,7 +19,7 @@ int main() {
     LexicalAnalyzer lexicalAnalyzer;
     SyntacticAnalyzer syntacticAnalyzer;
 
-    createInputSystem(&inputSystem, "../concurrentSum_errors.go");
+    createInputSystem(&inputSystem, "../concurrentSum.go");
     createSymbolsTable(&symbolsTable);
     createHashTable(&operatorsTable);
     createLexicalAnalyzer(&lexicalAnalyzer, inputSystem, symbolsTable, operatorsTable);
@@ -36,7 +35,7 @@ int main() {
     destroyLexicalAnalyzer(&lexicalAnalyzer);
     destroySyntacticAnalyzer(&syntacticAnalyzer);
 
-    return 0;
+    return EXIT_CODE_SUCCESS;
 }
 
 void fillOperatorsTable(HashTable *operatorsTable) {

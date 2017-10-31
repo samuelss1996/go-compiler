@@ -5,6 +5,7 @@ CMakeFiles/GoCompiler.dir/errors/Errors.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/errors/Errors.c.o: ../errors/Errors.c
 
 CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../Definitions.h
+CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../errors/Errors.h
 CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../input/InputSystem.c
 
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../Definitions.h
