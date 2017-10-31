@@ -74,15 +74,17 @@ char nextChar(InputSystem* inputSystem) {
     return result;
 }
 
-void getReadToken(InputSystem* inputSystem, char *outBuffer) {
+void getReadToken(InputSystem* inputSystem, char **outBuffer) {
     int size, i;
     size = resetFrontPosition(inputSystem);
 
+    *outBuffer = (char *) malloc((size + 1) * sizeof(char));
+
     for(i = 0; i < size; i++) {
-        outBuffer[i] = nextChar(inputSystem);
+        (*outBuffer)[i] = nextChar(inputSystem);
     }
 
-    outBuffer[i] = '\0';
+    (*outBuffer)[i] = '\0';
 }
 
 void moveBack(InputSystem* inputSystem, int positions) {

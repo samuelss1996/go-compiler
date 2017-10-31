@@ -38,17 +38,18 @@ void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, InputSystem inputSy
 
 LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     int componentId = mainAutomaton(lexicalAnalyzer);
-    char componentToken[200]; // TODO
+    char *tokenAsString;
     LexicalComponent result;
 
-    getReadToken(&(*lexicalAnalyzer)->inputSystem, componentToken);
+    getReadToken(&(*lexicalAnalyzer)->inputSystem, &tokenAsString);
     confirmToken(&(*lexicalAnalyzer)->inputSystem);
 
     if(componentId == TOKEN_COMMENT || componentId == TOKEN_BLANK || componentId == ERROR_CODE) {
         return nextLexicalComponent(lexicalAnalyzer);
     }
 
-    createLexicalComponent(&result, componentId, componentToken);
+    createLexicalComponent(&result, componentId, tokenAsString);
+    free(tokenAsString);
 
     return result;
 }
@@ -59,7 +60,7 @@ void destroyLexicalAnalyzer(LexicalAnalyzer* lexicalAnalyzer) {
 
 int alphanumericAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     char readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
-    char token[200]; // TODO
+    char *tokenAsString;
     int tokenId;
 
     while(isalnum(readChar) || readChar == '_') {
@@ -67,14 +68,17 @@ int alphanumericAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     }
 
     moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
-    getReadToken(&(*lexicalAnalyzer)->inputSystem, token);
+    getReadToken(&(*lexicalAnalyzer)->inputSystem, &tokenAsString);
 
-    tokenId = findSymbol(&(*lexicalAnalyzer)->symbolsTable, token);
+    tokenId = findSymbol(&(*lexicalAnalyzer)->symbolsTable, tokenAsString);
 
     if(tokenId == TOKEN_NOT_FOUND) {
-        addSymbol(&(*lexicalAnalyzer)->symbolsTable, token, TOKEN_IDENTIFIER);
+        addSymbol(&(*lexicalAnalyzer)->symbolsTable, tokenAsString, TOKEN_IDENTIFIER);
         return TOKEN_IDENTIFIER;
     }
+
+    free(tokenAsString);
+    return tokenId;
 }
 
 int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
@@ -356,12 +360,12 @@ short isImaginary(LexicalAnalyzer* lexicalAnalyzer) {
 }
 
 int recognizeOperator(LexicalAnalyzer* lexicalAnalyzer) {
-    char readOperator[MAXIMUM_OPERATOR_LENGTH + 1];
+    char *readOperator;
     int operatorId = ERROR_CODE;
     int newOperatorId;
 
     while(1) {
-        getReadToken(&(*lexicalAnalyzer)->inputSystem, readOperator);
+        getReadToken(&(*lexicalAnalyzer)->inputSystem, &readOperator);
         newOperatorId = findHash(&(*lexicalAnalyzer)->operatorsTable, readOperator);
 
         if(newOperatorId == TOKEN_NOT_FOUND) {
