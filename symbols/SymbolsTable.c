@@ -32,7 +32,7 @@ void destroySymbolsTable(SymbolsTable* symbolsTable) {
 }
 
 void fillWithKeywords(SymbolsTable* symbolsTable) {
-    FILE *keywordsDb = fopen("../db/keywords.db", "r");
+    FILE *keywordsDb = fopen(KEYWORDS_DB_FILE_PATH, "r");
     char keyword[50];
     int keywordId;
 

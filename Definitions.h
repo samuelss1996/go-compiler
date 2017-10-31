@@ -122,7 +122,11 @@
 #define MAXIMUM_OPERATOR_LENGTH 3
 
 #define EXIT_CODE_SUCCESS 0
-#define EXIT_CODE_UNABLE_TO_OPEN_FILE (-1000)
+#define EXIT_CODE_WRONG_ARGUMENTS (-1000)
+#define EXIT_CODE_UNABLE_TO_OPEN_FILE (-1001)
+
+#define OPERATORS_DB_FILE_PATH "db/operators.db"
+#define KEYWORDS_DB_FILE_PATH "db/keywords.db"
 
 #define ANSI_COLOR_ERROR "\x1b[31m"
 #define ANSI_COLOR_RESET "\x1b[0m"
