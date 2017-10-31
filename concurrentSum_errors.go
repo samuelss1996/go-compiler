@@ -1,5 +1,5 @@
 @@package main /*
-*/a
+*/ a
 
 @import "fmt\o\'"
 

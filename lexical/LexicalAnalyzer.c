@@ -80,6 +80,7 @@ int alphanumericAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
 int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
+    int result = TOKEN_COMMENT;
 
     while(1) {
         readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
@@ -97,23 +98,24 @@ int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
             case 1:
                 if(readChar == '\n' || readChar == EOF) {
                     moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
-                    return TOKEN_COMMENT;
+                    return result;
                 }
                 break;
             case 2:
                 switch(readChar) {
+                    case '\n': result = '\n'; break;
                     case '*': status = 3; break;
                     case EOF:
                         moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
-                        return TOKEN_COMMENT;
+                        return result;
                 }
                 break;
             case 3:
                 switch(readChar) {
-                    case '/': return TOKEN_COMMENT;
+                    case '/': return result;
                     case EOF:
                         moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
-                        return TOKEN_COMMENT;
+                        return result;
                     default: status = 2; break;
                 }
                 break;
