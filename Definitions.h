@@ -121,7 +121,8 @@
 #define TOKEN_NOT_FOUND (-101)
 #define MAXIMUM_OPERATOR_LENGTH 3
 
-#define OPERATORS_DB_PATH ../db/operators.db
+#define ANSI_COLOR_ERROR "\x1b[31m"
+#define ANSI_COLOR_RESET "\x1b[0m"
 
 // Custom types
 typedef int SymbolsTableValue;

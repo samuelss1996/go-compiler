@@ -13,6 +13,8 @@ stdio.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.c
 stdio.h
 -
+../Definitions.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
 
@@ -75,8 +77,6 @@ test/TestRunner.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.h
 syntactic/SyntacticAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
-stdio.h
--
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c
 ../Definitions.h

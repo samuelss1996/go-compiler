@@ -44,7 +44,7 @@ LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     getReadToken(&(*lexicalAnalyzer)->inputSystem, componentToken);
     confirmToken(&(*lexicalAnalyzer)->inputSystem);
 
-    if(componentId == TOKEN_COMMENT || componentId == TOKEN_BLANK) {
+    if(componentId == TOKEN_COMMENT || componentId == TOKEN_BLANK || componentId == ERROR_CODE) {
         return nextLexicalComponent(lexicalAnalyzer);
     }
 
@@ -169,8 +169,9 @@ int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                     case '"': return result;
                     case '\\': status = 1; break;
                     case '\n':
-                        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+                    case EOF:
                         expectingEndOfString(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem));
+                        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
                         return ERROR_CODE;
                 }
                 break;
@@ -221,7 +222,7 @@ int numbersAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
 int mainAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     char readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
-    if(isalpha(readChar) || readChar == '_') return alphanumericAutomaton(lexicalAnalyzer); // TODO find out if '_' is different
+    if(isalpha(readChar) || readChar == '_') return alphanumericAutomaton(lexicalAnalyzer);
     if(readChar == '/') return commentsAutomaton(lexicalAnalyzer);
     if(readChar == '\'') return runesAutomaton(lexicalAnalyzer);
     if(readChar == '"') return stringsAutomaton(lexicalAnalyzer);

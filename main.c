@@ -6,15 +6,13 @@
 #include "test/TestRunner.h"
 #include "syntactic/SyntacticAnalyzer.h"
 
-#include <stdio.h>
-
-void fillOperatorsTable(HashTable *operatorsTable) ;
+void fillOperatorsTable(HashTable *operatorsTable);
 
 // TODO ask the user the file to be compiled
-// TODO handle documentation comments
 // TODO check if comments should act as newline
 // TODO maybe handle rune errors
 // TODO check memory leaks
+// TODO handle I/O errors
 int main() {
     InputSystem inputSystem;
     SymbolsTable symbolsTable;
