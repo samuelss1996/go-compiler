@@ -23,7 +23,7 @@ void createHashTable(HashTable* hashTable) {
     (*hashTable)->elementsCount = 0;
     (*hashTable)->capacity = HASH_TABLE_INITIAL_CAPACITY;
 
-    memset((*hashTable)->elements, 0, sizeof(LinkedList));
+    memset((*hashTable)->elements, 0, HASH_TABLE_INITIAL_CAPACITY * sizeof(LinkedList));
 }
 
 SymbolsTableValue findHash(HashTable* hashTable, char* key) {

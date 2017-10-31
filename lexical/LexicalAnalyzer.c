@@ -45,6 +45,7 @@ LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     confirmToken(&(*lexicalAnalyzer)->inputSystem);
 
     if(componentId == TOKEN_COMMENT || componentId == TOKEN_BLANK || componentId == ERROR_CODE) {
+        free(tokenAsString);
         return nextLexicalComponent(lexicalAnalyzer);
     }
 
@@ -74,6 +75,8 @@ int alphanumericAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
 
     if(tokenId == TOKEN_NOT_FOUND) {
         addSymbol(&(*lexicalAnalyzer)->symbolsTable, tokenAsString, TOKEN_IDENTIFIER);
+        free(tokenAsString);
+
         return TOKEN_IDENTIFIER;
     }
 
@@ -374,6 +377,8 @@ int recognizeOperator(LexicalAnalyzer* lexicalAnalyzer) {
 
         operatorId = newOperatorId;
         nextChar(&(*lexicalAnalyzer)->inputSystem);
+
+        free(readOperator);
     }
 
     if (operatorId != ERROR_CODE) {
@@ -382,6 +387,7 @@ int recognizeOperator(LexicalAnalyzer* lexicalAnalyzer) {
         invalidSymbol(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem), *readOperator);
     }
 
+    free(readOperator);
     return operatorId;
 }
 

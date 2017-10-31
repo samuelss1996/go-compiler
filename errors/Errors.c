@@ -2,7 +2,7 @@
 #include "../Definitions.h"
 
 void unableToOpenFile(char* filename) {
-    printf(ANSI_COLOR_ERROR "Unable to open file '%s'. Check if file exists with proper permissions" ANSI_COLOR_RESET, filename);
+    printf(ANSI_COLOR_ERROR "Unable to open file '%s'. Check if file exists with proper permissions\n" ANSI_COLOR_RESET, filename);
 }
 
 void expectingEndOfString(int line, int column) {
