@@ -166,7 +166,7 @@ int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
 int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
-    int result = TOKEN_RUNE_LITERAL;
+    int result = TOKEN_RUNE_LITERAL, i;
     short multipleRead = 0;
 
     while(1) {
@@ -188,7 +188,7 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                 }
                 break;
             case 1: // Se ha leído una comilla simple y una barra de escape ('\). Se espera un carácter escapable válido
-                for (int i = 0; i < SIZE_RUNE_VALID_ESCAPED_CHARS; ++i) {
+                for (i = 0; i < SIZE_RUNE_VALID_ESCAPED_CHARS; ++i) {
                     if(readChar == ARR_RUNE_VALID_ESCAPED_CHARS[i]) {
                         status = 2;
                         break;
@@ -231,7 +231,7 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
 int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
-    int result = TOKEN_STRING_LITERAL;
+    int result = TOKEN_STRING_LITERAL, i;
 
     while(1) {
         readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
@@ -249,7 +249,7 @@ int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                 }
                 break;
             case 1: // Se ha leido una barra de escape '/' dentro del string. Se espera un caracter escapable válido
-                for (int i = 0; i < SIZE_STRING_VALID_ESCAPED_CHARS; ++i) {
+                for (i = 0; i < SIZE_STRING_VALID_ESCAPED_CHARS; ++i) {
                     if(readChar == ARR_STRING_VALID_ESCAPED_CHARS[i]) {
                         status = 0;
                         break;

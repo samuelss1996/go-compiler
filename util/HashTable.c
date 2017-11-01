@@ -79,7 +79,9 @@ void insertHash(HashTable* hashTable, char* key, SymbolsTableValue value) {
  * @param hashTable La tabla hash
  */
 void destroyHashTable(HashTable* hashTable) {
-    for (int i = 0; i < (*hashTable)->capacity; ++i) {
+    int i;
+
+    for (i = 0; i < (*hashTable)->capacity; ++i) {
         if((*hashTable)->elements[i] != NULL) {
             destroyList((*hashTable)->elements + i);
         }
