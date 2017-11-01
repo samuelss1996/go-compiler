@@ -205,14 +205,11 @@ int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
 
 int numbersAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
-    if(isImaginary(lexicalAnalyzer)) {
-        return TOKEN_IMAGINARY_LITERAL;
-    }
-
-    resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
-    if(isFloat(lexicalAnalyzer)) { // TODO already called in isImaginary, maybe make more efficient
-        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
-        return TOKEN_FLOATING_POINT_LITERAL;
+    switch(isImaginary(lexicalAnalyzer)) {
+        case 1: return TOKEN_IMAGINARY_LITERAL;
+        case -1:
+            moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+            return TOKEN_FLOATING_POINT_LITERAL;
     }
 
     resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
@@ -354,7 +351,7 @@ short isImaginary(LexicalAnalyzer* lexicalAnalyzer) {
                 break;
             case 1:
                 if(readChar == 'i') return 1;
-                else return 0;
+                else return -1;
             case 2:
                 if(readChar == 'i') return 1;
                 else if(!isdigit(readChar)) return 0;
