@@ -32,7 +32,7 @@ void startCompiling(char* fileToBeCompiled) {
 
     createInputSystem(&inputSystem, fileToBeCompiled);
     createSymbolsTable(&symbolsTable);
-    createHashTable(&operatorsTable);
+    createHashTable(&operatorsTable, OPERATORS_HASH_TABLE_CAPACITY);
     createLexicalAnalyzer(&lexicalAnalyzer, inputSystem, symbolsTable, operatorsTable);
     createSyntacticAnalyzer(&syntacticAnalyzer, lexicalAnalyzer);
 

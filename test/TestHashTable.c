@@ -4,7 +4,7 @@
 void hashTableBasicTest() {
     HashTable test;
 
-    createHashTable(&test);
+    createHashTable(&test, 10);
     insertHash(&test, "a", 1);
     insertHash(&test, "b", 2);
     insertHash(&test, "c", 3);

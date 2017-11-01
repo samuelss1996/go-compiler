@@ -14,7 +14,7 @@ void fillWithKeywords(SymbolsTable* symbolsTable);
 
 void createSymbolsTable(SymbolsTable* symbolsTable) {
     *symbolsTable = (SymbolsTable) malloc(sizeof(SymbolsTableStruct));
-    createHashTable(&(*symbolsTable)->hashTable);
+    createHashTable(&(*symbolsTable)->hashTable, SYMBOLS_HASH_TABLE_CAPACITY);
 
     fillWithKeywords(symbolsTable);
 }

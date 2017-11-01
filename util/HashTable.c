@@ -2,8 +2,6 @@
 #include <string.h>
 #include "LinkedList.h"
 
-#define HASH_TABLE_INITIAL_CAPACITY 500
-
 typedef struct {
     LinkedList* elements;
     int elementsCount;
@@ -11,19 +9,17 @@ typedef struct {
 } HashTableStruct;
 
 typedef HashTableStruct* HashTable;
-// TODO implement hash table expansion
-// TODO improve for operators, maybe allow variable initial capacity
 
 unsigned long calculateHash(char* key);
 
-void createHashTable(HashTable* hashTable) {
+void createHashTable(HashTable* hashTable, int initialCapacity) {
     *hashTable = (HashTable) malloc(sizeof(HashTableStruct));
 
-    (*hashTable)->elements = (LinkedList *) malloc(HASH_TABLE_INITIAL_CAPACITY * sizeof(LinkedList));
+    (*hashTable)->elements = (LinkedList *) malloc(initialCapacity * sizeof(LinkedList));
     (*hashTable)->elementsCount = 0;
-    (*hashTable)->capacity = HASH_TABLE_INITIAL_CAPACITY;
+    (*hashTable)->capacity = initialCapacity;
 
-    memset((*hashTable)->elements, 0, HASH_TABLE_INITIAL_CAPACITY * sizeof(LinkedList));
+    memset((*hashTable)->elements, 0, initialCapacity * sizeof(LinkedList));
 }
 
 SymbolsTableValue findHash(HashTable* hashTable, char* key) {
@@ -46,7 +42,6 @@ SymbolsTableValue findHash(HashTable* hashTable, char* key) {
     return TOKEN_NOT_FOUND;
 }
 
-// TODO maybe handle insertion of repeated items
 void insertHash(HashTable* hashTable, char* key, SymbolsTableValue value) {
     unsigned long hash = calculateHash(key) % (*hashTable)->capacity;
 
