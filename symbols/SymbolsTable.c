@@ -37,11 +37,6 @@ void fillWithKeywords(SymbolsTable* symbolsTable) {
     char keyword[50];
     int keywordId;
 
-    if(keywordsDb == NULL) {
-        unableToOpenDbFile(KEYWORDS_DB_FILE_PATH);
-        exit(EXIT_CODE_UNABLE_TO_OPEN_KEYWORDS_DB);
-    }
-
     while(fscanf(keywordsDb, "%s %d", keyword, &keywordId) > 0) {
         addSymbol(symbolsTable, keyword, keywordId);
     }

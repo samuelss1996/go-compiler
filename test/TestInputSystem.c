@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "../input/InputSystem.h"
 
-// TODO finish test
 void inputSystemBasicTest() {
     InputSystem inputSystem;
     char current;

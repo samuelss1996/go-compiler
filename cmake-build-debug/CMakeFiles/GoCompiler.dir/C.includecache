@@ -67,6 +67,8 @@ string.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/main.c
 stdlib.h
 -
+unistd.h
+-
 input/InputSystem.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 symbols/SymbolsTable.h

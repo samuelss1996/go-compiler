@@ -6,7 +6,7 @@ void unableToOpenFile(char* filename) {
 }
 
 void unableToOpenDbFile(char* filename) {
-    printf(ANSI_COLOR_ERROR "Unable to open database file '%s'. This file is required by the compiler. Try to fix this executing 'make' again\n" ANSI_COLOR_RESET, filename);
+    printf(ANSI_COLOR_ERROR "Unable to open database file '%s'. This file is required by the compiler. Try to fix this executing 'make -B' to rebuild the whole project\n" ANSI_COLOR_RESET, filename);
 }
 
 void expectingEndOfString(int line, int column) {
