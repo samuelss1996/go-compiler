@@ -12,6 +12,11 @@ typedef HashTableStruct* HashTable;
 
 unsigned long calculateHash(char* key);
 
+/**
+ * Crea una tabla hash. Se usa una tabla hash internamente en la tabla de símbolos, y de forma directa para la tabla de operadores
+ * @param hashTable La tabla hash
+ * @param initialCapacity La capacidad de la tabla hash (en caso de colisión se hace encadenamiento)
+ */
 void createHashTable(HashTable* hashTable, int initialCapacity) {
     *hashTable = (HashTable) malloc(sizeof(HashTableStruct));
 
@@ -22,6 +27,12 @@ void createHashTable(HashTable* hashTable, int initialCapacity) {
     memset((*hashTable)->elements, 0, initialCapacity * sizeof(LinkedList));
 }
 
+/**
+ * Se busca un elemento, dado su clave
+ * @param hashTable La tabla hash
+ * @param key La clave
+ * @return El valor asociado a la clave
+ */
 SymbolsTableValue findHash(HashTable* hashTable, char* key) {
     unsigned long hash = calculateHash(key) % (*hashTable)->capacity;
 
@@ -42,6 +53,12 @@ SymbolsTableValue findHash(HashTable* hashTable, char* key) {
     return TOKEN_NOT_FOUND;
 }
 
+/**
+ * Se inserta un nuevo elemento en la tabla hash, con su respectiva clave y su respectivo valor
+ * @param hashTable La tabla hash
+ * @param key La clave
+ * @param value El valor
+ */
 void insertHash(HashTable* hashTable, char* key, SymbolsTableValue value) {
     unsigned long hash = calculateHash(key) % (*hashTable)->capacity;
 
@@ -57,6 +74,10 @@ void insertHash(HashTable* hashTable, char* key, SymbolsTableValue value) {
     append(&targetList, newItem);
 }
 
+/**
+ * Destruir la tabla hash, liberando todos los recursos
+ * @param hashTable La tabla hash
+ */
 void destroyHashTable(HashTable* hashTable) {
     for (int i = 0; i < (*hashTable)->capacity; ++i) {
         if((*hashTable)->elements[i] != NULL) {
@@ -68,6 +89,11 @@ void destroyHashTable(HashTable* hashTable) {
     free(*hashTable);
 }
 
+/**
+ * Función de hash. Devuelve un entero dada una clave
+ * @param key La clave
+ * @return El entero calculado en base a la clave
+ */
 unsigned long calculateHash(char* key) {
     unsigned long hash = 5381;
     int c;

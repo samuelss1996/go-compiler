@@ -28,6 +28,13 @@ short isFloat(LexicalAnalyzer* lexicalAnalyzer);
 short isImaginary(LexicalAnalyzer* lexicalAnalyzer);
 short isOctal(char digit);
 
+/**
+ * Crear e incializar el analizador léxico
+ * @param lexicalAnalyzer El analizador léxico
+ * @param inputSystem El sistema de entrada a usar
+ * @param symbolsTable  La tabla de símbolos a usar
+ * @param operatorsTable La tabla de operadores a usar
+ */
 void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, InputSystem inputSystem, SymbolsTable symbolsTable, HashTable operatorsTable) {
     *lexicalAnalyzer = (LexicalAnalyzer) malloc(sizeof(LexicalAnalyzerStruct));
 
@@ -36,6 +43,11 @@ void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, InputSystem inputSy
     (*lexicalAnalyzer)->operatorsTable = operatorsTable;
 }
 
+/**
+ * Obtener el siguiente componente léxico.
+ * @param lexicalAnalyzer El analizador léxico
+ * @return El siguiente componente léxico.
+ */
 LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     int componentId = mainAutomaton(lexicalAnalyzer);
     char *tokenAsString;
@@ -55,10 +67,19 @@ LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     return result;
 }
 
+/**
+ * Destruir el analizador léxico, liberando los recursos
+ * @param lexicalAnalyzer
+ */
 void destroyLexicalAnalyzer(LexicalAnalyzer* lexicalAnalyzer) {
     free(*lexicalAnalyzer);
 }
 
+/**
+ * Autómata que reconoce las cadenas alfanuméricas. Cuando se invoca ya se ha leído un carácter alfabético
+ * @param lexicalAnalyzer El analizador léxico
+ * @return El identificador del componente léxico
+ */
 int alphanumericAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     char readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
     char *tokenAsString;
@@ -84,6 +105,12 @@ int alphanumericAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     return tokenId;
 }
 
+/**
+ * Autómata que reconoce los comentarios, tanto de una línea como multi-línea. Cuando se invoca ya se ha leído una '/'
+ * Si encuentra al menos un salto de línea dentro de un comentario, el componente al completo se reconoce como un salto de línea
+ * @param lexicalAnalyzer El analizador léxico
+ * @return El identificador del componente léxico
+ */
 int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
@@ -93,22 +120,22 @@ int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
         readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
-            case 0:
+            case 0: // Ya se ha leido un caracter '/' fuera del automata, se espera '/' o '*' si es un comentario.
                 switch(readChar) {
                     case '/': status = 1; break;
                     case '*': status = 2; break;
-                    default:
+                    default: // Si no es '*' ni '/', la '/' leida fuera del automata es una division
                         moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
                         return recognizeOperator(lexicalAnalyzer);
                 }
                 break;
-            case 1:
+            case 1: // Se ha leído '//'. Comentario de una línea. Termina en \n o EOF
                 if(readChar == '\n' || readChar == EOF) {
                     moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
                     return result;
                 }
                 break;
-            case 2:
+            case 2: // Se ha leido '/*' Es posible que el comentario termine al leer un '*'. Termina si se lee EOF
                 switch(readChar) {
                     case '\n': result = '\n'; break;
                     case '*': status = 3; break;
@@ -117,7 +144,7 @@ int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                         return result;
                 }
                 break;
-            case 3:
+            case 3: // Se ha leido '/* ... *'. Si se lee una '/' o un EOF el comentario se termina. En caso contrario el comentario sigue normalmente
                 switch(readChar) {
                     case '/': return result;
                     case EOF:
@@ -130,6 +157,12 @@ int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     }
 }
 
+/**
+ * Automata que reconoce runes: caracteres encerrados entre comillas simples. Cuando se invoca ya se ha leido una comilla simple
+ * Este automata no es neceario para reconocer el codigo dado, su presencia aquí se debe a un despiste
+ * @param lexicalAnalyzer El analizador léxico
+ * @return El identificador del componente léxico
+ */
 int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
@@ -140,7 +173,7 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
         readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
-            case 0:
+            case 0: // Se ha leido una comilla simple. Se espera un carácter o una barra de escape
                 switch(readChar) {
                     case '\\': status = 1; break;
                     case '\n':
@@ -154,7 +187,7 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                     default: status = 2; break;
                 }
                 break;
-            case 1:
+            case 1: // Se ha leído una comilla simple y una barra de escape ('\). Se espera un carácter escapable válido
                 for (int i = 0; i < SIZE_RUNE_VALID_ESCAPED_CHARS; ++i) {
                     if(readChar == ARR_RUNE_VALID_ESCAPED_CHARS[i]) {
                         status = 2;
@@ -169,7 +202,7 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                     result = ERROR_CODE;
                 }
                 break;
-            case 2:
+            case 2: // Se ha leído una comilla simple y un caracter, o un caracter escapado ('a) ('\n). Se espera una comilla simple de cierre
                 switch(readChar) {
                     case '\'': return result;
                     case '\n':
@@ -190,6 +223,11 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     }
 }
 
+/**
+ * Automata que reconoce cadenas de texto. Cuando se invoca ya se ha leido una comilla doble (")
+ * @param lexicalAnalyzer El analizador léxico
+ * @return El identificador del componente léxico
+ */
 int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
@@ -199,7 +237,7 @@ int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
         readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
         switch(status) {
-            case 0:
+            case 0: // Posición cualquiera dentro de la cadena. Se espera cualquier caracter válido. Si se lee " se cierra el string
                 switch(readChar) {
                     case '"': return result;
                     case '\\': status = 1; break;
@@ -210,7 +248,7 @@ int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                         return ERROR_CODE;
                 }
                 break;
-            case 1:
+            case 1: // Se ha leido una barra de escape '/' dentro del string. Se espera un caracter escapable válido
                 for (int i = 0; i < SIZE_STRING_VALID_ESCAPED_CHARS; ++i) {
                     if(readChar == ARR_STRING_VALID_ESCAPED_CHARS[i]) {
                         status = 0;
@@ -229,17 +267,22 @@ int stringsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     }
 }
 
+/**
+ * Automata que reonoce los números: ennteros, flotantes e imaginarios. Llama a su vez a otros autómatas para realizar el reconocimiento
+ * @param lexicalAnalyzer El analizador léxico
+ * @return El identificador del componente léxico
+ */
 int numbersAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
-    switch(isImaginary(lexicalAnalyzer)) {
-        case 1: return TOKEN_IMAGINARY_LITERAL;
+    switch(isImaginary(lexicalAnalyzer)) { // Determina si es imaginario, flotante, o ninguno de los dos
+        case 1: return TOKEN_IMAGINARY_LITERAL; // Es imaginario
         case -1:
             moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
-            return TOKEN_FLOATING_POINT_LITERAL;
+            return TOKEN_FLOATING_POINT_LITERAL; // Es flotante
     }
 
     resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
-    if(isInteger(lexicalAnalyzer)) {
+    if(isInteger(lexicalAnalyzer)) { // Determina si es entero
         moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
         return TOKEN_INTEGER_LITERAL;
     }
@@ -247,10 +290,15 @@ int numbersAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     resetFrontPosition(&(*lexicalAnalyzer)->inputSystem);
     nextChar(&(*lexicalAnalyzer)->inputSystem);
 
+    // Si no es ningún numero válido, puede que sea un operador, pues los números pueden empezar por '.', pero '.' puede ser operador
     return recognizeOperator(lexicalAnalyzer);
 }
 
-
+/**
+ * Autómata principal. En función del primer carácter de un componente léxico invoca al autómata correspondiente
+ * @param lexicalAnalyzer El analizador léxico
+ * @return El identificador del componente léxico
+ */
 int mainAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     char readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
 
@@ -265,6 +313,11 @@ int mainAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     return recognizeOperator(lexicalAnalyzer);
 }
 
+/**
+ * Determina si el componente léxico es un número entero. Es importante comprobar antes si se trata de un imaginario o un flotante
+ * @param lexicalAnalyzer El analizador léxico
+ * @return 1 si es un entero, 0 si no lo es
+ */
 short isInteger(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
@@ -303,6 +356,11 @@ short isInteger(LexicalAnalyzer* lexicalAnalyzer) {
     }
 }
 
+/**
+ * Determina si el componente léxico es un número flotante. Es importante comprobar antes si se trata de un imaginario
+ * @param lexicalAnalyzer El analizador léxico
+ * @return 1 si es un flotante, 0 si no lo es
+ */
 short isFloat(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
@@ -355,6 +413,11 @@ short isFloat(LexicalAnalyzer* lexicalAnalyzer) {
     }
 }
 
+/**
+ * Determina si el componente léxico es un número imaginario, o un flotante (internamente llama a isFloat()).
+ * @param lexicalAnalyzer El analizador léxico
+ * @return 1 si es imaginario, -1 si es flotante, 0 si no es ninguno de los dos
+ */
 short isImaginary(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
@@ -385,6 +448,11 @@ short isImaginary(LexicalAnalyzer* lexicalAnalyzer) {
     }
 }
 
+/**
+ * Reconoce si un componente léxico es un operador, y cuál es. Usa para ello la tabla de operadores
+ * @param lexicalAnalyzer El analizador léxico
+ * @return El identificador del operador
+ */
 int recognizeOperator(LexicalAnalyzer* lexicalAnalyzer) {
     char *readOperator;
     int operatorId = ERROR_CODE;
@@ -414,6 +482,10 @@ int recognizeOperator(LexicalAnalyzer* lexicalAnalyzer) {
     return operatorId;
 }
 
+/**
+ * Determina si un dígito es octal
+ * @return Un valor distinto de cero si el dígito es octal
+ */
 short isOctal(char digit) {
     return digit >= '0' && digit <= '7';
 }

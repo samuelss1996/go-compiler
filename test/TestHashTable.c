@@ -1,6 +1,7 @@
 #include "../util/HashTable.h"
 #include "TestUtils.h"
 
+/** Test básico para la tabla hash */
 void hashTableBasicTest() {
     HashTable test;
 

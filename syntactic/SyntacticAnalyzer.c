@@ -8,11 +8,20 @@ typedef struct {
 
 typedef SyntacticAnalyzerStruct* SyntacticAnalyzer;
 
+/**
+ * Crea e inicializa el analizador sintáctico
+ * @param syntacticAnalyzer El analizador sintáctico
+ * @param lexicalAnalyzer El analizador léxico a emplear
+ */
 void createSyntacticAnalyzer(SyntacticAnalyzer* syntacticAnalyzer, LexicalAnalyzer lexicalAnalyzer) {
     *syntacticAnalyzer = (SyntacticAnalyzer) malloc(sizeof(SyntacticAnalyzerStruct));
     (*syntacticAnalyzer)->lexicalAnalyzer = lexicalAnalyzer;
 }
 
+/**
+ * Comienza en análisis sintáctico. Esta función es la que se invoca desde el main para comenzar la compilación
+ * @param syntacticAnalyzer El analizador sintáctico
+ */
 void startSyntacticAnalyzer(SyntacticAnalyzer* syntacticAnalyzer) {
     LexicalComponent component;
     int componentId;
@@ -33,6 +42,10 @@ void startSyntacticAnalyzer(SyntacticAnalyzer* syntacticAnalyzer) {
     } while(componentId != EOF);
 }
 
+/**
+ * Destruir el analizador sintáctico, liberando todos los recursos
+ * @param syntacticAnalyzer El analizador sintáctico
+ */
 void destroySyntacticAnalyzer(SyntacticAnalyzer* syntacticAnalyzer) {
     free(*syntacticAnalyzer);
 }
