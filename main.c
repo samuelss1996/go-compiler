@@ -11,7 +11,6 @@
 void startCompiling(char* fileToBeCompiled);
 void fillOperatorsTable(HashTable *operatorsTable);
 
-// TODO maybe handle rune errors
 // TODO check memory leaks
 int main(int argc, char** argv) {
     if(argc != 2) {

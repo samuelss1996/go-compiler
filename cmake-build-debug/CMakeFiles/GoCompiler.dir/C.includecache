@@ -81,12 +81,16 @@ test/TestRunner.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.h
 syntactic/SyntacticAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
+errors/Errors.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c
 ../Definitions.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
 ../util/HashTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
+../errors/Errors.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
 stdlib.h
 -
 

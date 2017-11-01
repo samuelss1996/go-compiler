@@ -133,6 +133,8 @@ int commentsAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
 int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
     int status = 0;
     char readChar;
+    int result = TOKEN_RUNE_LITERAL;
+    short multipleRead = 0;
 
     while(1) {
         readChar = nextChar(&(*lexicalAnalyzer)->inputSystem);
@@ -141,7 +143,14 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
             case 0:
                 switch(readChar) {
                     case '\\': status = 1; break;
-                    case '\n': case '\'': return ERROR_CODE;
+                    case '\n':
+                    case EOF:
+                        expectingEndOfRune(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem));
+                        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+                        return ERROR_CODE;
+                    case '\'':
+                        emptyRune(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem));
+                        return ERROR_CODE;
                     default: status = 2; break;
                 }
                 break;
@@ -153,12 +162,29 @@ int runesAutomaton(LexicalAnalyzer* lexicalAnalyzer) {
                     }
                 }
 
-                if(status == 1) return ERROR_CODE;
+                if(status == 1) {
+                    invalidEscapedCharInsideRune(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem), readChar);
+
+                    status = 2;
+                    result = ERROR_CODE;
+                }
                 break;
             case 2:
                 switch(readChar) {
-                    case '\'': return TOKEN_RUNE_LITERAL;
-                    default: return ERROR_CODE;
+                    case '\'': return result;
+                    case '\n':
+                    case EOF:
+                        expectingEndOfRune(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem));
+                        moveBack(&(*lexicalAnalyzer)->inputSystem, 1);
+                        return ERROR_CODE;
+                    default:
+                        if(!multipleRead) {
+                            multiCharacterRune(getCurrentLine(&(*lexicalAnalyzer)->inputSystem), getCurrentColumn(&(*lexicalAnalyzer)->inputSystem));
+                            multipleRead = 1;
+                        }
+
+                        result = ERROR_CODE;
+                        break;
                 }
         }
     }

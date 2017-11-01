@@ -19,6 +19,7 @@ CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../util/HashTable.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalComponent.c.o: ../lexical/LexicalComponent.c
 
 CMakeFiles/GoCompiler.dir/main.c.o: ../Definitions.h
+CMakeFiles/GoCompiler.dir/main.c.o: ../errors/Errors.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../input/InputSystem.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../lexical/LexicalAnalyzer.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../lexical/LexicalComponent.h
@@ -30,6 +31,7 @@ CMakeFiles/GoCompiler.dir/main.c.o: ../util/HashTable.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../util/LinkedList.h
 
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../Definitions.h
+CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../errors/Errors.h
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../symbols/SymbolsTable.c
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../util/HashTable.h
 

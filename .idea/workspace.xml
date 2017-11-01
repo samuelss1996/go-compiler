@@ -13,15 +13,12 @@
   <component name="ChangeListManager">
     <list default="true" id="d5218d38-5411-4175-a57d-dc18948ad554" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Definitions.h" afterPath="$PROJECT_DIR$/Definitions.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/errors/Errors.c" afterPath="$PROJECT_DIR$/errors/Errors.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/errors/Errors.h" afterPath="$PROJECT_DIR$/errors/Errors.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/InputSystem.c" afterPath="$PROJECT_DIR$/input/InputSystem.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input/InputSystem.h" afterPath="$PROJECT_DIR$/input/InputSystem.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lexical/LexicalAnalyzer.c" afterPath="$PROJECT_DIR$/lexical/LexicalAnalyzer.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.c" afterPath="$PROJECT_DIR$/main.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/makefile" afterPath="$PROJECT_DIR$/makefile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symbols/SymbolsTable.c" afterPath="$PROJECT_DIR$/symbols/SymbolsTable.c" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LexicalAnalyzer.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LexicalAnalyzer.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lexical/LexicalAnalyzer.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1389">
-              <caret line="212" column="5" lean-forward="false" selection-start-line="212" selection-start-column="5" selection-end-line="212" selection-end-column="5" />
+            <state relative-caret-position="742">
+              <caret line="181" column="47" lean-forward="false" selection-start-line="181" selection-start-column="47" selection-end-line="181" selection-end-column="47" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -45,73 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="concurrentSum.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/concurrentSum.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="1" lean-forward="false" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="concurrentSum_errors.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/concurrentSum_errors.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="2" lean-forward="false" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Definitions.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Definitions.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="657">
-              <caret line="128" column="8" lean-forward="false" selection-start-line="128" selection-start-column="8" selection-end-line="128" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.c" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InputSystem.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/input/InputSystem.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Errors.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/errors/Errors.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="39" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SymbolsTable.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/symbols/SymbolsTable.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="41" column="49" lean-forward="false" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
+            <state relative-caret-position="135">
+              <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -120,8 +55,8 @@
       <file leaf-file-name="Errors.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/errors/Errors.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="8" column="141" lean-forward="false" selection-start-line="8" selection-start-column="141" selection-end-line="8" selection-end-column="141" />
+            <state relative-caret-position="465">
+              <caret line="32" column="69" lean-forward="false" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -185,12 +120,12 @@
         <option value="$PROJECT_DIR$/concurrentSum_errors.go" />
         <option value="$PROJECT_DIR$/db/keywords.db" />
         <option value="$PROJECT_DIR$/concurrentSum.go" />
-        <option value="$PROJECT_DIR$/lexical/LexicalAnalyzer.c" />
-        <option value="$PROJECT_DIR$/errors/Errors.h" />
-        <option value="$PROJECT_DIR$/errors/Errors.c" />
         <option value="$PROJECT_DIR$/Definitions.h" />
         <option value="$PROJECT_DIR$/symbols/SymbolsTable.c" />
         <option value="$PROJECT_DIR$/main.c" />
+        <option value="$PROJECT_DIR$/errors/Errors.h" />
+        <option value="$PROJECT_DIR$/errors/Errors.c" />
+        <option value="$PROJECT_DIR$/lexical/LexicalAnalyzer.c" />
       </list>
     </option>
   </component>
@@ -364,12 +299,12 @@
       <workItem from="1509450540342" duration="3612000" />
       <workItem from="1509476526499" duration="5459000" />
       <workItem from="1509494740909" duration="2008000" />
-      <workItem from="1509529908754" duration="2383000" />
+      <workItem from="1509529908754" duration="3266000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141322000" />
+    <option name="totallyTimeSpent" value="142205000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -744,36 +679,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lexical/LexicalAnalyzer.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1389">
-          <caret line="212" column="5" lean-forward="false" selection-start-line="212" selection-start-column="5" selection-end-line="212" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/input/InputSystem.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/errors/Errors.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="39" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/errors/Errors.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="141" lean-forward="false" selection-start-line="8" selection-start-column="141" selection-end-line="8" selection-end-column="141" />
           <folding />
         </state>
       </provider>
@@ -796,10 +705,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="90">
+          <caret line="13" column="3" lean-forward="false" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/errors/Errors.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="32" column="69" lean-forward="false" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/errors/Errors.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexical/LexicalAnalyzer.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="742">
+          <caret line="181" column="47" lean-forward="false" selection-start-line="181" selection-start-column="47" selection-end-line="181" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
