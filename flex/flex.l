@@ -39,7 +39,8 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 
 {IdLetter}({IdLetter}|[0-9])*							{printf("ID");}
 
-{MultiLineCommentStart}(.|\n)*{MultiLineCommentEnd}		{printf("TOKEN_COMMENT");}
+"/*"([^*\n]|(\*+[^*/\n]))*\*+\/							{printf("TOKEN_COMMENT");}
+"/*"([^*]|(\*+[^*/]))*\*+\/								{printf("TOKEN_COMMENT\n");}
 {SingleLineCommentStart}.*								{printf("TOKEN_COMMENT");}
 
 {DecimalLiteral}|{OctalLiteral}|{HexadecimalLiteral}	{printf("I");}
@@ -49,9 +50,56 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 '({RuneUnicodeValue}|{ByteValue})'						{printf("TOKEN_RUNE_LITERAL");}
 {RawStringLiteral}|{InterStringLiteral}					{printf("TOKEN_STRING_LITERAL");}
 
+"+" 													{printf("PUNCTUATION_ADD");}
+"&" 													{printf("PUNCTUATION_BITWISE_AND");}
+"+=" 													{printf("PUNCTUATION_ADD_EQUALS");}
+"&=" 													{printf("PUNCTUATION_AND_EQUALS");}
+"&&" 													{printf("PUNCTUATION_AND");}
+"==" 													{printf("PUNCTUATION_IS_EQUAL");}
+"!=" 													{printf("PUNCTUATION_NOT_EQUALS");}
+"(" 													{printf("PUNCTUATION_LEFT_PARENTHESES");}
+")" 													{printf("PUNCTUATION_RIGHT_PARENTHESES");}
+"-" 													{printf("PUNCTUATION_MINUS");}
+"|" 													{printf("PUNCTUATION_BITWISE_OR");}
+"-=" 													{printf("PUNCTUATION_MINUS_EQUALS");}
+"|=" 													{printf("PUNCTUATION_OR_EQUALS");}
+"||" 													{printf("PUNCTUATION_OR");}
+"<" 													{printf("PUNCTUATION_LOWER");}
+"<=" 													{printf("PUNCTUATION_LOWER_EQUALS");}
+"[" 													{printf("PUNCTUATION_LEFT_BRACKET");}
+"]" 													{printf("PUNCTUATION_RIGHT_BRACKET");}
+"*" 													{printf("PUNCTUATION_START");}
+"^" 													{printf("PUNCTUATION_BITWISE_XOR");}
+"*=" 													{printf("PUNCTUATION_STAR_EQUALS");}
+"^=" 													{printf("PUNCTUATION_XOR_EQUALS");}
+"<-" 													{printf("PUNCTUATION_RECEIVE");}
+">" 													{printf("PUNCTUATION_GREATER");}
+">=" 													{printf("PUNCTUATION_GREATER_EQUALS");}
+"{" 													{printf("PUNCTUATION_LEFT_BRACE");}
+"}" 													{printf("PUNCTUATION_RIGHT_BRACE");}
+"/" 													{printf("PUNCTUATION_SLASH");}
+"<<" 													{printf("PUNCTUATION_LEFT_SHIFT");}
+"/=" 													{printf("PUNCTUATION_SLASH_EQUALS");}
+"<<=" 													{printf("PUNCTUATION_LEFT_SHIFT_EQUALS");}
+"++" 													{printf("PUNCTUATION_INCREMENT");}
+"=" 													{printf("PUNCTUATION_ASSIGN");}
+":=" 													{printf("PUNCTUATION_SPECIAL_ASSIGN");}
+"," 													{printf("PUNCTUATION_COMMA");}
+";" 													{printf("PUNCTUATION_SEMICOLON");}
+"%" 													{printf("PUNCTUATION_MODULUS");}
+">>" 													{printf("PUNCTUATION_RIGHT_SHIFT");}
+"%=" 													{printf("PUNCTUATION_MODULUS_EQUALS");}
+">>=" 													{printf("PUNCTUATION_RIGHT_SHIFT_EQUALS");}
+"--" 													{printf("PUNCTUATION_DECREMENT");}
+"!" 													{printf("PUNCTUATION_NOT");}
+"..." 													{printf("PUNCTUATION_ELLIPSIS");}
+"." 													{printf("PUNCTUATION_DOT");}
+":" 													{printf("PUNCTUATION_COLON");}
+"&^" 													{printf("PUNCTUATION_AND_XOR");}
+"&^=" 													{printf("PUNCTUATION_AND_XOR_EQUALS");}
+
 %%
 
-// TODO distinguish actual mutline comments
 int main(int argc, char *argv[]) {
     if(argc == 2) {
 		yyin = fopen(argv[1], "r");
