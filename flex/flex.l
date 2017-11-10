@@ -28,11 +28,11 @@ HexByteValue			\\x{HexDigit}{2}
 OctalByteValue			\\[0-7]{3}
 ByteValue 				{OctalByteValue}|{HexByteValue}
 
-CommonUnicodeValue		[^\\\"']|{LittleUValue}|{BigUValue}
+CommonUnicodeValue		[^\\\n\"']|{LittleUValue}|{BigUValue}
 RuneUnicodeValue		{CommonUnicodeValue}|{RuneEscapedChar}|\"
 StringUnicodeValue		{CommonUnicodeValue}|{StringEscapedChar}|'
 
-RawStringLiteral		`(.|\n)*`
+RawStringLiteral		`[^`]*`
 InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 
 %%
