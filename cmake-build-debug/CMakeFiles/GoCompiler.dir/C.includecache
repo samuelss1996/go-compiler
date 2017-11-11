@@ -36,37 +36,21 @@ unistd.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h
 
-/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.c
-stdlib.h
--
-../Definitions.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
-../errors/Errors.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
-
-/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
-
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.c
-ctype.h
--
 stdlib.h
 -
 ../Definitions.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
 ../util/HashTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
-../input/InputSystem.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 ../symbols/SymbolsTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 LexicalComponent.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
-../errors/Errors.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
+../flex/lex.yy.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
-../input/InputSystem.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 LexicalComponent.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
 ../util/HashTable.h
@@ -87,8 +71,6 @@ stdlib.h
 -
 unistd.h
 -
-input/InputSystem.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
 symbols/SymbolsTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
 lexical/LexicalAnalyzer.h
@@ -123,8 +105,6 @@ string.h
 -
 ../lexical/LexicalAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
-../flex/lex.yy.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
 ../lexical/LexicalAnalyzer.h
@@ -138,19 +118,9 @@ TestUtils.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.h
 
-/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.c
-stdio.h
--
-../input/InputSystem.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
-
-/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.h
-
 /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c
 TestHashTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.h
-TestInputSystem.h
-/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.h
 

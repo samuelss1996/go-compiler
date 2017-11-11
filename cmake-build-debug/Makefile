@@ -177,33 +177,6 @@ flex/lex.yy.c.s:
 	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/flex/lex.yy.c.s
 .PHONY : flex/lex.yy.c.s
 
-input/InputSystem.o: input/InputSystem.c.o
-
-.PHONY : input/InputSystem.o
-
-# target to build an object file
-input/InputSystem.c.o:
-	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/input/InputSystem.c.o
-.PHONY : input/InputSystem.c.o
-
-input/InputSystem.i: input/InputSystem.c.i
-
-.PHONY : input/InputSystem.i
-
-# target to preprocess a source file
-input/InputSystem.c.i:
-	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/input/InputSystem.c.i
-.PHONY : input/InputSystem.c.i
-
-input/InputSystem.s: input/InputSystem.c.s
-
-.PHONY : input/InputSystem.s
-
-# target to generate assembly for a file
-input/InputSystem.c.s:
-	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/input/InputSystem.c.s
-.PHONY : input/InputSystem.c.s
-
 lexical/LexicalAnalyzer.o: lexical/LexicalAnalyzer.c.o
 
 .PHONY : lexical/LexicalAnalyzer.o
@@ -366,33 +339,6 @@ test/TestHashTable.c.s:
 	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestHashTable.c.s
 .PHONY : test/TestHashTable.c.s
 
-test/TestInputSystem.o: test/TestInputSystem.c.o
-
-.PHONY : test/TestInputSystem.o
-
-# target to build an object file
-test/TestInputSystem.c.o:
-	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestInputSystem.c.o
-.PHONY : test/TestInputSystem.c.o
-
-test/TestInputSystem.i: test/TestInputSystem.c.i
-
-.PHONY : test/TestInputSystem.i
-
-# target to preprocess a source file
-test/TestInputSystem.c.i:
-	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestInputSystem.c.i
-.PHONY : test/TestInputSystem.c.i
-
-test/TestInputSystem.s: test/TestInputSystem.c.s
-
-.PHONY : test/TestInputSystem.s
-
-# target to generate assembly for a file
-test/TestInputSystem.c.s:
-	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/test/TestInputSystem.c.s
-.PHONY : test/TestInputSystem.c.s
-
 test/TestRunner.o: test/TestRunner.c.o
 
 .PHONY : test/TestRunner.o
@@ -516,9 +462,6 @@ help:
 	@echo "... flex/lex.yy.o"
 	@echo "... flex/lex.yy.i"
 	@echo "... flex/lex.yy.s"
-	@echo "... input/InputSystem.o"
-	@echo "... input/InputSystem.i"
-	@echo "... input/InputSystem.s"
 	@echo "... lexical/LexicalAnalyzer.o"
 	@echo "... lexical/LexicalAnalyzer.i"
 	@echo "... lexical/LexicalAnalyzer.s"
@@ -537,9 +480,6 @@ help:
 	@echo "... test/TestHashTable.o"
 	@echo "... test/TestHashTable.i"
 	@echo "... test/TestHashTable.s"
-	@echo "... test/TestInputSystem.o"
-	@echo "... test/TestInputSystem.i"
-	@echo "... test/TestInputSystem.s"
 	@echo "... test/TestRunner.o"
 	@echo "... test/TestRunner.i"
 	@echo "... test/TestRunner.s"

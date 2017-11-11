@@ -7,13 +7,8 @@ CMakeFiles/GoCompiler.dir/errors/Errors.c.o: ../errors/Errors.c
 CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o: ../flex/lex.yy.c
 
-CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../Definitions.h
-CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../errors/Errors.h
-CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../input/InputSystem.c
-
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../Definitions.h
-CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../errors/Errors.h
-CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../input/InputSystem.h
+CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../flex/lex.yy.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../lexical/LexicalAnalyzer.c
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../lexical/LexicalComponent.h
 CMakeFiles/GoCompiler.dir/lexical/LexicalAnalyzer.c.o: ../symbols/SymbolsTable.h
@@ -23,7 +18,6 @@ CMakeFiles/GoCompiler.dir/lexical/LexicalComponent.c.o: ../lexical/LexicalCompon
 
 CMakeFiles/GoCompiler.dir/main.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../errors/Errors.h
-CMakeFiles/GoCompiler.dir/main.c.o: ../input/InputSystem.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../lexical/LexicalAnalyzer.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../lexical/LexicalComponent.h
 CMakeFiles/GoCompiler.dir/main.c.o: ../main.c
@@ -39,8 +33,6 @@ CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../symbols/SymbolsTable.c
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../util/HashTable.h
 
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../Definitions.h
-CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../flex/lex.yy.h
-CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../input/InputSystem.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../lexical/LexicalAnalyzer.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../lexical/LexicalComponent.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../symbols/SymbolsTable.h
@@ -52,11 +44,7 @@ CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../test/TestHashTable.c
 CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../test/TestUtils.h
 CMakeFiles/GoCompiler.dir/test/TestHashTable.c.o: ../util/HashTable.h
 
-CMakeFiles/GoCompiler.dir/test/TestInputSystem.c.o: ../input/InputSystem.h
-CMakeFiles/GoCompiler.dir/test/TestInputSystem.c.o: ../test/TestInputSystem.c
-
 CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestHashTable.h
-CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestInputSystem.h
 CMakeFiles/GoCompiler.dir/test/TestRunner.c.o: ../test/TestRunner.c
 
 CMakeFiles/GoCompiler.dir/test/TestUtils.c.o: ../test/TestUtils.c

@@ -39,6 +39,7 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 %%
 
 {IdLetter}({IdLetter}|[0-9])*							{return TOKEN_IDENTIFIER;}
+\n 														{return '\n';}
 {Blank}+												{}
 
 {SingleLineCommentStart}.*								{}

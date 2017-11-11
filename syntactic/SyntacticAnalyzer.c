@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../lexical/LexicalAnalyzer.h"
-#include "../flex/lex.yy.h"
 
 typedef struct {
     LexicalAnalyzer lexicalAnalyzer;
@@ -41,9 +40,6 @@ void startSyntacticAnalyzer(SyntacticAnalyzer* syntacticAnalyzer) {
         printf("%s -> %d\n", token, componentId);
         destroyLexicalComponent(&component);
     } while(componentId != EOF);
-
-    yyin = fopen("concurrentSum.go", "r");
-    printf("%d", yylex());
 }
 
 /**

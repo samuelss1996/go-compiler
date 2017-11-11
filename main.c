@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <unistd.h>
-#include "input/InputSystem.h"
 #include "symbols/SymbolsTable.h"
 #include "lexical/LexicalAnalyzer.h"
 #include "util/LinkedList.h"
@@ -33,23 +32,20 @@ int main(int argc, char** argv) {
 }
 
 void startCompiling(char* fileToBeCompiled) {
-    InputSystem inputSystem;
     SymbolsTable symbolsTable;
     HashTable operatorsTable;
     LexicalAnalyzer lexicalAnalyzer;
     SyntacticAnalyzer syntacticAnalyzer;
 
-    createInputSystem(&inputSystem, fileToBeCompiled);
     createSymbolsTable(&symbolsTable);
     createHashTable(&operatorsTable, OPERATORS_HASH_TABLE_CAPACITY);
-    createLexicalAnalyzer(&lexicalAnalyzer, inputSystem, symbolsTable, operatorsTable);
+    createLexicalAnalyzer(&lexicalAnalyzer, fileToBeCompiled, symbolsTable, operatorsTable);
     createSyntacticAnalyzer(&syntacticAnalyzer, lexicalAnalyzer);
 
     fillOperatorsTable(&operatorsTable);
 
     startSyntacticAnalyzer(&syntacticAnalyzer);
 
-    destroyInputSystem(&inputSystem);
     destroySymbolsTable(&symbolsTable);
     destroyHashTable(&operatorsTable);
     destroyLexicalAnalyzer(&lexicalAnalyzer);

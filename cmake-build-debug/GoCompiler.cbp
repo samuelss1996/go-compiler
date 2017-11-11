@@ -99,12 +99,6 @@
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h">
 			<Option target="GoCompiler"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h">
-			<Option target="GoCompiler"/>
-		</Unit>
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.c">
 			<Option target="GoCompiler"/>
 		</Unit>
@@ -136,12 +130,6 @@
 			<Option target="GoCompiler"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.h">
 			<Option target="GoCompiler"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c">
