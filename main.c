@@ -8,7 +8,7 @@
 #include "syntactic/SyntacticAnalyzer.h"
 #include "errors/Errors.h"
 
-void startCompiling(char* fileToBeCompiled);
+int startCompiling(char* fileToBeCompiled);
 
 int main(int argc, char** argv) {
     if(argc != 2) {
@@ -17,27 +17,35 @@ int main(int argc, char** argv) {
     }
 
     if(access(KEYWORDS_DB_FILE_PATH, R_OK) != -1) {
-        startCompiling(argv[1]);
-        return EXIT_CODE_SUCCESS;
+        return startCompiling(argv[1]);
     } else {
         unableToOpenDbFile(KEYWORDS_DB_FILE_PATH);
         return EXIT_CODE_UNABLE_TO_OPEN_KEYWORDS_DB;
     }
 }
 
-void startCompiling(char* fileToBeCompiled) {
+int startCompiling(char* fileToBeCompiled) {
     SymbolsTable symbolsTable;
     LexicalAnalyzer lexicalAnalyzer;
     SyntacticAnalyzer syntacticAnalyzer;
 
-    createSymbolsTable(&symbolsTable);
-    createLexicalAnalyzer(&lexicalAnalyzer, fileToBeCompiled, symbolsTable);
-    createSyntacticAnalyzer(&syntacticAnalyzer, lexicalAnalyzer);
+    FILE* file = fopen(fileToBeCompiled, "r");
 
+    if (file != NULL) {
+        createSymbolsTable(&symbolsTable);
+        createLexicalAnalyzer(&lexicalAnalyzer, file, symbolsTable);
+        createSyntacticAnalyzer(&syntacticAnalyzer, lexicalAnalyzer);
 
-    startSyntacticAnalyzer(&syntacticAnalyzer);
+        startSyntacticAnalyzer(&syntacticAnalyzer);
 
-    destroySymbolsTable(&symbolsTable);
-    destroyLexicalAnalyzer(&lexicalAnalyzer);
-    destroySyntacticAnalyzer(&syntacticAnalyzer);
+        destroySymbolsTable(&symbolsTable);
+        destroyLexicalAnalyzer(&lexicalAnalyzer);
+        destroySyntacticAnalyzer(&syntacticAnalyzer);
+
+        fclose(file);
+        return EXIT_CODE_SUCCESS;
+    } else {
+        unableToOpenFile(fileToBeCompiled);
+        return EXIT_CODE_UNABLE_TO_OPEN_FILE;
+    }
 }

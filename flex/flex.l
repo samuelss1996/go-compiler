@@ -110,6 +110,11 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 
 <<EOF>>													{column += yyleng; return EOF;}
 
+\"({StringUnicodeValue}|{ByteValue})* 					{column += yyleng; expectingEndOfString(yylineno, column); return yylex(symbolsTable);}
+\"[^\"\n]*\"											{column += yyleng; invalidEscapedCharInsideString(yylineno, column, yytext[yyleng - 1]); return yylex(symbolsTable);}
+''														{column += yyleng; emptyRune(yylineno, column); return yylex(symbolsTable);}
+'({RuneUnicodeValue}|{ByteValue})*						{column += yyleng; expectingEndOfRune(yylineno, column); return yylex(symbolsTable);}
+'({RuneUnicodeValue}|{ByteValue}){2,}'					{column += yyleng; multiCharacterRune(yylineno, column); return yylex(symbolsTable);}
 .														{column += yyleng; invalidSymbol(yylineno, column, *yytext); return yylex(symbolsTable);}
 
 %%

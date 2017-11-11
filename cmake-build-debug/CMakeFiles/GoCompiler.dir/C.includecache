@@ -53,6 +53,8 @@ LexicalComponent.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
+stdio.h
+-
 LexicalComponent.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
 ../symbols/SymbolsTable.h

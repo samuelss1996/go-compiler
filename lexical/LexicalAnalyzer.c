@@ -19,10 +19,10 @@ typedef LexicalAnalyzerStruct* LexicalAnalyzer;
  * @param symbolsTable  La tabla de símbolos a usar
  * @param operatorsTable La tabla de operadores a usar
  */
-void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, char* file, SymbolsTable symbolsTable) {
+void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, FILE* file, SymbolsTable symbolsTable) {
     *lexicalAnalyzer = (LexicalAnalyzer) malloc(sizeof(LexicalAnalyzerStruct));
 
-    (*lexicalAnalyzer)->file = fopen(file, "r");
+    (*lexicalAnalyzer)->file = file;
     (*lexicalAnalyzer)->symbolsTable = symbolsTable;
 
     yyset_in((*lexicalAnalyzer)->file);
@@ -48,6 +48,5 @@ LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
  * @param lexicalAnalyzer
  */
 void destroyLexicalAnalyzer(LexicalAnalyzer* lexicalAnalyzer) {
-    fclose((*lexicalAnalyzer)->file);
     free(*lexicalAnalyzer);
 }

@@ -12,19 +12,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5218d38-5411-4175-a57d-dc18948ad554" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/util/HashTable.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/util/HashTable.c.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/util/LinkedList.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/util/LinkedList.c.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/GoCompiler" afterPath="$PROJECT_DIR$/cmake-build-debug/GoCompiler" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.txt" afterPath="$PROJECT_DIR$/README.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/C.includecache" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/C.includecache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/depend.internal" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/depend.internal" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/depend.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/GoCompiler.dir/depend.make" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/concurrentSum.go" afterPath="$PROJECT_DIR$/concurrentSum.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/concurrentSum_errors.go" afterPath="$PROJECT_DIR$/concurrentSum_errors.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flex/flex.l" afterPath="$PROJECT_DIR$/flex/flex.l" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flex/lex.yy.c" afterPath="$PROJECT_DIR$/flex/lex.yy.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lexical/LexicalAnalyzer.c" afterPath="$PROJECT_DIR$/lexical/LexicalAnalyzer.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lexical/LexicalAnalyzer.h" afterPath="$PROJECT_DIR$/lexical/LexicalAnalyzer.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.c" afterPath="$PROJECT_DIR$/main.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/makefile" afterPath="$PROJECT_DIR$/makefile" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -60,8 +56,8 @@
       <file leaf-file-name="LexicalAnalyzer.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lexical/LexicalAnalyzer.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="52" column="1" lean-forward="true" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+            <state relative-caret-position="750">
+              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -69,28 +65,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="concurrentSum_errors.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="concurrentSum_errors.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/concurrentSum_errors.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+            <state relative-caret-position="390">
+              <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lex.yy.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flex/lex.yy.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="2020" column="3" lean-forward="true" selection-start-line="2020" selection-start-column="3" selection-end-line="2020" selection-end-column="3" />
-              <folding>
-                <element signature="e#43008#43033#0" expanded="true" />
-                <element signature="e#44241#44258#0" expanded="true" />
-                <element signature="e#56160#56193#0" expanded="true" />
-                <element signature="e#56996#57120#0" expanded="true" />
-                <element signature="e#57151#57250#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -115,11 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+            <state relative-caret-position="600">
+              <caret line="48" column="45" lean-forward="false" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -128,9 +108,11 @@
       <file leaf-file-name="LexicalAnalyzer.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lexical/LexicalAnalyzer.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="90">
+              <caret line="6" column="62" lean-forward="false" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,7 +178,6 @@
         <option value="$PROJECT_DIR$/input/InputSystem.h" />
         <option value="$PROJECT_DIR$/db/keywords.db" />
         <option value="$PROJECT_DIR$/errors/Errors.h" />
-        <option value="$PROJECT_DIR$/concurrentSum_errors.go" />
         <option value="$PROJECT_DIR$/util/HashTable.h" />
         <option value="$PROJECT_DIR$/errors/Errors.c" />
         <option value="$PROJECT_DIR$/input/InputSystem.c" />
@@ -213,12 +194,13 @@
         <option value="$PROJECT_DIR$/symbols/SymbolsTable.c" />
         <option value="$PROJECT_DIR$/symbols/SymbolsTable.h" />
         <option value="$PROJECT_DIR$/flex/lex.yy.h" />
-        <option value="$PROJECT_DIR$/lexical/LexicalAnalyzer.h" />
         <option value="$PROJECT_DIR$/syntactic/SyntacticAnalyzer.c" />
-        <option value="$PROJECT_DIR$/lexical/LexicalAnalyzer.c" />
-        <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/Definitions.h" />
         <option value="$PROJECT_DIR$/flex/lex.yy.c" />
+        <option value="$PROJECT_DIR$/concurrentSum_errors.go" />
+        <option value="$PROJECT_DIR$/lexical/LexicalAnalyzer.h" />
+        <option value="$PROJECT_DIR$/lexical/LexicalAnalyzer.c" />
+        <option value="$PROJECT_DIR$/main.c" />
       </list>
     </option>
   </component>
@@ -390,12 +372,12 @@
       <workItem from="1509529908754" duration="6535000" />
       <workItem from="1509536902128" duration="6342000" />
       <workItem from="1509563250001" duration="28000" />
-      <workItem from="1510396055461" duration="11244000" />
+      <workItem from="1510396055461" duration="15956000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163088000" />
+    <option name="totallyTimeSpent" value="167800000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -408,7 +390,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="23" width="2560" height="1377" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22698908" sideWeight="0.49791667" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32137287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -445,7 +426,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="178" />
+      <option name="time" value="179" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -763,34 +744,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.c">
+    <entry file="file://$PROJECT_DIR$/flex/lex.yy.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="2754">
+          <caret line="2164" column="3" lean-forward="true" selection-start-line="2164" selection-start-column="3" selection-end-line="2164" selection-end-column="3" />
+          <folding>
+            <element signature="e#27658#27685#0" expanded="true" />
+            <element signature="e#28935#28965#0" expanded="true" />
+            <element signature="e#29120#29177#0" expanded="true" />
+            <element signature="e#29208#29252#0" expanded="true" />
+            <element signature="e#29301#29328#0" expanded="true" />
+            <element signature="e#29468#29545#0" expanded="true" />
+            <element signature="e#31374#31459#0" expanded="true" />
+            <element signature="e#31984#31997#0" expanded="true" />
+            <element signature="e#50706#50731#0" expanded="true" />
+            <element signature="e#51939#51956#0" expanded="true" />
+            <element signature="e#63858#63891#0" expanded="true" />
+            <element signature="e#64694#64818#0" expanded="true" />
+            <element signature="e#64849#64948#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Definitions.h">
+    <entry file="file://$PROJECT_DIR$/concurrentSum_errors.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="122" column="41" lean-forward="true" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
+        <state relative-caret-position="390">
+          <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lexical/LexicalAnalyzer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="90">
+          <caret line="6" column="62" lean-forward="false" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lexical/LexicalAnalyzer.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="52" column="1" lean-forward="true" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+        <state relative-caret-position="750">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -805,24 +802,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flex/lex.yy.c">
+    <entry file="file://$PROJECT_DIR$/Definitions.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="2020" column="3" lean-forward="true" selection-start-line="2020" selection-start-column="3" selection-end-line="2020" selection-end-column="3" />
-          <folding>
-            <element signature="e#43008#43033#0" expanded="true" />
-            <element signature="e#44241#44258#0" expanded="true" />
-            <element signature="e#56160#56193#0" expanded="true" />
-            <element signature="e#56996#57120#0" expanded="true" />
-            <element signature="e#57151#57250#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1155">
+          <caret line="122" column="41" lean-forward="true" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/concurrentSum_errors.go">
+    <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+        <state relative-caret-position="600">
+          <caret line="48" column="45" lean-forward="false" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
           <folding />
         </state>
       </provider>
