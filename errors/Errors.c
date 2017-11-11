@@ -32,8 +32,8 @@ void expectingEndOfString(int line, int column) {
  * @param column La columna (número de carácter) en la que se detectó el error
  * @param foundChar El caracter no válido que se encontró después de la barra de escape
  */
-void invalidEscapedCharInsideString(int line, int column, char foundChar) {
-    printf(ANSI_COLOR_ERROR "[%d:%d] Invalid character '%c' after backslash inside string\n" ANSI_COLOR_RESET, line, column, foundChar);
+void invalidEscapedCharInsideString(int line, int column, char *string) {
+    printf(ANSI_COLOR_ERROR "[%d:%d] Invalid character after backslash inside string: %s\n" ANSI_COLOR_RESET, line, column, string);
 }
 
 /**
@@ -60,8 +60,8 @@ void emptyRune(int line, int column) {
  * @param column La columna (número de carácter) en la que se detectó el error
  * @param foundChar El caracter no válido que se encontró después de la barra de escape
  */
-void invalidEscapedCharInsideRune(int line, int column, char foundChar) {
-    printf(ANSI_COLOR_ERROR "[%d:%d] Invalid character '%c' after backslash inside rune\n" ANSI_COLOR_RESET, line, column, foundChar);
+void invalidEscapedCharInsideRune(int line, int column, char *rune) {
+    printf(ANSI_COLOR_ERROR "[%d:%d] Invalid character after backslash inside rune: %s\n" ANSI_COLOR_RESET, line, column, rune);
 }
 
 /**

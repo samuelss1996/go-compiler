@@ -11,6 +11,7 @@ int charCount(char* string, char character);
 
 IdLetter				[a-zA-Z_]
 Blank					[ \t\r]
+NewLine					{Blank}*\n
 
 SingleLineCommentStart	\/\/
 MultiLineCommentStart 	\/\*
@@ -46,12 +47,12 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 %%
 
 {IdLetter}({IdLetter}|[0-9])*							{column += yyleng; return findOrAdd(symbolsTable, yytext, TOKEN_IDENTIFIER);}
-\n 														{column = 0; yylineno++; return '\n';}
+{NewLine}+ 												{column = 0; yylineno += charCount(yytext, '\n'); return '\n';}
 {Blank}+												{column += yyleng;}
 
 {SingleLineCommentStart}.*								{column += yyleng;}
 "/*"([^*\n]|(\*+[^*/\n]))*\*+\/							{column += yyleng;}
-"/*"([^*]|(\*+[^*/]))*\*+\/								{column += yyleng; yylineno += charCount(yytext, '\n'); return '\n';}
+{NewLine}*("/*"([^*]|(\*+[^*/]))*\*+\/){NewLine}*		{column = 0; yylineno += charCount(yytext, '\n'); return '\n';}
 
 {DecimalLiteral}|{OctalLiteral}|{HexadecimalLiteral}	{column += yyleng; return TOKEN_INTEGER_LITERAL;}
 {FloatLit}												{column += yyleng; return TOKEN_FLOATING_POINT_LITERAL;}
@@ -111,10 +112,11 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 <<EOF>>													{column += yyleng; return EOF;}
 
 \"({StringUnicodeValue}|{ByteValue})* 					{column += yyleng; expectingEndOfString(yylineno, column); return yylex(symbolsTable);}
-\"[^\"\n]*\"											{column += yyleng; invalidEscapedCharInsideString(yylineno, column, yytext[yyleng - 1]); return yylex(symbolsTable);}
+\"[^\n]*\"												{column += yyleng; invalidEscapedCharInsideString(yylineno, column - yyleng + 1, yytext); return yylex(symbolsTable);}
 ''														{column += yyleng; emptyRune(yylineno, column); return yylex(symbolsTable);}
 '({RuneUnicodeValue}|{ByteValue})*						{column += yyleng; expectingEndOfRune(yylineno, column); return yylex(symbolsTable);}
 '({RuneUnicodeValue}|{ByteValue}){2,}'					{column += yyleng; multiCharacterRune(yylineno, column); return yylex(symbolsTable);}
+'[^\n]+'												{column += yyleng; invalidEscapedCharInsideRune(yylineno, column - yyleng + 1, yytext); return yylex(symbolsTable);}
 .														{column += yyleng; invalidSymbol(yylineno, column, *yytext); return yylex(symbolsTable);}
 
 %%

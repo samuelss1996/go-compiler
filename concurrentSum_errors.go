@@ -1,7 +1,7 @@
 @@package main /*
 */ a
 
-@import "fmt\o\'"
+@import "fmt\"\o\'"
 
 func sum(s []float32, c chan float32) {
         var sum float32 = 0
@@ -25,4 +25,4 @@ func main() {
 
         fmt@Println("Partial results and \"Total\" sum:);
         fmt@Println(i, j, i+j)
-}.1e+a '\"a'
+}.1e+a '\'\"a'

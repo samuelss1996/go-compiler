@@ -43,7 +43,13 @@ int findSymbol(SymbolsTable* symbolsTable, char *token) {
     return findHash(&(*symbolsTable)->hashTable, token);
 }
 
-// TODO document
+/**
+ * Consultar un símbolo en la tabla de śimbolos, si no existe, añadirlos
+ * @param symbolsTable La tabla de símbolos
+ * @param token La cadena de texto del símbolo a consultar
+ * @param id El identificador del símbolo. En caso de que no exista se insertará con este id
+ * @return El identificador del símbolo (el que ya estaba o el que se ha pasado)
+ */
 int findOrAdd(SymbolsTable* symbolsTable, char* token, int id) {
     int result = findSymbol(symbolsTable, token);
 
