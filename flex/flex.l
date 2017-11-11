@@ -1,5 +1,8 @@
 %{
 #include "../Definitions.h"
+#include "../symbols/SymbolsTable.h"
+
+#define YY_DECL int yylex(SymbolsTable* symbolsTable)
 %}
 
 IdLetter				[a-zA-Z_]
@@ -38,7 +41,7 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 
 %%
 
-{IdLetter}({IdLetter}|[0-9])*							{return TOKEN_IDENTIFIER;}
+{IdLetter}({IdLetter}|[0-9])*							{return findOrAdd(symbolsTable, yytext, TOKEN_IDENTIFIER);}
 \n 														{return '\n';}
 {Blank}+												{}
 

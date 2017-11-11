@@ -43,6 +43,18 @@ int findSymbol(SymbolsTable* symbolsTable, char *token) {
     return findHash(&(*symbolsTable)->hashTable, token);
 }
 
+// TODO document
+int findOrAdd(SymbolsTable* symbolsTable, char* token, int id) {
+    int result = findSymbol(symbolsTable, token);
+
+    if(result == TOKEN_NOT_FOUND) {
+        result = id;
+        addSymbol(symbolsTable, token, result);
+    }
+
+    return result;
+}
+
 /**
  * Destruye la tabla de símbolos, liberando todos los recursos
  * @param symbolsTable La tabla de śimbolos

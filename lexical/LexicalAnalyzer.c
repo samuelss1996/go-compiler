@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "../Definitions.h"
-#include "../util/HashTable.h"
 #include "../symbols/SymbolsTable.h"
 #include "LexicalComponent.h"
 #include "../flex/lex.yy.h"
@@ -9,7 +8,6 @@
 typedef struct {
     FILE* file;
     SymbolsTable symbolsTable;
-    HashTable operatorsTable;
 } LexicalAnalyzerStruct;
 
 typedef LexicalAnalyzerStruct* LexicalAnalyzer;
@@ -21,12 +19,11 @@ typedef LexicalAnalyzerStruct* LexicalAnalyzer;
  * @param symbolsTable  La tabla de símbolos a usar
  * @param operatorsTable La tabla de operadores a usar
  */
-void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, char* file, SymbolsTable symbolsTable, HashTable operatorsTable) {
+void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, char* file, SymbolsTable symbolsTable) {
     *lexicalAnalyzer = (LexicalAnalyzer) malloc(sizeof(LexicalAnalyzerStruct));
 
     (*lexicalAnalyzer)->file = fopen(file, "r");
     (*lexicalAnalyzer)->symbolsTable = symbolsTable;
-    (*lexicalAnalyzer)->operatorsTable = operatorsTable;
 
     yyset_in((*lexicalAnalyzer)->file);
 }
@@ -38,7 +35,7 @@ void createLexicalAnalyzer(LexicalAnalyzer *lexicalAnalyzer, char* file, Symbols
  */
 LexicalComponent nextLexicalComponent(LexicalAnalyzer* lexicalAnalyzer) {
     LexicalComponent result;
-    int tokenId = yylex();
+    int tokenId = yylex(&(*lexicalAnalyzer)->symbolsTable);
     char* tokenStr = yyget_text();
 
     createLexicalComponent(&result, tokenId, tokenStr);
