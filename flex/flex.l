@@ -3,6 +3,7 @@
 %}
 
 IdLetter				[a-zA-Z_]
+Blank					[ \t\r]
 
 SingleLineCommentStart	\/\/
 MultiLineCommentStart 	\/\*
@@ -37,70 +38,73 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 
 %%
 
-{IdLetter}({IdLetter}|[0-9])*							{printf("ID");}
+{IdLetter}({IdLetter}|[0-9])*							{return TOKEN_IDENTIFIER;}
+{Blank}+												{}
 
-"/*"([^*\n]|(\*+[^*/\n]))*\*+\/							{printf("TOKEN_COMMENT");}
-"/*"([^*]|(\*+[^*/]))*\*+\/								{printf("TOKEN_COMMENT\n");}
-{SingleLineCommentStart}.*								{printf("TOKEN_COMMENT");}
+{SingleLineCommentStart}.*								{}
+"/*"([^*\n]|(\*+[^*/\n]))*\*+\/							{}
+"/*"([^*]|(\*+[^*/]))*\*+\/								{return '\n';}
 
-{DecimalLiteral}|{OctalLiteral}|{HexadecimalLiteral}	{printf("I");}
-{FloatLit}												{printf("f");}
-({Decimals}|{FloatLit})i								{printf("i");}
+{DecimalLiteral}|{OctalLiteral}|{HexadecimalLiteral}	{return TOKEN_INTEGER_LITERAL;}
+{FloatLit}												{return TOKEN_FLOATING_POINT_LITERAL;}
+({Decimals}|{FloatLit})i								{return TOKEN_IMAGINARY_LITERAL;}
 
-'({RuneUnicodeValue}|{ByteValue})'						{printf("TOKEN_RUNE_LITERAL");}
-{RawStringLiteral}|{InterStringLiteral}					{printf("TOKEN_STRING_LITERAL");}
+'({RuneUnicodeValue}|{ByteValue})'						{return TOKEN_RUNE_LITERAL;}
+{RawStringLiteral}|{InterStringLiteral}					{return TOKEN_STRING_LITERAL;}
 
-"+" 													{printf("PUNCTUATION_ADD");}
-"&" 													{printf("PUNCTUATION_BITWISE_AND");}
-"+=" 													{printf("PUNCTUATION_ADD_EQUALS");}
-"&=" 													{printf("PUNCTUATION_AND_EQUALS");}
-"&&" 													{printf("PUNCTUATION_AND");}
-"==" 													{printf("PUNCTUATION_IS_EQUAL");}
-"!=" 													{printf("PUNCTUATION_NOT_EQUALS");}
-"(" 													{printf("PUNCTUATION_LEFT_PARENTHESES");}
-")" 													{printf("PUNCTUATION_RIGHT_PARENTHESES");}
-"-" 													{printf("PUNCTUATION_MINUS");}
-"|" 													{printf("PUNCTUATION_BITWISE_OR");}
-"-=" 													{printf("PUNCTUATION_MINUS_EQUALS");}
-"|=" 													{printf("PUNCTUATION_OR_EQUALS");}
-"||" 													{printf("PUNCTUATION_OR");}
-"<" 													{printf("PUNCTUATION_LOWER");}
-"<=" 													{printf("PUNCTUATION_LOWER_EQUALS");}
-"[" 													{printf("PUNCTUATION_LEFT_BRACKET");}
-"]" 													{printf("PUNCTUATION_RIGHT_BRACKET");}
-"*" 													{printf("PUNCTUATION_START");}
-"^" 													{printf("PUNCTUATION_BITWISE_XOR");}
-"*=" 													{printf("PUNCTUATION_STAR_EQUALS");}
-"^=" 													{printf("PUNCTUATION_XOR_EQUALS");}
-"<-" 													{printf("PUNCTUATION_RECEIVE");}
-">" 													{printf("PUNCTUATION_GREATER");}
-">=" 													{printf("PUNCTUATION_GREATER_EQUALS");}
-"{" 													{printf("PUNCTUATION_LEFT_BRACE");}
-"}" 													{printf("PUNCTUATION_RIGHT_BRACE");}
-"/" 													{printf("PUNCTUATION_SLASH");}
-"<<" 													{printf("PUNCTUATION_LEFT_SHIFT");}
-"/=" 													{printf("PUNCTUATION_SLASH_EQUALS");}
-"<<=" 													{printf("PUNCTUATION_LEFT_SHIFT_EQUALS");}
-"++" 													{printf("PUNCTUATION_INCREMENT");}
-"=" 													{printf("PUNCTUATION_ASSIGN");}
-":=" 													{printf("PUNCTUATION_SPECIAL_ASSIGN");}
-"," 													{printf("PUNCTUATION_COMMA");}
-";" 													{printf("PUNCTUATION_SEMICOLON");}
-"%" 													{printf("PUNCTUATION_MODULUS");}
-">>" 													{printf("PUNCTUATION_RIGHT_SHIFT");}
-"%=" 													{printf("PUNCTUATION_MODULUS_EQUALS");}
-">>=" 													{printf("PUNCTUATION_RIGHT_SHIFT_EQUALS");}
-"--" 													{printf("PUNCTUATION_DECREMENT");}
-"!" 													{printf("PUNCTUATION_NOT");}
-"..." 													{printf("PUNCTUATION_ELLIPSIS");}
-"." 													{printf("PUNCTUATION_DOT");}
-":" 													{printf("PUNCTUATION_COLON");}
-"&^" 													{printf("PUNCTUATION_AND_XOR");}
-"&^=" 													{printf("PUNCTUATION_AND_XOR_EQUALS");}
+"+" 													{return PUNCTUATION_ADD;}
+"&" 													{return PUNCTUATION_BITWISE_AND;}
+"+=" 													{return PUNCTUATION_ADD_EQUALS;}
+"&=" 													{return PUNCTUATION_AND_EQUALS;}
+"&&" 													{return PUNCTUATION_AND;}
+"==" 													{return PUNCTUATION_IS_EQUAL;}
+"!=" 													{return PUNCTUATION_NOT_EQUALS;}
+"(" 													{return PUNCTUATION_LEFT_PARENTHESES;}
+")" 													{return PUNCTUATION_RIGHT_PARENTHESES;}
+"-" 													{return PUNCTUATION_MINUS;}
+"|" 													{return PUNCTUATION_BITWISE_OR;}
+"-=" 													{return PUNCTUATION_MINUS_EQUALS;}
+"|=" 													{return PUNCTUATION_OR_EQUALS;}
+"||" 													{return PUNCTUATION_OR;}
+"<" 													{return PUNCTUATION_LOWER;}
+"<=" 													{return PUNCTUATION_LOWER_EQUALS;}
+"[" 													{return PUNCTUATION_LEFT_BRACKET;}
+"]" 													{return PUNCTUATION_RIGHT_BRACKET;}
+"*" 													{return PUNCTUATION_START;}
+"^" 													{return PUNCTUATION_BITWISE_XOR;}
+"*=" 													{return PUNCTUATION_STAR_EQUALS;}
+"^=" 													{return PUNCTUATION_XOR_EQUALS;}
+"<-" 													{return PUNCTUATION_RECEIVE;}
+">" 													{return PUNCTUATION_GREATER;}
+">=" 													{return PUNCTUATION_GREATER_EQUALS;}
+"{" 													{return PUNCTUATION_LEFT_BRACE;}
+"}" 													{return PUNCTUATION_RIGHT_BRACE;}
+"/" 													{return PUNCTUATION_SLASH;}
+"<<" 													{return PUNCTUATION_LEFT_SHIFT;}
+"/=" 													{return PUNCTUATION_SLASH_EQUALS;}
+"<<=" 													{return PUNCTUATION_LEFT_SHIFT_EQUALS;}
+"++" 													{return PUNCTUATION_INCREMENT;}
+"=" 													{return PUNCTUATION_ASSIGN;}
+":=" 													{return PUNCTUATION_SPECIAL_ASSIGN;}
+"," 													{return PUNCTUATION_COMMA;}
+";" 													{return PUNCTUATION_SEMICOLON;}
+"%" 													{return PUNCTUATION_MODULUS;}
+">>" 													{return PUNCTUATION_RIGHT_SHIFT;}
+"%=" 													{return PUNCTUATION_MODULUS_EQUALS;}
+">>=" 													{return PUNCTUATION_RIGHT_SHIFT_EQUALS;}
+"--" 													{return PUNCTUATION_DECREMENT;}
+"!" 													{return PUNCTUATION_NOT;}
+"..." 													{return PUNCTUATION_ELLIPSIS;}
+"." 													{return PUNCTUATION_DOT;}
+":" 													{return PUNCTUATION_COLON;}
+"&^" 													{return PUNCTUATION_AND_XOR;}
+"&^=" 													{return PUNCTUATION_AND_XOR_EQUALS;}
+
+<<EOF>>													{return EOF;}
 
 %%
 
-int main(int argc, char *argv[]) {
+/*int main(int argc, char *argv[]) {
     if(argc == 2) {
 		yyin = fopen(argv[1], "r");
 	    yylex();
@@ -108,4 +112,4 @@ int main(int argc, char *argv[]) {
     } else {
     	printf("Usage: %s fileToBeProcessed\n", argv[0]);
     }
-}
+}*/

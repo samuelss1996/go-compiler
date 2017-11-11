@@ -14,6 +14,9 @@
 # EXTERNAL cache entries
 ########################
 
+//path to the bison executable
+BISON_EXECUTABLE:FILEPATH=BISON_EXECUTABLE-NOTFOUND
+
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
@@ -172,6 +175,15 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//path to the flex executable
+FLEX_EXECUTABLE:FILEPATH=/usr/bin/flex
+
+//Path to the flex headers
+FLEX_INCLUDE_DIR:PATH=/usr/include
+
+//Path to the fl library
+FL_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libfl.so
+
 //Value Computed by CMake
 GoCompiler_BINARY_DIR:STATIC=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug
 
@@ -184,11 +196,22 @@ ProcessorCount_cmd_getconf:FILEPATH=/usr/bin/getconf
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/sbin/sysctl
 
+//Value Computed by CMake
+calc_BINARY_DIR:STATIC=/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug
+
+//Dependencies for target
+calc_LIB_DEPENDS:STATIC=
+
+//Value Computed by CMake
+calc_SOURCE_DIR:STATIC=/mnt/c/Users/Ada/GitHub/GoCompiler
+
 
 ########################
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: BISON_EXECUTABLE
+BISON_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //This is the directory where this CMakeCache.txt was created
@@ -324,6 +347,14 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding FLEX
+FIND_PACKAGE_MESSAGE_DETAILS_FLEX:INTERNAL=[/usr/bin/flex][v2.6.0()]
+//ADVANCED property for variable: FLEX_EXECUTABLE
+FLEX_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FLEX_INCLUDE_DIR
+FLEX_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FL_LIBRARY
+FL_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_getconf
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl

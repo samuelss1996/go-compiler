@@ -18,6 +18,24 @@ stdio.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
 
+/mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.c
+stdio.h
+-
+string.h
+-
+errno.h
+-
+stdlib.h
+-
+inttypes.h
+-
+../Definitions.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
+unistd.h
+-
+
+/mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h
+
 /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.c
 stdlib.h
 -
@@ -105,6 +123,8 @@ string.h
 -
 ../lexical/LexicalAnalyzer.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
+../flex/lex.yy.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h
 
 /mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h
 ../lexical/LexicalAnalyzer.h

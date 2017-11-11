@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="GoCompiler"/>
+		<Option title="calc"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;"/>
@@ -37,11 +37,11 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="GoCompiler">
-				<Option output="/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/GoCompiler" prefix_auto="0" extension_auto="0"/>
+			<Target title="calc">
+				<Option output="/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/libcalc.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug"/>
 				<Option object_output="./"/>
-				<Option type="1"/>
+				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/usr/include/c++/5"/>
@@ -54,17 +54,17 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 GoCompiler"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 calc"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="GoCompiler/fast">
-				<Option output="/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/GoCompiler" prefix_auto="0" extension_auto="0"/>
+			<Target title="calc/fast">
+				<Option output="/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/libcalc.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug"/>
 				<Option object_output="./"/>
-				<Option type="1"/>
+				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/usr/include/c++/5"/>
@@ -77,96 +77,18 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 GoCompiler/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 calc/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/Users/Ada/GitHub/GoCompiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h">
-			<Option target="GoCompiler"/>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/scanner.c">
+			<Option target="calc"/>
 		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/main.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/syntactic/SyntacticAnalyzer.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestHashTable.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestInputSystem.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestRunner.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/test/TestUtils.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.c">
-			<Option target="GoCompiler"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/util/LinkedList.h">
-			<Option target="GoCompiler"/>
+		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/scanner.c.rule">
+			<Option target="calc"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Ada/GitHub/GoCompiler/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

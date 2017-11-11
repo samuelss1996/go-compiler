@@ -4,6 +4,9 @@
 CMakeFiles/GoCompiler.dir/errors/Errors.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/errors/Errors.c.o: ../errors/Errors.c
 
+CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o: ../Definitions.h
+CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o: ../flex/lex.yy.c
+
 CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../errors/Errors.h
 CMakeFiles/GoCompiler.dir/input/InputSystem.c.o: ../input/InputSystem.c
@@ -36,6 +39,7 @@ CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../symbols/SymbolsTable.c
 CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o: ../util/HashTable.h
 
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../Definitions.h
+CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../flex/lex.yy.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../input/InputSystem.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../lexical/LexicalAnalyzer.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o: ../lexical/LexicalComponent.h

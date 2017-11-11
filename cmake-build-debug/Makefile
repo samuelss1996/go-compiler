@@ -150,6 +150,33 @@ errors/Errors.c.s:
 	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/errors/Errors.c.s
 .PHONY : errors/Errors.c.s
 
+flex/lex.yy.o: flex/lex.yy.c.o
+
+.PHONY : flex/lex.yy.o
+
+# target to build an object file
+flex/lex.yy.c.o:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o
+.PHONY : flex/lex.yy.c.o
+
+flex/lex.yy.i: flex/lex.yy.c.i
+
+.PHONY : flex/lex.yy.i
+
+# target to preprocess a source file
+flex/lex.yy.c.i:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/flex/lex.yy.c.i
+.PHONY : flex/lex.yy.c.i
+
+flex/lex.yy.s: flex/lex.yy.c.s
+
+.PHONY : flex/lex.yy.s
+
+# target to generate assembly for a file
+flex/lex.yy.c.s:
+	$(MAKE) -f CMakeFiles/GoCompiler.dir/build.make CMakeFiles/GoCompiler.dir/flex/lex.yy.c.s
+.PHONY : flex/lex.yy.c.s
+
 input/InputSystem.o: input/InputSystem.c.o
 
 .PHONY : input/InputSystem.o
@@ -486,6 +513,9 @@ help:
 	@echo "... errors/Errors.o"
 	@echo "... errors/Errors.i"
 	@echo "... errors/Errors.s"
+	@echo "... flex/lex.yy.o"
+	@echo "... flex/lex.yy.i"
+	@echo "... flex/lex.yy.s"
 	@echo "... input/InputSystem.o"
 	@echo "... input/InputSystem.i"
 	@echo "... input/InputSystem.s"

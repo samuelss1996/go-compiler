@@ -4,6 +4,9 @@
 CMakeFiles/GoCompiler.dir/errors/Errors.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.c
+CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o
+ /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.c
 CMakeFiles/GoCompiler.dir/input/InputSystem.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
@@ -37,6 +40,7 @@ CMakeFiles/GoCompiler.dir/symbols/SymbolsTable.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/util/HashTable.h
 CMakeFiles/GoCompiler.dir/syntactic/SyntacticAnalyzer.c.o
  /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
+ /mnt/c/Users/Ada/GitHub/GoCompiler/flex/lex.yy.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/input/InputSystem.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalAnalyzer.h
  /mnt/c/Users/Ada/GitHub/GoCompiler/lexical/LexicalComponent.h
