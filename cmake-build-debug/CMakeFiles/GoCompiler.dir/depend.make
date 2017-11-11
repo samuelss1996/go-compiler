@@ -5,6 +5,7 @@ CMakeFiles/GoCompiler.dir/errors/Errors.c.o: ../Definitions.h
 CMakeFiles/GoCompiler.dir/errors/Errors.c.o: ../errors/Errors.c
 
 CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o: ../Definitions.h
+CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o: ../errors/Errors.h
 CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o: ../flex/lex.yy.c
 CMakeFiles/GoCompiler.dir/flex/lex.yy.c.o: ../symbols/SymbolsTable.h
 

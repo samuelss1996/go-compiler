@@ -375,8 +375,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 59
-#define YY_END_OF_BUFFER 60
+#define YY_NUM_RULES 60
+#define YY_END_OF_BUFFER 61
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -386,7 +386,7 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[134] =
     {   0,
-        0,    0,   60,   59,    3,    2,   53,   59,   48,   13,
+        0,    0,   61,   59,    3,    2,   53,   59,   48,   13,
        59,   19,   20,   30,   12,   46,   21,   55,   39,    7,
         7,   56,   47,   26,   44,   35,    1,   28,   29,   31,
        59,   37,   22,   38,    3,   18,    0,   11,    0,   50,
@@ -588,9 +588,13 @@ char *yytext;
 #line 2 "flex.l"
 #include "../Definitions.h"
 #include "../symbols/SymbolsTable.h"
+#include "../errors/Errors.h"
 
 #define YY_DECL int yylex(SymbolsTable* symbolsTable)
-#line 594 "lex.yy.c"
+
+int column = 0;
+int charCount(char* string, char character);
+#line 598 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -808,10 +812,10 @@ YY_DECL
 		}
 
 	{
-#line 42 "flex.l"
+#line 46 "flex.l"
 
 
-#line 815 "lex.yy.c"
+#line 819 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -870,307 +874,312 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 44 "flex.l"
-{return findOrAdd(symbolsTable, yytext, TOKEN_IDENTIFIER);}
+#line 48 "flex.l"
+{column += yyleng; return findOrAdd(symbolsTable, yytext, TOKEN_IDENTIFIER);}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 45 "flex.l"
-{return '\n';}
+#line 49 "flex.l"
+{column = 0; yylineno++; return '\n';}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 46 "flex.l"
-{}
+#line 50 "flex.l"
+{column += yyleng;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 48 "flex.l"
-{}
+#line 52 "flex.l"
+{column += yyleng;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 49 "flex.l"
-{}
+#line 53 "flex.l"
+{column += yyleng;}
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 50 "flex.l"
-{return '\n';}
+#line 54 "flex.l"
+{column += yyleng; yylineno += charCount(yytext, '\n'); return '\n';}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 52 "flex.l"
-{return TOKEN_INTEGER_LITERAL;}
+#line 56 "flex.l"
+{column += yyleng; return TOKEN_INTEGER_LITERAL;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 53 "flex.l"
-{return TOKEN_FLOATING_POINT_LITERAL;}
+#line 57 "flex.l"
+{column += yyleng; return TOKEN_FLOATING_POINT_LITERAL;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 54 "flex.l"
-{return TOKEN_IMAGINARY_LITERAL;}
+#line 58 "flex.l"
+{column += yyleng; return TOKEN_IMAGINARY_LITERAL;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 56 "flex.l"
-{return TOKEN_RUNE_LITERAL;}
+#line 60 "flex.l"
+{column += yyleng; return TOKEN_RUNE_LITERAL;}
 	YY_BREAK
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 57 "flex.l"
-{return TOKEN_STRING_LITERAL;}
+#line 61 "flex.l"
+{column += yyleng; return TOKEN_STRING_LITERAL;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 59 "flex.l"
-{return PUNCTUATION_ADD;}
+#line 63 "flex.l"
+{column += yyleng; return PUNCTUATION_ADD;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 60 "flex.l"
-{return PUNCTUATION_BITWISE_AND;}
+#line 64 "flex.l"
+{column += yyleng; return PUNCTUATION_BITWISE_AND;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 61 "flex.l"
-{return PUNCTUATION_ADD_EQUALS;}
+#line 65 "flex.l"
+{column += yyleng; return PUNCTUATION_ADD_EQUALS;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 62 "flex.l"
-{return PUNCTUATION_AND_EQUALS;}
+#line 66 "flex.l"
+{column += yyleng; return PUNCTUATION_AND_EQUALS;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 63 "flex.l"
-{return PUNCTUATION_AND;}
+#line 67 "flex.l"
+{column += yyleng; return PUNCTUATION_AND;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 64 "flex.l"
-{return PUNCTUATION_IS_EQUAL;}
+#line 68 "flex.l"
+{column += yyleng; return PUNCTUATION_IS_EQUAL;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 65 "flex.l"
-{return PUNCTUATION_NOT_EQUALS;}
+#line 69 "flex.l"
+{column += yyleng; return PUNCTUATION_NOT_EQUALS;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 66 "flex.l"
-{return PUNCTUATION_LEFT_PARENTHESES;}
+#line 70 "flex.l"
+{column += yyleng; return PUNCTUATION_LEFT_PARENTHESES;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 67 "flex.l"
-{return PUNCTUATION_RIGHT_PARENTHESES;}
+#line 71 "flex.l"
+{column += yyleng; return PUNCTUATION_RIGHT_PARENTHESES;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 68 "flex.l"
-{return PUNCTUATION_MINUS;}
+#line 72 "flex.l"
+{column += yyleng; return PUNCTUATION_MINUS;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 69 "flex.l"
-{return PUNCTUATION_BITWISE_OR;}
+#line 73 "flex.l"
+{column += yyleng; return PUNCTUATION_BITWISE_OR;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 70 "flex.l"
-{return PUNCTUATION_MINUS_EQUALS;}
+#line 74 "flex.l"
+{column += yyleng; return PUNCTUATION_MINUS_EQUALS;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 71 "flex.l"
-{return PUNCTUATION_OR_EQUALS;}
+#line 75 "flex.l"
+{column += yyleng; return PUNCTUATION_OR_EQUALS;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 72 "flex.l"
-{return PUNCTUATION_OR;}
+#line 76 "flex.l"
+{column += yyleng; return PUNCTUATION_OR;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 73 "flex.l"
-{return PUNCTUATION_LOWER;}
+#line 77 "flex.l"
+{column += yyleng; return PUNCTUATION_LOWER;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 74 "flex.l"
-{return PUNCTUATION_LOWER_EQUALS;}
+#line 78 "flex.l"
+{column += yyleng; return PUNCTUATION_LOWER_EQUALS;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 75 "flex.l"
-{return PUNCTUATION_LEFT_BRACKET;}
+#line 79 "flex.l"
+{column += yyleng; return PUNCTUATION_LEFT_BRACKET;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 76 "flex.l"
-{return PUNCTUATION_RIGHT_BRACKET;}
+#line 80 "flex.l"
+{column += yyleng; return PUNCTUATION_RIGHT_BRACKET;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 77 "flex.l"
-{return PUNCTUATION_START;}
+#line 81 "flex.l"
+{column += yyleng; return PUNCTUATION_START;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 78 "flex.l"
-{return PUNCTUATION_BITWISE_XOR;}
+#line 82 "flex.l"
+{column += yyleng; return PUNCTUATION_BITWISE_XOR;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 79 "flex.l"
-{return PUNCTUATION_STAR_EQUALS;}
+#line 83 "flex.l"
+{column += yyleng; return PUNCTUATION_STAR_EQUALS;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 80 "flex.l"
-{return PUNCTUATION_XOR_EQUALS;}
+#line 84 "flex.l"
+{column += yyleng; return PUNCTUATION_XOR_EQUALS;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 81 "flex.l"
-{return PUNCTUATION_RECEIVE;}
+#line 85 "flex.l"
+{column += yyleng; return PUNCTUATION_RECEIVE;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 82 "flex.l"
-{return PUNCTUATION_GREATER;}
+#line 86 "flex.l"
+{column += yyleng; return PUNCTUATION_GREATER;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 83 "flex.l"
-{return PUNCTUATION_GREATER_EQUALS;}
+#line 87 "flex.l"
+{column += yyleng; return PUNCTUATION_GREATER_EQUALS;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 84 "flex.l"
-{return PUNCTUATION_LEFT_BRACE;}
+#line 88 "flex.l"
+{column += yyleng; return PUNCTUATION_LEFT_BRACE;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 85 "flex.l"
-{return PUNCTUATION_RIGHT_BRACE;}
+#line 89 "flex.l"
+{column += yyleng; return PUNCTUATION_RIGHT_BRACE;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 86 "flex.l"
-{return PUNCTUATION_SLASH;}
+#line 90 "flex.l"
+{column += yyleng; return PUNCTUATION_SLASH;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 87 "flex.l"
-{return PUNCTUATION_LEFT_SHIFT;}
+#line 91 "flex.l"
+{column += yyleng; return PUNCTUATION_LEFT_SHIFT;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 88 "flex.l"
-{return PUNCTUATION_SLASH_EQUALS;}
+#line 92 "flex.l"
+{column += yyleng; return PUNCTUATION_SLASH_EQUALS;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 89 "flex.l"
-{return PUNCTUATION_LEFT_SHIFT_EQUALS;}
+#line 93 "flex.l"
+{column += yyleng; return PUNCTUATION_LEFT_SHIFT_EQUALS;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 90 "flex.l"
-{return PUNCTUATION_INCREMENT;}
+#line 94 "flex.l"
+{column += yyleng; return PUNCTUATION_INCREMENT;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 91 "flex.l"
-{return PUNCTUATION_ASSIGN;}
+#line 95 "flex.l"
+{column += yyleng; return PUNCTUATION_ASSIGN;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 92 "flex.l"
-{return PUNCTUATION_SPECIAL_ASSIGN;}
+#line 96 "flex.l"
+{column += yyleng; return PUNCTUATION_SPECIAL_ASSIGN;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 93 "flex.l"
-{return PUNCTUATION_COMMA;}
+#line 97 "flex.l"
+{column += yyleng; return PUNCTUATION_COMMA;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 94 "flex.l"
-{return PUNCTUATION_SEMICOLON;}
+#line 98 "flex.l"
+{column += yyleng; return PUNCTUATION_SEMICOLON;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 95 "flex.l"
-{return PUNCTUATION_MODULUS;}
+#line 99 "flex.l"
+{column += yyleng; return PUNCTUATION_MODULUS;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 96 "flex.l"
-{return PUNCTUATION_RIGHT_SHIFT;}
+#line 100 "flex.l"
+{column += yyleng; return PUNCTUATION_RIGHT_SHIFT;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 97 "flex.l"
-{return PUNCTUATION_MODULUS_EQUALS;}
+#line 101 "flex.l"
+{column += yyleng; return PUNCTUATION_MODULUS_EQUALS;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 98 "flex.l"
-{return PUNCTUATION_RIGHT_SHIFT_EQUALS;}
+#line 102 "flex.l"
+{column += yyleng; return PUNCTUATION_RIGHT_SHIFT_EQUALS;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 99 "flex.l"
-{return PUNCTUATION_DECREMENT;}
+#line 103 "flex.l"
+{column += yyleng; return PUNCTUATION_DECREMENT;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 100 "flex.l"
-{return PUNCTUATION_NOT;}
+#line 104 "flex.l"
+{column += yyleng; return PUNCTUATION_NOT;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 101 "flex.l"
-{return PUNCTUATION_ELLIPSIS;}
+#line 105 "flex.l"
+{column += yyleng; return PUNCTUATION_ELLIPSIS;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 102 "flex.l"
-{return PUNCTUATION_DOT;}
+#line 106 "flex.l"
+{column += yyleng; return PUNCTUATION_DOT;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 103 "flex.l"
-{return PUNCTUATION_COLON;}
+#line 107 "flex.l"
+{column += yyleng; return PUNCTUATION_COLON;}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 104 "flex.l"
-{return PUNCTUATION_AND_XOR;}
+#line 108 "flex.l"
+{column += yyleng; return PUNCTUATION_AND_XOR;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 105 "flex.l"
-{return PUNCTUATION_AND_XOR_EQUALS;}
+#line 109 "flex.l"
+{column += yyleng; return PUNCTUATION_AND_XOR_EQUALS;}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 107 "flex.l"
-{return EOF;}
+#line 111 "flex.l"
+{column += yyleng; return EOF;}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 109 "flex.l"
+#line 113 "flex.l"
+{column += yyleng; invalidSymbol(yylineno, column, *yytext); return yylex(symbolsTable);}
+	YY_BREAK
+case 60:
+YY_RULE_SETUP
+#line 115 "flex.l"
 ECHO;
 	YY_BREAK
-#line 1174 "lex.yy.c"
+#line 1183 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2169,9 +2178,22 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 109 "flex.l"
+#line 115 "flex.l"
 
 
+
+int charCount(char* string, char character) {
+	int result = 0;
+	char *pointer;
+
+	for(pointer = string; *pointer != '\0'; pointer++) {
+		if(*pointer == character) {
+			result++;
+		}
+	}
+
+	return result;
+}
 
 /*int main(int argc, char *argv[]) {
     if(argc == 2) {

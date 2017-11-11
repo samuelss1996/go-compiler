@@ -33,6 +33,8 @@ inttypes.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/Definitions.h
 ../symbols/SymbolsTable.h
 /mnt/c/Users/Ada/GitHub/GoCompiler/symbols/SymbolsTable.h
+../errors/Errors.h
+/mnt/c/Users/Ada/GitHub/GoCompiler/errors/Errors.h
 unistd.h
 -
 

@@ -1,8 +1,12 @@
 %{
 #include "../Definitions.h"
 #include "../symbols/SymbolsTable.h"
+#include "../errors/Errors.h"
 
 #define YY_DECL int yylex(SymbolsTable* symbolsTable)
+
+int column = 0;
+int charCount(char* string, char character);
 %}
 
 IdLetter				[a-zA-Z_]
@@ -41,72 +45,87 @@ InterStringLiteral		\"({StringUnicodeValue}|{ByteValue})*\"
 
 %%
 
-{IdLetter}({IdLetter}|[0-9])*							{return findOrAdd(symbolsTable, yytext, TOKEN_IDENTIFIER);}
-\n 														{return '\n';}
-{Blank}+												{}
+{IdLetter}({IdLetter}|[0-9])*							{column += yyleng; return findOrAdd(symbolsTable, yytext, TOKEN_IDENTIFIER);}
+\n 														{column = 0; yylineno++; return '\n';}
+{Blank}+												{column += yyleng;}
 
-{SingleLineCommentStart}.*								{}
-"/*"([^*\n]|(\*+[^*/\n]))*\*+\/							{}
-"/*"([^*]|(\*+[^*/]))*\*+\/								{return '\n';}
+{SingleLineCommentStart}.*								{column += yyleng;}
+"/*"([^*\n]|(\*+[^*/\n]))*\*+\/							{column += yyleng;}
+"/*"([^*]|(\*+[^*/]))*\*+\/								{column += yyleng; yylineno += charCount(yytext, '\n'); return '\n';}
 
-{DecimalLiteral}|{OctalLiteral}|{HexadecimalLiteral}	{return TOKEN_INTEGER_LITERAL;}
-{FloatLit}												{return TOKEN_FLOATING_POINT_LITERAL;}
-({Decimals}|{FloatLit})i								{return TOKEN_IMAGINARY_LITERAL;}
+{DecimalLiteral}|{OctalLiteral}|{HexadecimalLiteral}	{column += yyleng; return TOKEN_INTEGER_LITERAL;}
+{FloatLit}												{column += yyleng; return TOKEN_FLOATING_POINT_LITERAL;}
+({Decimals}|{FloatLit})i								{column += yyleng; return TOKEN_IMAGINARY_LITERAL;}
 
-'({RuneUnicodeValue}|{ByteValue})'						{return TOKEN_RUNE_LITERAL;}
-{RawStringLiteral}|{InterStringLiteral}					{return TOKEN_STRING_LITERAL;}
+'({RuneUnicodeValue}|{ByteValue})'						{column += yyleng; return TOKEN_RUNE_LITERAL;}
+{RawStringLiteral}|{InterStringLiteral}					{column += yyleng; return TOKEN_STRING_LITERAL;}
 
-"+" 													{return PUNCTUATION_ADD;}
-"&" 													{return PUNCTUATION_BITWISE_AND;}
-"+=" 													{return PUNCTUATION_ADD_EQUALS;}
-"&=" 													{return PUNCTUATION_AND_EQUALS;}
-"&&" 													{return PUNCTUATION_AND;}
-"==" 													{return PUNCTUATION_IS_EQUAL;}
-"!=" 													{return PUNCTUATION_NOT_EQUALS;}
-"(" 													{return PUNCTUATION_LEFT_PARENTHESES;}
-")" 													{return PUNCTUATION_RIGHT_PARENTHESES;}
-"-" 													{return PUNCTUATION_MINUS;}
-"|" 													{return PUNCTUATION_BITWISE_OR;}
-"-=" 													{return PUNCTUATION_MINUS_EQUALS;}
-"|=" 													{return PUNCTUATION_OR_EQUALS;}
-"||" 													{return PUNCTUATION_OR;}
-"<" 													{return PUNCTUATION_LOWER;}
-"<=" 													{return PUNCTUATION_LOWER_EQUALS;}
-"[" 													{return PUNCTUATION_LEFT_BRACKET;}
-"]" 													{return PUNCTUATION_RIGHT_BRACKET;}
-"*" 													{return PUNCTUATION_START;}
-"^" 													{return PUNCTUATION_BITWISE_XOR;}
-"*=" 													{return PUNCTUATION_STAR_EQUALS;}
-"^=" 													{return PUNCTUATION_XOR_EQUALS;}
-"<-" 													{return PUNCTUATION_RECEIVE;}
-">" 													{return PUNCTUATION_GREATER;}
-">=" 													{return PUNCTUATION_GREATER_EQUALS;}
-"{" 													{return PUNCTUATION_LEFT_BRACE;}
-"}" 													{return PUNCTUATION_RIGHT_BRACE;}
-"/" 													{return PUNCTUATION_SLASH;}
-"<<" 													{return PUNCTUATION_LEFT_SHIFT;}
-"/=" 													{return PUNCTUATION_SLASH_EQUALS;}
-"<<=" 													{return PUNCTUATION_LEFT_SHIFT_EQUALS;}
-"++" 													{return PUNCTUATION_INCREMENT;}
-"=" 													{return PUNCTUATION_ASSIGN;}
-":=" 													{return PUNCTUATION_SPECIAL_ASSIGN;}
-"," 													{return PUNCTUATION_COMMA;}
-";" 													{return PUNCTUATION_SEMICOLON;}
-"%" 													{return PUNCTUATION_MODULUS;}
-">>" 													{return PUNCTUATION_RIGHT_SHIFT;}
-"%=" 													{return PUNCTUATION_MODULUS_EQUALS;}
-">>=" 													{return PUNCTUATION_RIGHT_SHIFT_EQUALS;}
-"--" 													{return PUNCTUATION_DECREMENT;}
-"!" 													{return PUNCTUATION_NOT;}
-"..." 													{return PUNCTUATION_ELLIPSIS;}
-"." 													{return PUNCTUATION_DOT;}
-":" 													{return PUNCTUATION_COLON;}
-"&^" 													{return PUNCTUATION_AND_XOR;}
-"&^=" 													{return PUNCTUATION_AND_XOR_EQUALS;}
+"+" 													{column += yyleng; return PUNCTUATION_ADD;}
+"&" 													{column += yyleng; return PUNCTUATION_BITWISE_AND;}
+"+=" 													{column += yyleng; return PUNCTUATION_ADD_EQUALS;}
+"&=" 													{column += yyleng; return PUNCTUATION_AND_EQUALS;}
+"&&" 													{column += yyleng; return PUNCTUATION_AND;}
+"==" 													{column += yyleng; return PUNCTUATION_IS_EQUAL;}
+"!=" 													{column += yyleng; return PUNCTUATION_NOT_EQUALS;}
+"(" 													{column += yyleng; return PUNCTUATION_LEFT_PARENTHESES;}
+")" 													{column += yyleng; return PUNCTUATION_RIGHT_PARENTHESES;}
+"-" 													{column += yyleng; return PUNCTUATION_MINUS;}
+"|" 													{column += yyleng; return PUNCTUATION_BITWISE_OR;}
+"-=" 													{column += yyleng; return PUNCTUATION_MINUS_EQUALS;}
+"|=" 													{column += yyleng; return PUNCTUATION_OR_EQUALS;}
+"||" 													{column += yyleng; return PUNCTUATION_OR;}
+"<" 													{column += yyleng; return PUNCTUATION_LOWER;}
+"<=" 													{column += yyleng; return PUNCTUATION_LOWER_EQUALS;}
+"[" 													{column += yyleng; return PUNCTUATION_LEFT_BRACKET;}
+"]" 													{column += yyleng; return PUNCTUATION_RIGHT_BRACKET;}
+"*" 													{column += yyleng; return PUNCTUATION_START;}
+"^" 													{column += yyleng; return PUNCTUATION_BITWISE_XOR;}
+"*=" 													{column += yyleng; return PUNCTUATION_STAR_EQUALS;}
+"^=" 													{column += yyleng; return PUNCTUATION_XOR_EQUALS;}
+"<-" 													{column += yyleng; return PUNCTUATION_RECEIVE;}
+">" 													{column += yyleng; return PUNCTUATION_GREATER;}
+">=" 													{column += yyleng; return PUNCTUATION_GREATER_EQUALS;}
+"{" 													{column += yyleng; return PUNCTUATION_LEFT_BRACE;}
+"}" 													{column += yyleng; return PUNCTUATION_RIGHT_BRACE;}
+"/" 													{column += yyleng; return PUNCTUATION_SLASH;}
+"<<" 													{column += yyleng; return PUNCTUATION_LEFT_SHIFT;}
+"/=" 													{column += yyleng; return PUNCTUATION_SLASH_EQUALS;}
+"<<=" 													{column += yyleng; return PUNCTUATION_LEFT_SHIFT_EQUALS;}
+"++" 													{column += yyleng; return PUNCTUATION_INCREMENT;}
+"=" 													{column += yyleng; return PUNCTUATION_ASSIGN;}
+":=" 													{column += yyleng; return PUNCTUATION_SPECIAL_ASSIGN;}
+"," 													{column += yyleng; return PUNCTUATION_COMMA;}
+";" 													{column += yyleng; return PUNCTUATION_SEMICOLON;}
+"%" 													{column += yyleng; return PUNCTUATION_MODULUS;}
+">>" 													{column += yyleng; return PUNCTUATION_RIGHT_SHIFT;}
+"%=" 													{column += yyleng; return PUNCTUATION_MODULUS_EQUALS;}
+">>=" 													{column += yyleng; return PUNCTUATION_RIGHT_SHIFT_EQUALS;}
+"--" 													{column += yyleng; return PUNCTUATION_DECREMENT;}
+"!" 													{column += yyleng; return PUNCTUATION_NOT;}
+"..." 													{column += yyleng; return PUNCTUATION_ELLIPSIS;}
+"." 													{column += yyleng; return PUNCTUATION_DOT;}
+":" 													{column += yyleng; return PUNCTUATION_COLON;}
+"&^" 													{column += yyleng; return PUNCTUATION_AND_XOR;}
+"&^=" 													{column += yyleng; return PUNCTUATION_AND_XOR_EQUALS;}
 
-<<EOF>>													{return EOF;}
+<<EOF>>													{column += yyleng; return EOF;}
+
+.														{column += yyleng; invalidSymbol(yylineno, column, *yytext); return yylex(symbolsTable);}
 
 %%
+
+int charCount(char* string, char character) {
+	int result = 0;
+	char *pointer;
+
+	for(pointer = string; *pointer != '\0'; pointer++) {
+		if(*pointer == character) {
+			result++;
+		}
+	}
+
+	return result;
+}
 
 /*int main(int argc, char *argv[]) {
     if(argc == 2) {
